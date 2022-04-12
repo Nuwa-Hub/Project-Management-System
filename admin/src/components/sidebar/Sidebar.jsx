@@ -2,6 +2,8 @@ import "./sidebar.css";
 import HomeIcon from '@mui/icons-material/Home';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import LaptopChromebookIcon from '@mui/icons-material/LaptopChromebook';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 //import { Link } from "react-router-dom";
 
 export default function Sidebar() {
@@ -29,11 +31,11 @@ export default function Sidebar() {
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
             <li className="sidebarListItem active">
-              <HomeIcon className="sidebarIcon" />
+              <PersonOutlineIcon className="sidebarIcon" />
               Home
             </li>
             <li className="sidebarListItem">
-              <TimelineIcon className="sidebarIcon" />
+              <LaptopChromebookIcon className="sidebarIcon" />
               Analytics
             </li>
             <li className="sidebarListItem">
