@@ -2,6 +2,7 @@ import React from "react";
 import "./projectList.css";
 import { DataGrid} from "@mui/x-data-grid";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Link } from "react-router-dom";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -38,7 +39,9 @@ const columns = [
     renderCell: (params) => {
       return (
         <>
+        <Link to={"/tasks/"}>
           <button className="userListEdit">View</button>
+          </Link>
           <DeleteIcon className="userListdel"/>
         </>
       );

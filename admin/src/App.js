@@ -11,7 +11,8 @@ import {
 import ProjectList from './pages/projectList/ProjectList';
 import UserList from './pages/userList/UserList';
 import Project from './project/Project';
-import ProjectTask from './pages/projectTask/ProjectTask';
+import ProjectTaskList from './pages/projectTask/ProjectTaskList';
+import User from './pages/user/User';
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
      <Route path="/projects" element={<ProjectList />} />
      <Route path="/users" element={<UserList />} />
      <Route path="/project" element={<Project />} />
-     <Route path="/projectTask" element={<ProjectTask />} />
+     <Route path="/tasks" element={<ProjectTaskList />} />
+     <Route path="/user" element={<User />} />
      </Routes>
      </div>
     </BrowserRouter>

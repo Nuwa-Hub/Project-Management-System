@@ -1,8 +1,7 @@
-.projectTask{
+.taskList{
     flex: 4;
 }
 
-  
   .taskList {
     display: flex;
     align-items: center;

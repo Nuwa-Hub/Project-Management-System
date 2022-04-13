@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import "./projectTask.css"
+import "./projectTaskList.css"
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
 import { userRows } from '../../dummyData';
 
-const ProjectTask = () => {
+const ProjectTaskList = () => {
 
     const columns = [
         { field: "id", headerName: "ID", width: 90 },
@@ -40,7 +40,7 @@ const ProjectTask = () => {
           renderCell: (params) => {
             return (
               <>
-                <Link to={"/task/" + params.row.id}>
+                <Link to={"/tasks/" + params.row.id}>
                   <button className="taskListEdit">Edit</button>
                 </Link>
                 <DeleteIcon
@@ -54,7 +54,7 @@ const ProjectTask = () => {
       ];
 
   return (
-     <div className="userList">
+     <div className="taskList">
       <DataGrid
         rows={userRows}
         disableSelectionOnClick
@@ -66,4 +66,4 @@ const ProjectTask = () => {
   )
 }
 
-export default ProjectTask
+export default ProjectTaskList

@@ -1,13 +1,10 @@
 import "./userList.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { userRows } from "../../dummyData";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 
-
 export default function UserList() {
- 
-  
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
@@ -41,13 +38,10 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/user/" + params.row.id}>
+            <Link to={"/user" }>
               <button className="userListEdit">Edit</button>
             </Link>
-            <DeleteIcon
-              className="userListDelete"
-              
-            />
+            <DeleteIcon className="userListDelete" />
           </>
         );
       },
