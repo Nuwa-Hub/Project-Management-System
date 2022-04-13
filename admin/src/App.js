@@ -11,6 +11,7 @@ import {
 import ProjectList from './pages/projectList/ProjectList';
 import UserList from './pages/userList/UserList';
 import Project from './project/Project';
+import ProjectTask from './pages/projectTask/ProjectTask';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
      <Route path="/projects" element={<ProjectList />} />
      <Route path="/users" element={<UserList />} />
      <Route path="/project" element={<Project />} />
+     <Route path="/projectTask" element={<ProjectTask />} />
      </Routes>
      </div>
     </BrowserRouter>

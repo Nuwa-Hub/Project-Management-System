@@ -10,5 +10,26 @@
   font-size: 22px;
   font-weight: 600;
 }
+.widgetLgchart{
+  display: flex;
+}
+.chartItems{
+  margin: 50px 20px;
 
-
+}
+.dotIndicator{
+  margin-right: 10px;
+  width: 8px;
+  height: 8px;
+  color: rgb(235, 8, 8);
+}
+.chartItem{
+  display: flex;
+  justify-items: center;
+  align-items: center;
+   margin-bottom: 10px;
+}
+.chartItemText{
+  font-size: 14px;
+  font-weight: 300;
+}

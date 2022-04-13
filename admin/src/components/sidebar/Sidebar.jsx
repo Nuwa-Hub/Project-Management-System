@@ -14,10 +14,12 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
+          <Link className="link" to={"/"}>
             <li className="sidebarListItem active">
               <HomeIcon className="sidebarIcon" />
               Home
             </li>
+            </Link>
             <li className="sidebarListItem">
               <TimelineIcon className="sidebarIcon" />
               Analytics
@@ -40,7 +42,7 @@ export default function Sidebar() {
             <Link className="link" to={"/projects"}>
             <li className="sidebarListItem">
               <LaptopChromebookIcon className="sidebarIcon" />
-              Analytics
+              Projects
             </li>
             </Link>
             <li className="sidebarListItem">
