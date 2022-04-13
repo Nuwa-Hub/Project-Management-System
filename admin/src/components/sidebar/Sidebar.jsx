@@ -4,6 +4,7 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import LaptopChromebookIcon from '@mui/icons-material/LaptopChromebook';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import { Link } from "react-router-dom";
 //import { Link } from "react-router-dom";
 
 export default function Sidebar() {
@@ -30,14 +31,18 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
+          <Link className="link" to={"/users"}>
             <li className="sidebarListItem active">
               <PersonOutlineIcon className="sidebarIcon" />
-              Home
+              Users
             </li>
+            </Link>
+            <Link className="link" to={"/projects"}>
             <li className="sidebarListItem">
               <LaptopChromebookIcon className="sidebarIcon" />
               Analytics
             </li>
+            </Link>
             <li className="sidebarListItem">
               <TrendingUpIcon className="sidebarIcon" />
               Sales

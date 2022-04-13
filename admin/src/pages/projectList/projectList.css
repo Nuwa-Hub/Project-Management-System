@@ -1,0 +1,11 @@
+.projectList{
+    flex: 4;
+}
+.userListEdit{
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: rgb(3, 239, 50);
+    color: aliceblue;
+    margin-right: 20px;
+}
