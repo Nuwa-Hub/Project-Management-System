@@ -67,8 +67,8 @@ const ProjectList = () => {
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={7}
-        rowsPerPageOptions={[7]}
+        pageSize={10}
+        rowsPerPageOptions={[10]}
         checkboxSelection
         disableSelectionOnClick
       />
