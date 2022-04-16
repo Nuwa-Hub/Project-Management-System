@@ -1,78 +1,231 @@
-import React from "react";
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 import "./projectList.css";
-import { DataGrid} from "@mui/x-data-grid";
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Link } from "react-router-dom";
+import Progressbar from '../../components/circular-progressbar/Progressbar';
+import Grid3x3Icon from '@mui/icons-material/Grid3x3';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import BookIcon from '@mui/icons-material/Book';
 
-const columns = [
-  { field: "id", headerName: "ID", width: 90 },
-  {
-    field: "firstName",
-    headerName: "First name",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "lastName",
-    headerName: "Last name",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 110,
-    editable: true,
-  },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-  },
-  {
-    field: "Action",
-    headerName: "Action",
-    width: 160,
-    renderCell: (params) => {
-      return (
-        <>
-        <Link to={"/tasks/"}>
-          <button className="userListEdit">View</button>
-          </Link>
-          <DeleteIcon className="userListdel"/>
-        </>
-      );
-    },
-  },
-];
-
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode ===  '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 const ProjectList = () => {
   return (
-    <div className="projectList">
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-        checkboxSelection
-        disableSelectionOnClick
-      />
-    </div>
+    
+    <Box className='box' sx={{ width: '100%' }} >
+    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid item xs={4}>
+        <Item>
+        <div className="projectShow">
+          <div className="projectShowTop">
+  
+            <div className="projectShowTopTitle">
+              <span className="projectShowprojectname">Project management system</span>
+              <span className="projectShowprojectTitle">ABC company</span>
+            </div>
+          </div>
+          <div className="projectShowBottom">
+            <div className='projectShowdetail'>
+              <span className='projectShowTitle'>Project Detail</span>
+              <div className="projectShowInfo">
+              <Grid3x3Icon className='projectShowIcon'/>
+              <span className="userShowInfoTitle">dfdgfdghfh</span>
+            </div>
+              <div className="projectShowInfo">
+              <BookIcon className='projectShowIcon'/>
+              <span className="userShowInfoTitle">ewrewrtetr</span>
+            </div>
+              <div className="projectShowInfo">
+              <LocalPhoneIcon className='projectShowIcon'/>
+              <span className="userShowInfoTitle">+1 123 456 67</span>
+            </div>
+            <span className='projectShowTitle'>Contributors</span>
+            <div className='userShowInfo'>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+
+            </div>
+            </div>
+            <div className='projectShowcontributors'>
+            <span className='projectShowTitle'>Project Analytics</span>
+            <div className="projectShowInfo">
+              <Progressbar/>
+            </div>
+            </div>
+          </div>
+        </div>
+        </Item>
+      </Grid>
+      <Grid item xs={4}>
+        <Item>        <div className="projectShow">
+          <div className="projectShowTop">
+  
+            <div className="projectShowTopTitle">
+              <span className="projectShowprojectname">Project management system</span>
+              <span className="projectShowprojectTitle">ABC company</span>
+            </div>
+          </div>
+          <div className="projectShowBottom">
+            <div className='projectShowdetail'>
+              <span className='projectShowTitle'>Project Detail</span>
+              <div className="projectShowInfo">
+              
+              <span className="userShowInfoTitle">dfdgfdghfh</span>
+            </div>
+              <div className="projectShowInfo">
+              
+              <span className="userShowInfoTitle">ewrewrtetr</span>
+            </div>
+              <div className="projectShowInfo">
+              
+              <span className="userShowInfoTitle">+1 123 456 67</span>
+            </div>
+            <span className='projectShowTitle'>Contributors</span>
+            <div className='userShowInfo'>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+
+            </div>
+            </div>
+            <div className='projectShowcontributors'>
+            <span className='projectShowTitle'>Project Analytics</span>
+            <div className="projectShowInfo">
+              <Progressbar/>
+            </div>
+            </div>
+          </div>
+        </div></Item>
+      </Grid>
+      <Grid item xs={4}>
+        <Item>        <div className="projectShow">
+          <div className="projectShowTop">
+  
+            <div className="projectShowTopTitle">
+              <span className="projectShowprojectname">Project management system</span>
+              <span className="projectShowprojectTitle">ABC company</span>
+            </div>
+          </div>
+          <div className="projectShowBottom">
+            <div className='projectShowdetail'>
+              <span className='projectShowTitle'>Project Detail</span>
+              <div className="projectShowInfo">
+              
+              <span className="userShowInfoTitle">dfdgfdghfh</span>
+            </div>
+              <div className="projectShowInfo">
+              
+              <span className="userShowInfoTitle">ewrewrtetr</span>
+            </div>
+              <div className="projectShowInfo">
+              
+              <span className="userShowInfoTitle">+1 123 456 67</span>
+            </div>
+            <span className='projectShowTitle'>Contributors</span>
+            <div className='userShowInfo'>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+
+            </div>
+            </div>
+            <div className='projectShowcontributors'>
+            <span className='projectShowTitle'>Project Analytics</span>
+            <div className="projectShowInfo">
+              <Progressbar/>
+            </div>
+            </div>
+          </div>
+        </div></Item>
+      </Grid>
+      <Grid item xs={4}>
+        <Item>        <div className="projectShow">
+          <div className="projectShowTop">
+  
+            <div className="projectShowTopTitle">
+              <span className="projectShowprojectname">Project management system</span>
+              <span className="projectShowprojectTitle">ABC company</span>
+            </div>
+          </div>
+          <div className="projectShowBottom">
+            <div className='projectShowdetail'>
+              <span className='projectShowTitle'>Project Detail</span>
+              <div className="projectShowInfo">
+              
+              <span className="userShowInfoTitle">dfdgfdghfh</span>
+            </div>
+              <div className="projectShowInfo">
+              
+              <span className="userShowInfoTitle">ewrewrtetr</span>
+            </div>
+              <div className="projectShowInfo">
+              
+              <span className="userShowInfoTitle">+1 123 456 67</span>
+            </div>
+            <span className='projectShowTitle'>Contributors</span>
+            <div className='userShowInfo'>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+              <img className='contributorImg' src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"/>
+
+            </div>
+            </div>
+            <div className='projectShowcontributors'>
+            <span className='projectShowTitle'>Project Analytics</span>
+            <div className="projectShowInfo">
+              <Progressbar/>
+            </div>
+            </div>
+          </div>
+        </div></Item>
+      </Grid>
+    </Grid>
+  </Box>
   );
 };
 

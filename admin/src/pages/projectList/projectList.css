@@ -1,14 +1,93 @@
-.projectList{
-    flex: 4; 
+.box{
+  flex: 4;
 }
-.userListEdit{
-    border: none;
-    border-radius: 10px;
-    padding: 5px 10px;
-    background-color: rgb(3, 239, 50);
-    color: aliceblue;
-    margin-right: 20px;
+.projectShow {
+  padding: 10px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
-.userListdel{
-color: red;
+
+.projectShowTop {
+  display: flex;
+  align-items: flex-start;
+}
+
+.projectShowImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.projectShowTopTitle {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.projectShowprojectname {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.projectShowprojectTitle {
+  font-weight: 300;
+}
+
+.projectShowBottom {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.projectShowdetail {
+  flex: 1;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  padding-left: 5px;
+  -webkit-box-shadow: 0px 0px 5px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+.projectShowcontributors {
+  flex: 1;
+  margin-left: 5px;
+  flex-wrap: wrap;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  padding: 10px;
+}
+.projectShowTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(175, 170, 170);
+}
+
+.projectShowInfo {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+  color: #444;
+}
+.userShowInfo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 10px 10px;
+  color: #444;
+  padding: 0 0px;
+}
+.projectShowIcon {
+  font-size: 16px !important;
+}
+.contributorImg {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.projectShowInfoTitle {
+  margin-left: 10px;
 }
