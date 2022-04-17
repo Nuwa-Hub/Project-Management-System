@@ -34,7 +34,25 @@
 .projectShowprojectTitle {
   font-weight: 300;
 }
-
+.viewbutton{
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: none;
+  background-color: rgb(9, 244, 135);
+  padding: 5px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.viewbuttontext{
+  font-size: 14px;
+  font-weight: 400;
+  margin-right: 5px;
+}
+.viewbuttonicon{
+  font-size: 16px !important;
+}
 .projectShowBottom {
   margin-top: 10px;
   display: flex;
@@ -56,6 +74,11 @@
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+align-items: center;
+  
 }
 .projectShowTitle {
   font-size: 14px;
