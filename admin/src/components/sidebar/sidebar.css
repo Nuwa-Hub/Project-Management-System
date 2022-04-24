@@ -4,8 +4,26 @@
   background-color: rgb(251, 251, 255);
   position: sticky;
   top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
+.logoutdiv{
+  margin: 40px 20px;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+}
+.logoutIcon{
+  margin-right: 5px;
+  font-size: 20px !important;
+}
+.logoutdiv.active,
+.logoutdiv:hover {
+  background-color: rgb(240, 240, 255);
+}
 .sidebarWrapper {
   padding: 20px;
   color: #555;

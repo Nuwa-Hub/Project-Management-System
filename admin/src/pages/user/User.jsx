@@ -6,9 +6,15 @@ import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PublishIcon from '@mui/icons-material/Publish';
+import Topbar from '../../components/topbar/Topbar';
+import Sidebar from '../../components/sidebar/Sidebar';
 
 export default function User() {
   return (
+    <>
+    <Topbar />
+    <div className="container">
+      <Sidebar />
     <div className="user">
       <div className="userTitleContainer">
         <h1 className="userTitle">Edit User</h1>
@@ -117,5 +123,7 @@ export default function User() {
         </div>
       </div>
     </div>
+    </div>
+    </>
   );
 }

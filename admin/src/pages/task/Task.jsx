@@ -1,8 +1,14 @@
 import React from "react";
+import Sidebar from "../../components/sidebar/Sidebar";
+import Topbar from "../../components/topbar/Topbar";
 import "./task.css";
 
 const Task = () => {
   return (
+    <>
+    <Topbar />
+    <div className="container">
+      <Sidebar />
     <div className="task">
       <div className="task-wapper">
         <div className="taskInfo">
@@ -78,6 +84,8 @@ const Task = () => {
         <div className="massages-container">massage</div>
       </div>
     </div>
+    </div>
+    </>
   );
 };
 

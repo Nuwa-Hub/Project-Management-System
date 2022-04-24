@@ -3,6 +3,8 @@ import { DataGrid } from "@mui/x-data-grid";
 import { userRows } from "../../dummyData";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
+import Topbar from "../../components/topbar/Topbar";
+import Sidebar from "../../components/sidebar/Sidebar";
 
 export default function UserList() {
   const columns = [
@@ -28,7 +30,7 @@ export default function UserList() {
     },
     {
       field: "transaction",
-      headerName: "Transaction Volume",
+      headerName: "Payment",
       width: 160,
     },
     {
@@ -49,6 +51,10 @@ export default function UserList() {
   ];
 
   return (
+    <>
+    <Topbar />
+    <div className="container">
+      <Sidebar />
     <div className="userList">
       <DataGrid
         rows={userRows}
@@ -58,5 +64,7 @@ export default function UserList() {
         checkboxSelection
       />
     </div>
+    </div>
+    </>
   );
 }

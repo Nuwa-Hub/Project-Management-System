@@ -4,6 +4,8 @@ import "./projectTaskList.css"
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
 import { userRows } from '../../dummyData';
+import Topbar from '../../components/topbar/Topbar';
+import Sidebar from '../../components/sidebar/Sidebar';
 
 const ProjectTaskList = () => {
 
@@ -54,6 +56,10 @@ const ProjectTaskList = () => {
       ];
 
   return (
+    <>
+    <Topbar />
+    <div className="container">
+      <Sidebar />
      <div className="taskList">
       <DataGrid
         rows={userRows}
@@ -63,6 +69,8 @@ const ProjectTaskList = () => {
         checkboxSelection
       />
     </div>
+    </div>
+    </>
   )
 }
 

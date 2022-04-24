@@ -1,10 +1,18 @@
-import React from 'react'
-import "./project.css"
+import React from "react";
+import Sidebar from "../components/sidebar/Sidebar";
+import Topbar from "../components/topbar/Topbar";
+import "./project.css";
 
 const Project = () => {
   return (
-    <div className='project'>Project</div>
-  )
-}
+    <>
+      <Topbar />
+      <div className="container">
+        <Sidebar />
+        <div className="project">Project</div>
+      </div>
+    </>
+  );
+};
 
-export default Project
+export default Project;
