@@ -4,7 +4,7 @@ import ProjectTaskList from "./pages/projectTask/ProjectTaskList"
 import Task from "./pages/task/Task"
 import User from "./pages/user/User"
 import UserList from "./pages/userList/UserList"
-import Project from "./project/Project"
+import Project from "./pages/project/Project"
 
 export const routes = [
     {
