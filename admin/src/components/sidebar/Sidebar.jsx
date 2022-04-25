@@ -67,7 +67,7 @@ export default function Sidebar() {
             <Link className="link" to={"/users"}>
               <li className="sidebarListItem active">
                 <PersonOutlineIcon className="sidebarIcon" />
-                Users
+                Developers
               </li>
             </Link>
             <Link className="link" to={"/projects"}>
