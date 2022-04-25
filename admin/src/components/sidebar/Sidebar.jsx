@@ -9,12 +9,36 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/apiCalls";
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-//import { Link } from "react-router-dom";
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import TaskIcon from '@mui/icons-material/Task';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'; 
 
 export default function Sidebar() {
   const dispatch = useDispatch();
+
+  const submit = () => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className='custom-ui'>
+            <h1>Confirm to Logout?</h1>
+            <p>Are you sure to do this.</p>
+            <button onClick={onClose}>No</button>
+            <button
+              onClick={() => {
+                logOut(dispatch);
+                onClose();
+              }}
+            >
+              Yes
+            </button>
+          </div>
+        );
+      }
+    });
+  }
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -76,14 +100,12 @@ export default function Sidebar() {
           </ul>
         </div>
       </div>
-      <Link className="link" to={"/login"}>
-      <div className="logoutdiv" onClick={()=>{
-        logOut(dispatch);
-      }}>
+     
+      <div className="logoutdiv" onClick={submit}>
         <LogoutIcon className="logoutIcon"/>
         <span className="logouttext">logout</span>
       </div>
-      </Link>
+     
     </div>
   );
 }
