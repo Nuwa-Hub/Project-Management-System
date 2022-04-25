@@ -9,7 +9,7 @@ const Project = () => {
       <Topbar />
       <div className="container">
         <Sidebar />
-        <div className="project">Project</div>
+        <div className="project">Project1</div>
       </div>
     </>
   );
