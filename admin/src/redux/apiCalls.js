@@ -14,7 +14,10 @@ import {
   addProjectStart,
   addProjectSuccess,
 } from "./projectRedux";
+import { getDeveloperFailure, getDeveloperStart, getDeveloperSuccess } from "./developerRedux";
 
+
+//auth
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
@@ -29,7 +32,7 @@ export const logOut =async(dispatch)=>{
      dispatch(logout());
 }
 
-
+//products
 export const getProjects = async (dispatch) => {
   dispatch(getProjectStart());
   try {
@@ -68,3 +71,15 @@ export const addProject = async (Project, dispatch) => {
     dispatch(addProjectFailure());
   }
 };
+
+//get all Developers
+export const getdevelopers = async (dispatch) => {
+  dispatch(getDeveloperStart());
+  try {
+    const res = await publicRequest.get("/users");
+    dispatch(getDeveloperSuccess(res.data));
+  } catch (err) {
+    dispatch(getDeveloperFailure());
+  }
+};
+

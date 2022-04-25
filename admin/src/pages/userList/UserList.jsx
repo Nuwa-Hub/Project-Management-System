@@ -1,14 +1,25 @@
 import "./userList.css";
 import { DataGrid } from "@mui/x-data-grid";
-import { userRows } from "../../dummyData";
+//import { userRows } from "../../dummyData";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getdevelopers } from "../../redux/apiCalls";
+import userdp from "../../images/user.png";
 
 export default function UserList() {
+  const dispatch = useDispatch();
+  const developers=useSelector((state) => state.developer.developers);
+  
+  useEffect(() => {
+    getdevelopers(dispatch);
+  }, [dispatch]);
+
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 220 },
     {
       field: "user",
       headerName: "User",
@@ -16,22 +27,22 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <div className="userListUser">
-            <img className="userListImg" src={params.row.avatar} alt="" />
+            <img className="userListImg" src={userdp || params.row.avatar} alt="" />
             {params.row.username}
           </div>
         );
       },
     },
-    { field: "email", headerName: "Email", width: 200 },
+    { field: "email", headerName: "Email", width: 180 },
     {
       field: "status",
       headerName: "Status",
-      width: 120,
+      width: 100,
     },
     {
-      field: "transaction",
-      headerName: "Payment",
-      width: 160,
+      field: "address",
+      headerName: "Address",
+      width: 180,
     },
     {
       field: "action",
@@ -40,7 +51,7 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/user" }>
+            <Link to={"/user"}>
               <button className="userListEdit">Edit</button>
             </Link>
             <DeleteIcon className="userListDelete" />
@@ -52,19 +63,20 @@ export default function UserList() {
 
   return (
     <>
-    <Topbar />
-    <div className="container">
-      <Sidebar />
-    <div className="userList">
-      <DataGrid
-        rows={userRows}
-        disableSelectionOnClick
-        columns={columns}
-        pageSize={8}
-        checkboxSelection
-      />
-    </div>
-    </div>
+      <Topbar />
+      <div className="container">
+        <Sidebar />
+        <div className="userList">
+          <DataGrid
+            rows={developers}
+            disableSelectionOnClick
+            columns={columns}
+            getRowId={(row) => row._id}
+            pageSize={8}
+            checkboxSelection
+          />
+        </div>
+      </div>
     </>
   );
 }
