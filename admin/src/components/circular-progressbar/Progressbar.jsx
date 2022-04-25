@@ -2,8 +2,9 @@ import React from "react";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import "react-circular-progressbar/dist/styles.css";
 
-const Progressbar = () => {
-  const percentage = 66;
+const Progressbar = ({progress,_id}) => {
+  const percentage = progress*10;
+
   return (
     <CircularProgressbar
       value={percentage}

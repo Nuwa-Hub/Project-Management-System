@@ -32,7 +32,7 @@ router.get("/find/:id", async (req, res) => {
   });
 
   //GET ALL PROJECTS
-  router.get("/find", async (req, res) => {
+  router.get("/", async (req, res) => {
     try {
       
       const Projects = await Project.find();
