@@ -2,8 +2,9 @@ import React from "react";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import "react-circular-progressbar/dist/styles.css";
 
-const Progressbar = () => {
-  const percentage = 66;
+const Progressbar = ({progress,_id}) => {
+  const percentage = progress*10;
+
   return (
     <CircularProgressbar
       value={percentage}
@@ -25,7 +26,8 @@ const Progressbar = () => {
         // pathTransition: 'none',
 
         // Colors
-        pathColor: `rgba(62, 152, 199, ${percentage / 100})`,
+      
+        pathColor: `rgba(${percentage>49 ? 1:255}, ${percentage>49 ? 255:1}, 1, ${(Math.abs(percentage-50) / 50)+0.4})`,
         textColor: "#f88",
         trailColor: "#d6d6d6",
         backgroundColor: "#3e98c7",

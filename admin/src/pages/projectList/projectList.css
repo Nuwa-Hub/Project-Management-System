@@ -1,15 +1,31 @@
-.box{
-  flex: 4;
+.project{
+  flex: 5 !important;
+ 
+}
+.projectpagetop{
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px;
+}
+.projectpagetitle{
+  font-size: 28px;
+  font-weight: 700;
+}
+.createprojectbn{
+  width: 100px;
+  border-radius: 10px;
+  border-style: none;
+  font-size: 18px;
+  background-color: rgb(46, 172, 172);
 }
 .projectShow {
-  padding: 10px;
-  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  padding: 5px; 
 }
 
 .projectShowTop {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .projectShowImg {
@@ -25,9 +41,12 @@
   flex-direction: column;
   margin-left: 20px;
 }
-
+.userShowInfoTitle{
+  border-radius: 10px;
+  padding:2px 5px;
+}
 .projectShowprojectname {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 24px;
 }
 
@@ -35,12 +54,12 @@
   font-weight: 300;
 }
 .viewbutton{
-  width: 80px;
+  width: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-style: none;
-  background-color: rgb(9, 244, 135);
+  background-color: rgb(214, 255, 236);
   padding: 5px;
   border-radius: 10px;
   margin-bottom: 10px;
@@ -48,12 +67,13 @@
 .viewbuttontext{
   font-size: 14px;
   font-weight: 400;
-  margin-right: 5px;
+  margin-left: 5px;
 }
 .viewbuttonicon{
   font-size: 16px !important;
 }
 .projectShowBottom {
+ 
   margin-top: 10px;
   display: flex;
   justify-content: space-around;
@@ -76,8 +96,7 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-align-items: center;
+   align-items: center;
   
 }
 .projectShowTitle {
@@ -102,6 +121,15 @@ align-items: center;
 }
 .projectShowIcon {
   font-size: 16px !important;
+}
+.projectShowIcon.pending{
+  font-size: 16px !important;
+  color: red;
+  
+}
+.projectShowIcon.done{
+  font-size: 16px !important;
+  color: greenyellow;
 }
 .contributorImg {
   width: 25px;

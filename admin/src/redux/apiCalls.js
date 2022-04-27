@@ -32,11 +32,11 @@ export const logOut =async(dispatch)=>{
      dispatch(logout());
 }
 
-//products
+//projects
 export const getProjects = async (dispatch) => {
   dispatch(getProjectStart());
   try {
-    const res = await publicRequest.get("/Projects");
+    const res = await publicRequest.get("/projects");
     dispatch(getProjectSuccess(res.data));
   } catch (err) {
     dispatch(getProjectFailure());
