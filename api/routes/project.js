@@ -7,7 +7,6 @@ const router =require("express").Router();
 const Project = require("../models/Project");
 
 
-
 //CREATE
 router.post("/", async (req, res) => {
     const newProject = new Project(req.body);
@@ -21,7 +20,7 @@ router.post("/", async (req, res) => {
   });
 
 //GET Project
-router.get("/find/:id", async (req, res) => {
+router.get("/find/:id",verifyTokenAndAuthorization, async (req, res) => {
     try {
       const project = await Project.findById(req.params.id);
       
@@ -32,7 +31,7 @@ router.get("/find/:id", async (req, res) => {
   });
 
   //GET ALL PROJECTS
-  router.get("/", async (req, res) => {
+  router.get("/",verifyTokenAndAuthorization, async (req, res) => {
     try {
       
       const Projects = await Project.find();

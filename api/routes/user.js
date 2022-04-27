@@ -3,7 +3,7 @@ const router =require("express").Router();
 const User = require("../models/User");
 
 //GET ALL USER
-router.get("/", async (req, res) => {
+router.get("/",verifyTokenAndAdmin, async (req, res) => {
   const query = req.query.new;
   try {
     const users = query

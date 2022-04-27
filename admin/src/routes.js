@@ -1,10 +1,11 @@
 import Home from "./pages/home/Home"
+import Project from "./pages/project/Project"
 import ProjectList from "./pages/projectList/ProjectList"
 import ProjectTaskList from "./pages/projectTask/ProjectTaskList"
 import Task from "./pages/task/Task"
 import User from "./pages/user/User"
 import UserList from "./pages/userList/UserList"
-import Project from "./pages/project/Project"
+
 
 export const routes = [
     {

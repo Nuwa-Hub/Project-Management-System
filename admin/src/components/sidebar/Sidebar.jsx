@@ -46,7 +46,7 @@ export default function Sidebar() {
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
             <Link className="link" to={"/"}>
-              <li className="sidebarListItem active">
+              <li className="sidebarListItem">
                 <HomeIcon className="sidebarIcon" />
                 Home
               </li>
@@ -65,7 +65,7 @@ export default function Sidebar() {
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
             <Link className="link" to={"/users"}>
-              <li className="sidebarListItem active">
+              <li className="sidebarListItem ">
                 <PersonOutlineIcon className="sidebarIcon" />
                 Developers
               </li>
@@ -85,7 +85,7 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <li className="sidebarListItem active">
+            <li className="sidebarListItem">
               <AccessAlarmIcon className="sidebarIcon" />
               Time handle
             </li>
