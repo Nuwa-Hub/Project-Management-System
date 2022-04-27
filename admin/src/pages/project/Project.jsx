@@ -3,6 +3,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import "./project.css";
 
+
 const Project = () => {
   return (
     <>
@@ -11,7 +12,7 @@ const Project = () => {
         <Sidebar />
         <div className="uprojectpage">
             <div className="uprojectwrapper">
-                <></>
+           
             </div>
         </div>
       </div>

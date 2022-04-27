@@ -27,7 +27,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const ProjectList = () => {
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.project.projects);
-  console.log(projects);
+  
   useEffect(() => {
     getProjects(dispatch);
   }, [dispatch]);
