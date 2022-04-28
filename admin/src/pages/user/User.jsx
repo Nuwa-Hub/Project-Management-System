@@ -15,6 +15,7 @@ export default function User() {
       <Topbar />
       <div className="container">
         <Sidebar />
+        
         <div className="user">
           <div className="userTitleContainer">
             <h1 className="userTitle">Edit User</h1>
@@ -22,6 +23,7 @@ export default function User() {
               <button className="userAddButton">Create</button>
             </Link>
           </div>
+
           <div className="userContainer">
             <div className="userShow">
               <div className="userShowTop">

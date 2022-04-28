@@ -16,6 +16,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { getProjects } from "../../redux/apiCalls";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -61,6 +62,7 @@ const ProjectList = () => {
                             {project.companyname}
                           </span>
                         </div>
+                        <Link  className="link" to={"/project/"+project._id}>
                         <Button
                           className="viewbutton"
                           variant="outlined"
@@ -69,6 +71,7 @@ const ProjectList = () => {
                           <RemoveRedEyeIcon className="viewbuttonicon" />
                           <h1 className="viewbuttontext">display</h1>
                         </Button>
+                        </Link>
                       </div>
                       <div className="projectShowBottom">
                         <div className="projectShowdetail">
