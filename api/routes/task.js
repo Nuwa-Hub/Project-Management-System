@@ -4,26 +4,26 @@ const {
     verifyTokenAndAdmin,
   } = require("./verifyToken");
 const router =require("express").Router();
-const Project = require("../models/Project");
+const Task = require("../models/Task");
 
-//UPADATE PROJECT
+//UPADATE Task
 router.put("/:id",verifyTokenAndAuthorization, async (req, res) => {
   try {
-    const updateProject = await Project.findByIdAndUpdate(
+    const updateTask = await Task.findByIdAndUpdate(
       req.params.id,
       {$set:req.body},
       {new:true}
       );
-    res.status(200).json(updateProject);
+    res.status(200).json(updateTask);
   } catch (err) {
     console.log("err")
     res.status(500).json(err);
   }
 })
-//DELETE PROJECT
+//DELETE Task
 router.delete("/:id",verifyTokenAndAuthorization, async (req, res) => {
   try {
-    const updateProject = await Project.findByIdAndDelete(req.params.id);
+    const updateTask = await Task.findByIdAndDelete(req.params.id);
     res.status(200).json();
   } catch (err) {
     console.log("err")
@@ -33,48 +33,36 @@ router.delete("/:id",verifyTokenAndAuthorization, async (req, res) => {
 
 //CREATE
 router.post("/", async (req, res) => {
-    const newProject = new Project(req.body);
+    const newTask = new Task(req.body);
   
     try {
-      const savedProject = await newProject.save();
-      res.status(200).json(savedProject);
+      const savedTask = await newTask.save();
+      res.status(200).json(savedTask);
     } catch (err) {
       res.status(500).json(err);
     }
   });
 
-//GET Project
-router.get("/find/:id",verifyTokenAndAuthorization, async (req, res) => {
-    try {
-      const project = await Project.findById(req.params.id);
-      
-      res.status(200).json(project);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
-
-  router.get("/",verifyTokenAndAuthorization, async (req, res) => {
-    try {
-      
-      const Projects = await Project.find();
-      res.status(200).json(Projects);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
-
-  //GET ALL PROJECTS
+  
   router.get("/:id",verifyTokenAndAuthorization, async (req, res) => {
     try {
       
-      const Projects = await Project.find({managerId:req.params.id});
-      res.status(200).json(Projects);
+      const Tasks = await Task.find({_id:req.params.id});
+      res.status(200).json(Tasks);
     } catch (err) {
       res.status(500).json(err);
     }
   });
-
+    //GET ALL TaskS
+  router.get("/",verifyTokenAndAuthorization, async (req, res) => {
+    try {
+      
+      const Tasks = await Task.find();
+      res.status(200).json(Tasks);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
   
 
   module.exports=router;

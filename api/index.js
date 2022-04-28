@@ -5,6 +5,7 @@ const dotenv =require("dotenv");
 const userRoute=require("./routes/user")
 const authRoute=require("./routes/auth")
 const projectRoute=require("./routes/project")
+const taskRoute=require("./routes/task")
 const cors = require("cors");
 
 dotenv.config();
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users",userRoute);
 app.use("/api/projects",projectRoute);
+app.use("/api/tasks",taskRoute);
 
 
 app.listen(5000,()=>{

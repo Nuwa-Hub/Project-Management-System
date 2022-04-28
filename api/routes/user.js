@@ -2,6 +2,56 @@ const { verifyTokenAndAdmin } = require("./verifyToken");
 const router =require("express").Router();
 const User = require("../models/User");
 
+
+
+
+//UPADATE PROJECT
+router.put("/:id",verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const updateUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {$set:req.body},
+      {new:true}
+      );
+    res.status(200).json(updateUser);
+  } catch (err) {
+    console.log("err")
+    res.status(500).json(err);
+  }
+})
+//DELETE PROJECT
+router.delete("/:id",verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const updateUser = await User.findByIdAndDelete(req.params.id);
+    res.status(200).json();
+  } catch (err) {
+    console.log("err")
+    res.status(500).json(err);
+  }
+})
+
+//CREATE
+router.post("/", async (req, res) => {
+    const newUser = new User(req.body);
+  
+    try {
+      const savedProject = await newUser.save();
+      res.status(200).json(savedProject);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
+  //GET AN USER
+  router.get("/:id",verifyTokenAndAdmin, async (req, res) => {
+    try {
+      
+      const User = await User.find({_ud:req.params.id});
+      res.status(200).json(User);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 //GET ALL USER
 router.get("/",verifyTokenAndAdmin, async (req, res) => {
   const query = req.query.new;
