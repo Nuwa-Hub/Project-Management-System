@@ -8,13 +8,40 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import GrantChartsm from "../../components/granttChartsm/GrantChartsm";
-import Divider from '@mui/material/Divider';
+import Divider from "@mui/material/Divider";
 import SearchBar from "material-ui-search-bar";
-import Progressbar from "../../components/circular-progressbar/Progressbar";
-
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+import Masonry from "@mui/lab/Masonry";
+import CreateTaskDialog from "../../components/createTaskDialog/CreateTaskDialog";
 
 const Project = () => {
   const [searchItem, setSearchItem] = useState("");
+  const heights = [
+    150, 30, 90, 70, 110, 150, 130, 80, 50, 90, 100, 150, 30, 50, 80,
+  ];
+
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(0.5),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  }));
+
+  const emails = ["username@gmail.com", "user02@gmail.com"];
+  const [open, setOpen] = React.useState(false);
+  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+    setSelectedValue(value);
+  };
 
   return (
     <>
@@ -71,29 +98,56 @@ const Project = () => {
               </div>
               <div className="uprojectanalys">
                 <GrantChartsm />
-               
               </div>
             </div>
-            <Divider  className="uprjectpagedevider" />
+            <Divider className="uprjectpagedevider" />
             <div className="uprojectbottom">
-              <div className="uprojecttopleft">
-                <h3 className="uprojecttaskstitle">Project Tasks</h3>
+              <div className="uprojectbottomtop">
+                <div className="uprojecttopleft">
+                  <h3 className="uprojecttaskstitle">Project Tasks</h3>
+                </div>
+                <div className="uprojecttopright">
+                  <SearchBar
+                    value={searchItem}
+                    onChange={(value) => {
+                      setSearchItem(value);
+                    }}
+                    onRequestSearch={() => console.log("onRequestSearch")}
+                    style={{
+                      margin: "0 0px",
+                      maxWidth: 800,
+                    }}
+                  />
+                </div>
+
+                <div className="uprojecttopright">
+                  <button className="userAddButton" onClick={handleClickOpen}>
+                    Create
+                  </button>
+                  <CreateTaskDialog
+                    selectedValue={selectedValue}
+                    open={open}
+                    onClose={handleClose}
+                  />
+                </div>
+                
               </div>
-              <div className="uprojecttopright">
-                <SearchBar
-                  value={searchItem}
-                  onChange={(value) => {
-                    setSearchItem(value);
-                  }}
-                  onRequestSearch={() => console.log("onRequestSearch")}
-                  style={{
-                    margin: "0 0px",
-                    maxWidth: 800,
-                  }}
-                />
-              </div>
-              <div className="uprojecttopright">
-                <button className="userAddButton">Create</button>
+              <div className="uprojectbottombody">
+                <Box sx={{ width: "100%", height: "100%" }}>
+                  <Masonry
+                    columns={4}
+                    spacing={2}
+                    defaultHeight={450}
+                    defaultColumns={4}
+                    defaultSpacing={1}
+                  >
+                    {heights.map((index) => (
+                      <Item key={index} sx={{ height: "auto" }}>
+                        {index + 1}
+                      </Item>
+                    ))}
+                  </Masonry>
+                </Box>
               </div>
             </div>
           </div>
