@@ -51,10 +51,12 @@ export default function Sidebar() {
                 Home
               </li>
             </Link>
+            <Link className="link" to={"/timeline"}>
             <li className="sidebarListItem">
               <TimelineIcon className="sidebarIcon" />
-              Analytics
+              TimeLine
             </li>
+            </Link>
             <li className="sidebarListItem">
               <TrendingUpIcon className="sidebarIcon" />
               Sales
