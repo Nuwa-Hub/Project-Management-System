@@ -15,11 +15,12 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Masonry from "@mui/lab/Masonry";
 import CreateTaskDialog from "../../components/createTaskDialog/CreateTaskDialog";
+import WidgetTask from "../../components/widgetTask/WidgetTask";
 
 const Project = () => {
   const [searchItem, setSearchItem] = useState("");
   const heights = [
-    150, 30, 90, 70, 110, 150, 130, 80, 50, 90, 100, 150, 30, 50, 80,
+    150, 30, 90, 70, 110, 150, 130, 
   ];
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -143,7 +144,7 @@ const Project = () => {
                   >
                     {heights.map((index) => (
                       <Item key={index} sx={{ height: "auto" }}>
-                        {index + 1}
+                       <WidgetTask/>
                       </Item>
                     ))}
                   </Masonry>

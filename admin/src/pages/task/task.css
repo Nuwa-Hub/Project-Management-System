@@ -8,9 +8,14 @@
     flex: 1;
 }
 .massages-container{
-    flex: 2;
+    flex: 3;
 }
-
+.taskdivider{
+  margin-bottom: 10px;
+}
+.taskShow{
+  margin-top: 10px;
+}
 .userShowTop {
     display: flex;
     align-items: center;
