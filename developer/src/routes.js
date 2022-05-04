@@ -42,7 +42,7 @@ export const routes = [
       {
         name: 'task',
         element: <Task />,
-        path: '/task',
+        path: '/task/:id',
       },
       {
         name: 'timeline',

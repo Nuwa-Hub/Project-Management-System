@@ -6,7 +6,6 @@
   min-height: 300px;
   max-height: 720px;
   
-
 }
 @media screen and (max-width: 360px) {
   #frame {
@@ -14,11 +13,29 @@
     height: 100vh;
   }
 }
+#frame #sidepanel {
+  float: right;
+  min-width: 280px;
+  max-width: 340px;
+  width: 40%;
+  height: 100%;
+  background: #ffffff;
+  color: #f5f5f5;
+  overflow: hidden;
+  position: relative;
+}
+
+@media screen and (max-width: 735px) {
+  #frame #sidepanel {
+    width: 58px;
+    min-width: 58px;
+  }
+}
+
 #frame .content {
-  
   width: 60%;
   height: 100%;
-  float: right;
+  float: left;
   overflow: hidden;
   position: relative;
   background: #e6eaea;
@@ -57,6 +74,7 @@
   max-height: calc(100% - 93px);
   overflow-y: scroll;
   overflow-x: hidden;
+  
 }
 @media screen and (max-width: 735px) {
   #frame .content .messages {
@@ -73,8 +91,7 @@
 #frame .content .messages ul li {
   display: inline-block;
   clear: both;
-  
-  margin: 15px 15px 5px 15px;
+  margin: 15px 5px 15px 0px;
   width: calc(100% - 25px);
   font-size: 0.9em;
 }
@@ -82,6 +99,7 @@
   margin-bottom: 20px;
 }
 #frame .content .messages ul li.sent img {
+  float: left;
   margin: 6px 8px 0 0;
 }
 #frame .content .messages ul li.sent p {
@@ -118,6 +136,9 @@
   bottom: 0;
   width: 100%;
   z-index: 99;
+  background: #f5f5f5;
+  padding: 0px;
+ 
 }
 #frame .content .message-input .wrap {
   position: relative;
@@ -126,9 +147,9 @@
   font-family: "proxima-nova", "Source Sans Pro", sans-serif;
   float: left;
   border: none;
-  width: calc(100% - 90px);
-  padding: 11px 32px 10px 8px;
-  font-size: 0.8em;
+  width: calc(100% - 100px);
+  padding: 25px 32px 10px 8px;
+  font-size: 1.1em;
   color: #32465a;
 }
 @media screen and (max-width: 735px) {
@@ -141,10 +162,10 @@
 }
 #frame .content .message-input .wrap .attachment {
   position: absolute;
-  right: 60px;
+  right: 65px;
   z-index: 4;
-  margin-top: 10px;
-  font-size: 1.1em;
+  margin-top: 15px;
+  font-size: 1.5em;
   color: #435f7a;
   opacity: 0.5;
   cursor: pointer;
@@ -152,17 +173,17 @@
 @media screen and (max-width: 735px) {
   #frame .content .message-input .wrap .attachment {
     margin-top: 17px;
-    right: 65px;
+    right: 55px;
   }
 }
 #frame .content .message-input .wrap .attachment:hover {
-  opacity: 1;
+  opacity: 2;
 }
 #frame .content .message-input .wrap button {
   float: right;
   border: none;
   width: 50px;
-  padding: 12px 0;
+  padding: 14px 13px 12px 12px;
   cursor: pointer;
   background: #32465a;
   color: #f5f5f5;
@@ -170,6 +191,7 @@
 @media screen and (max-width: 735px) {
   #frame .content .message-input .wrap button {
     padding: 16px 0;
+  
   }
 }
 #frame .content .message-input .wrap button:hover {
@@ -177,4 +199,9 @@
 }
 #frame .content .message-input .wrap button:focus {
   outline: none;
+}
+.chatsendicon{
+
+  font-size: 1.5em;
+  top:5px;
 }

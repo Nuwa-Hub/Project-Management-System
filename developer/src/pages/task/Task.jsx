@@ -4,8 +4,24 @@ import Topbar from "../../components/topbar/Topbar";
 import "./task.css";
 import Divider from "@mui/material/Divider";
 import ChatInterface from "../../components/chatInterface/ChatInterface";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const Task = () => {
+  const location = useLocation();
+  const taskId = location.pathname.split("/")[2];
+
+  //get developer relevent to tha specific task
+  const task = useSelector((state) =>
+    state.task.tasks.find(
+      (task) => task._id === taskId
+    )
+  );
+  //get task developer id
+  const user2 = task.developerId;
+  //get project manager id
+  const user1 = useSelector((state) => state.user.currentUser._id);
+
   return (
     <>
       <Topbar />
@@ -41,7 +57,7 @@ const Task = () => {
                   </div>
                 </div>
               </div>
-              <Divider variant="middle" className="taskdivider"/>
+              <Divider variant="middle" className="taskdivider" />
               <div className="taskShow">
                 <div className="userShowTop">
                   <img
@@ -75,7 +91,10 @@ const Task = () => {
               </div>
             </div>
             <div className="massages-container">
-              <ChatInterface/>
+              <ChatInterface
+              taskId={taskId}
+              user1={user1}
+              user2={user2} />
             </div>
           </div>
         </div>

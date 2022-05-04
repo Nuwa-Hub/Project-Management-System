@@ -88,14 +88,13 @@ export const getdevelopers = async (dispatch) => {
 
 //TASKS
 
-//GET TASK BY PROJEC ID
+//GET TASK BY developer ID
 export const getTasks = async (dispatch,id) => {
   dispatch(getTaskStart());
   try {
-    const res = await userRequest.get(`/tasks/${id}`);
+    const res = await userRequest.get(`/tasks/find/${id}`);
     dispatch(getTaskSuccess(res.data));
   } catch (err) {
     dispatch(getTaskFailure());
   }
 };
-

@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
-import { getProjects } from "../../redux/apiCalls";
+import { getTasks } from "../../redux/apiCalls";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -27,10 +27,11 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const ProjectList = () => {
   const dispatch = useDispatch();
-  const projects = useSelector((state) => state.project.projects);
+  const tasks = useSelector((state) => state.task.tasks);
+  const userId = useSelector((state) => state.user.currentUser._id);
   
   useEffect(() => {
-    getProjects(dispatch);
+    getTasks(dispatch,userId);
   }, [dispatch]);
 
   return (
@@ -49,20 +50,20 @@ const ProjectList = () => {
               rowSpacing={1}
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             >
-              {projects.map((project) => (
-                <Grid item xs={4} key={project._id}>
+              {tasks.map((task) => (
+                <Grid item xs={4} key={task._id}>
                   <Item>
                     <div className="projectShow">
                       <div className="projectShowTop">
                         <div className="projectShowTopTitle">
                           <span className="projectShowprojectname">
-                            {project.projectname}
+                            {task.Taskname}
                           </span>
                           <span className="projectShowprojectTitle">
-                            {project.companyname}
+                            {task._id}
                           </span>
                         </div>
-                        <Link  className="link" to={"/project/"+project._id}>
+                        <Link  className="link" to={"/task/"+task._id}>
                         <Button
                           className="viewbutton"
                           variant="outlined"
@@ -80,7 +81,7 @@ const ProjectList = () => {
                           <div className="projectShowInfo">
                             <Grid3x3Icon className="projectShowIcon" />
                             <span className="userShowInfoTitle">
-                              {project._id}
+                              {task._id}
                             </span>
                           </div>
                           <div className="projectShowInfo">
@@ -88,14 +89,14 @@ const ProjectList = () => {
                             <span className="userShowInfoTitle">tast</span>
                           </div>
                           <div className="projectShowInfo">
-                            {project.status === "pending" ? (
+                            {task.status === "pending" ? (
                               <PendingIcon className="projectShowIcon pending" 
                                />
                             ) : (
                               <DoneOutlineIcon className="projectShowIcon done" />
                             )}
                             <span className="userShowInfoTitle">
-                              {project.status}
+                              {task.status}
                             </span>
                           </div>
                           <span className="projectShowTitle">Contributors</span>
@@ -111,7 +112,7 @@ const ProjectList = () => {
                             Project Analytics
                           </span>
                           <div className="projectShowInfo">
-                            <Progressbar progress={project.progress} />
+                            <Progressbar progress={2} />
                           </div>
                         </div>
                       </div>
