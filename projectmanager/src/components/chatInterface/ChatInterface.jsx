@@ -18,6 +18,9 @@ import {
 } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import Message from "../message/Message";
+import Instruction from "../instruction/Instruction";
+import TodoApp from "../instruction/Instruction";
+
 
 
 const ChatInterface = (props) => {
@@ -97,6 +100,12 @@ const ChatInterface = (props) => {
   return (
     <div className="chatInterface">
       <div id="frame">
+      <div id="sidepanel">
+      <div className="text">
+      <Instruction/>
+      </div>
+        
+      </div>
         <div class="content">
           <div class="contact-profile">
             <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
