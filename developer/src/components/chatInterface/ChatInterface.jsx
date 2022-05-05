@@ -19,8 +19,6 @@ import {
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import Message from "../message/Message";
 import Instruction from "../instruction/Instruction";
-import TodoApp from "../instruction/Instruction";
-
 
 
 const ChatInterface = (props) => {
@@ -102,52 +100,17 @@ const ChatInterface = (props) => {
       <div id="frame">
       <div id="sidepanel">
       <div className="text">
-      <Instruction/>
+      <Instruction taskId={taskId}/>
       </div>
         
       </div>
-        <div class="content">
-          <div class="contact-profile">
+        <div className="content">
+          <div className="contact-profile">
             <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
             <p>Harvey Specter</p>
           </div>
-          <div class="messages">
+          <div className="messages">
             <ul>
-              <li class="sent">
-                <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                <p>
-                  How the hell am I supposed to get a jury to believe you when I
-                  am not even sure that I do?!
-                </p>
-              </li>
-              <li class="replies">
-                <img
-                  src="http://emilcarlsson.se/assets/harveyspecter.png"
-                  alt=""
-                />
-                <p>
-                  When you're backed against the wall, break the god damn thing
-                  down.
-                </p>
-              </li>
-              <li class="replies">
-                <img
-                  src="http://emilcarlsson.se/assets/harveyspecter.png"
-                  alt=""
-                />
-                <p>Excuses don't win championships.</p>
-              </li>
-              <li class="sent">
-                <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                <p>Oh yeah, did Michael Jordan tell you that?</p>
-              </li>
-              <li class="replies">
-                <img
-                  src="http://emilcarlsson.se/assets/harveyspecter.png"
-                  alt=""
-                />
-                <p>No, I told him that.</p>
-              </li>
               {msgs.length
                 ? msgs.map((msg, i) => (
                     <Message key={i} msg={msg} user1={user1} />
@@ -157,8 +120,8 @@ const ChatInterface = (props) => {
             </ul>
           </div>
           <form className="message_form" onSubmit={handleSubmit}>
-          <div class="message-input">
-            <div class="wrap">
+          <div className="message-input">
+            <div className="wrap">
               <input
                 type="text"
                 placeholder="Write your message..."
@@ -172,10 +135,10 @@ const ChatInterface = (props) => {
                 accept="image/*"
                 style={{ display: "none" }}
               />
-              <label for="file-input">
+              <label htmlFor="file-input">
                 <FileUploadIcon className="attachment" />
               </label>
-              <button class="submit">
+              <button className="submit">
                 <SendIcon className="chatsendicon" />
               </button>
             </div>

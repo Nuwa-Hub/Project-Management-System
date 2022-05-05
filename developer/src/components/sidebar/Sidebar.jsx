@@ -22,10 +22,13 @@ export default function Sidebar() {
       customUI: ({ onClose }) => {
         return (
           <div className='custom-ui'>
-            <h1>Confirm to Logout?</h1>
-            <p>Are you sure to do this.</p>
-            <button onClick={onClose}>No</button>
-            <button
+          <div>
+            <h1 className="logoutmsg">Confirm to Logout?</h1>
+            <p className="logout-text">Are you sure to do this.</p>
+            </div>
+            <div className="logoutaction">
+            <button className="logoutbtn no" onClick={onClose}>No</button>
+            <button className="logoutbtn yes"
               onClick={() => {
                 logOut(dispatch);
                 onClose();
@@ -33,6 +36,7 @@ export default function Sidebar() {
             >
               Yes
             </button>
+            </div>
           </div>
         );
       }

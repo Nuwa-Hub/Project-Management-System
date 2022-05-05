@@ -30,10 +30,34 @@
 .ttexwrap {
   background-color:  #e6eaea;
   padding: 5px;
+  padding-right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
+  position: relative;
+}
+.todo-deleteiconwrap{
+  opacity: 0;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+  cursor: pointer
+}
+.todo-deleteiconwrap:hover{
+  opacity: 1;
+}
+.todo-deleteicon{
+  color: rgb(255, 0, 0);
 }
 .ticonwrap {
   display: flex;

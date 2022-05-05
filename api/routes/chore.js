@@ -29,7 +29,7 @@ router.get("/:id", async (req, res) => {
 });
 
 //UPADATE CHORE
-router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.put("/:id",  async (req, res) => {
   try {
     const updateChore = await Chore.findByIdAndUpdate(
       req.params.id,

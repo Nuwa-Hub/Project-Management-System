@@ -16,6 +16,7 @@ import {
 } from "./projectRedux";
 import { getDeveloperFailure, getDeveloperStart, getDeveloperSuccess } from "./developerRedux";
 import { getTaskFailure, getTaskStart, getTaskSuccess } from "./taskRedux";
+import { getChoreFailure, getChoreStart, getChoreSuccess, updateChoreFailure, updateChoreStart, updateChoreSuccess } from "./choreRedux";
 
 
 //auth
@@ -96,5 +97,31 @@ export const getTasks = async (dispatch,id) => {
     dispatch(getTaskSuccess(res.data));
   } catch (err) {
     dispatch(getTaskFailure());
+  }
+};
+
+
+//Chore
+
+//get chores by task id
+export const getChores = async (dispatch, id) => {
+  dispatch(getChoreStart());
+  try {
+    const res = await userRequest.get(`/chores/${id}`);
+    dispatch(getChoreSuccess(res.data));
+  } catch (err) {
+    dispatch(getChoreFailure());
+  }
+};
+
+export const updateChore = async (id, Chore, dispatch) => {
+  dispatch(updateChoreStart());
+  try {
+    // update
+    const res = await userRequest.put(`/chores/${id}`,Chore);
+    
+    dispatch(updateChoreSuccess(res.data));
+  } catch (err) {
+    dispatch(updateChoreFailure());
   }
 };

@@ -2,6 +2,9 @@ import React, { useEffect, useRef } from "react";
 import Moment from "react-moment";
 
 const Message = ({ msg, user1 }) => {
+
+  document.querySelectorAll(" p * div ")
+
   const scrollRef = useRef();
 
   useEffect(() => {
@@ -9,7 +12,7 @@ const Message = ({ msg, user1 }) => {
   }, [msg]);
 
   return (
-    <li class={`${msg.from === user1 ? "sent" : "replies"}`} ref={scrollRef}>
+    <li className={`${msg.from === user1 ? "sent" : "replies"}`} ref={scrollRef}>
       <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
 
       <p className="messagetext">
