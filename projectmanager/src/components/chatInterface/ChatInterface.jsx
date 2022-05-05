@@ -102,7 +102,7 @@ const ChatInterface = (props) => {
       <div id="frame">
       <div id="sidepanel">
       <div className="text">
-      <Instruction/>
+      <Instruction taskId={taskId}/>
       </div>
         
       </div>

@@ -17,7 +17,6 @@ export const taskSlice = createSlice({
     getTaskSuccess: (state, action) => {
       state.isFetching = false;
       state.tasks = action.payload;
-      console.log(action.payload)
     },
     getTaskFailure: (state) => {
       state.isFetching = false;

@@ -6,8 +6,12 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { Link } from "react-router-dom";
 import userdp from "../../images/user.png";
 import { useDispatch, useSelector } from "react-redux";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteTask } from "../../redux/apiCalls";
 
 const WidgetTask = ({ task }) => {
+  const dispatch = useDispatch();
+
   //get developer relevent to tha specific task
   const developer = useSelector((state) =>
     state.developer.developers.find(
@@ -15,19 +19,25 @@ const WidgetTask = ({ task }) => {
     )
   );
 
-  
-
   return (
     <div className="widgetTask">
       <div className="widgetTaskwrapper">
         <div className="widgetTasktop">
           <h3 className="widgetTasktitle">{task.Taskname}</h3>
-          <Link className="link" to={"/task/" + task._id}>
-            <Button className="taskviewbutton" variant="outlined">
-              <RemoveRedEyeIcon className="taskviewbuttonicon" />
-              <h1 className="taskviewbuttontext">display</h1>
-            </Button>
-          </Link>
+          <div className="projectaction">
+            <DeleteIcon
+              className="projectdeleticon"
+              onClick={(e) => {
+                deleteTask(task._id, dispatch);
+              }}
+            />
+            <Link className="link" to={"/task/" + task._id}>
+              <Button className="taskviewbutton" variant="outlined">
+                <RemoveRedEyeIcon className="taskviewbuttonicon" />
+                <h1 className="taskviewbuttontext">display</h1>
+              </Button>
+            </Link>
+          </div>
         </div>
         <div className="widgetTaskbottom">
           <div className="widgetTaskleft">

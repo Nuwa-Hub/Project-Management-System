@@ -37,6 +37,7 @@
     "recharts": "^2.1.9",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
+    "semantic-ui-react": "^2.1.2",
     "timeago": "^1.6.7",
     "web-vitals": "^2.1.0"
   },

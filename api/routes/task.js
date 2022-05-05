@@ -23,14 +23,23 @@ router.put("/:id", async (req, res) => {
 //DELETE Task
 router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
-    const updateTask = await Task.findByIdAndDelete(req.params.id);
+    const deleteTask = await Task.findByIdAndDelete(req.params.id);
+    res.status(200).json(deleteTask);
+  } catch (err) {
+    console.log("err");
+    res.status(500).json(err);
+  }
+});
+//delete Task by project id
+router.delete("find/:id", verifyTokenAndAuthorization, async (req, res) => {
+  try {
+    const deleteTasks = await Task.remove({projectId:req.params.id});
     res.status(200).json();
   } catch (err) {
     console.log("err");
     res.status(500).json(err);
   }
 });
-
 //CREATE task
 router.post("/", async (req, res) => {
   const newTask = new Task(req.body);

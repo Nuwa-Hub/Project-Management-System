@@ -21,36 +21,33 @@ import { getTasks } from "../../redux/apiCalls";
 import { useLocation } from "react-router-dom";
 
 const Project = () => {
-
   const location = useLocation();
   const projectId = location.pathname.split("/")[2];
 
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState();
- //get project by id
+  //get project by id
   const project = useSelector((state) =>
     state.project.projects.find((project) => project._id === projectId)
   );
 
- //get task by projectID
- const dispatch = useDispatch();
+  //get task by projectID
+  const dispatch = useDispatch();
   const tasks = useSelector((state) => state.task.tasks);
-  
+
   useEffect(() => {
-    getTasks(dispatch,projectId);
-  }, [dispatch,projectId,open]);
+    getTasks(dispatch, projectId);
+  }, [dispatch, projectId, open]);
 
   const [searchItem, setSearchItem] = useState("");
- 
+
   const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor:  "#fff",
+    backgroundColor: "#fff",
     ...theme.typography.body2,
     padding: theme.spacing(0.5),
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
-
-  
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -71,7 +68,9 @@ const Project = () => {
             <div className="uprojecttop">
               <div className="uprojecttopleft">
                 <h3 className="uprojecttoplefttitle">{project.projectname}</h3>
-                <h3 className="uprojecttopleftcompany">{project.companyname}</h3>
+                <h3 className="uprojecttopleftcompany">
+                  {project.companyname}
+                </h3>
               </div>
               <div className="uprojecttopright">
                 <button className="userAddButton">Create</button>
@@ -115,9 +114,8 @@ const Project = () => {
                 </div>
               </div>
               <div className="uprojectanalys">
-                <GrantChartsm tasks={tasks}/>
+                <GrantChartsm tasks={tasks} />
               </div>
-              
             </div>
             <Divider className="uprjectpagedevider" />
             <div className="uprojectbottom">
@@ -150,7 +148,6 @@ const Project = () => {
                     projectId={projectId}
                   />
                 </div>
-                
               </div>
               <div className="uprojectbottombody">
                 <Box sx={{ width: "100%", height: "100%" }}>
@@ -163,7 +160,7 @@ const Project = () => {
                   >
                     {tasks.map((task) => (
                       <Item key={task._id} sx={{ height: "auto" }}>
-                       <WidgetTask task={task}/>
+                        <WidgetTask task={task} />
                       </Item>
                     ))}
                   </Masonry>

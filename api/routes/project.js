@@ -58,10 +58,9 @@ router.put("/:id",verifyTokenAndAuthorization, async (req, res) => {
 //DELETE PROJECT
 router.delete("/:id",verifyTokenAndAuthorization, async (req, res) => {
   try {
-    const updateProject = await Project.findByIdAndDelete(req.params.id);
-    res.status(200).json();
+    const deleteProject = await Project.findByIdAndDelete(req.params.id);
+    res.status(200).json(deleteProject);
   } catch (err) {
-    console.log("err")
     res.status(500).json(err);
   }
 })

@@ -9,14 +9,15 @@ import Grid3x3Icon from "@mui/icons-material/Grid3x3";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import BookIcon from "@mui/icons-material/Book";
 import PendingIcon from "@mui/icons-material/Pending";
-import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import Button from "@mui/material/Button";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
-import { getProjects } from "../../redux/apiCalls";
+import { deleteProject, getProjects } from "../../redux/apiCalls";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -28,7 +29,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const ProjectList = () => {
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.project.projects);
-  
+
   useEffect(() => {
     getProjects(dispatch);
   }, [dispatch]);
@@ -62,15 +63,20 @@ const ProjectList = () => {
                             {project.companyname}
                           </span>
                         </div>
-                        <Link  className="link" to={"/project/"+project._id}>
-                        <Button
-                          className="viewbutton"
-                          variant="outlined"
-                        >
-                          <RemoveRedEyeIcon className="viewbuttonicon" />
-                          <h1 className="viewbuttontext">display</h1>
-                        </Button>
-                        </Link>
+                        <div className="projectaction">
+                          <DeleteIcon
+                            className="projectdeleticon"
+                            onClick={(e) => {
+                              deleteProject(project._id, dispatch);
+                            }}
+                          />
+                          <Link className="link" to={"/project/" + project._id}>
+                            <Button className="viewbutton" variant="outlined">
+                              <RemoveRedEyeIcon className="viewbuttonicon" />
+                              <h1 className="viewbuttontext">display</h1>
+                            </Button>
+                          </Link>
+                        </div>
                       </div>
                       <div className="projectShowBottom">
                         <div className="projectShowdetail">
@@ -89,8 +95,7 @@ const ProjectList = () => {
                           </div>
                           <div className="projectShowInfo">
                             {project.status === "pending" ? (
-                              <PendingIcon className="projectShowIcon pending" 
-                               />
+                              <PendingIcon className="projectShowIcon pending" />
                             ) : (
                               <DoneOutlineIcon className="projectShowIcon done" />
                             )}

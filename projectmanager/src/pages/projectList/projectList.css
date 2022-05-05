@@ -7,6 +7,19 @@
   justify-content: space-between;
   padding: 0px 20px;
 }
+.projectaction{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.projectdeleticon{
+  margin-right: 5px;
+  color: red;
+  opacity: 0.7;
+}
+.projectdeleticon:hover{
+  opacity: 1;
+}
 .projectpagetitle{
   font-size: 28px;
   font-weight: 700;
