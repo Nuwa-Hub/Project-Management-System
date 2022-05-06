@@ -12,7 +12,10 @@ import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import TaskIcon from '@mui/icons-material/Task';
 import { confirmAlert } from 'react-confirm-alert';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -74,14 +77,17 @@ export default function Sidebar() {
             </Link>
             <Link className="link" to={"/projects"}>
               <li className="sidebarListItem">
+                <SupervisorAccountIcon className="sidebarIcon" />
+                Project Managers
+              </li>
+            </Link>
+            <Link className="link" to={"/projects"}>
+              <li className="sidebarListItem">
                 <LaptopChromebookIcon className="sidebarIcon" />
                 Projects
               </li>
             </Link>
-            <li className="sidebarListItem">
-              <TaskIcon className="sidebarIcon" />
-              Task
-            </li>
+        
           </ul>
         </div>
         <div className="sidebarMenu">
@@ -91,14 +97,18 @@ export default function Sidebar() {
               <AccessAlarmIcon className="sidebarIcon" />
               Time handle
             </li>
+            <Link className="link" to={`/profile/ ${234}`}>
             <li className="sidebarListItem">
-              <PeopleOutlineIcon className="sidebarIcon" />
-              User Analytics
+              <AccountCircleIcon className="sidebarIcon" />
+              Profile
             </li>
+            </Link>
+            <Link className="link" to={`/user/ ${234}`}>
             <li className="sidebarListItem">
-              <TrendingUpIcon className="sidebarIcon" />
-              Settings
+              <ManageAccountsIcon className="sidebarIcon" />
+              Manage Profile
             </li>
+            </Link>
           </ul>
         </div>
       </div>

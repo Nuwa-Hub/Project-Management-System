@@ -1,4 +1,5 @@
 import Home from "./pages/home/Home"
+import Profile from "./pages/profile/Profile"
 import Project from "./pages/project/Project"
 import ProjectList from "./pages/projectList/ProjectList"
 import Timeline from "./pages/timeLine/Timeline"
@@ -27,11 +28,15 @@ export const routes = [
         element: <Project />,
         path: '/project/:id',
       },
-     
+      {
+        name: 'profile',
+        element: <Profile />,
+        path: '/profile/:id',
+      },
       {
         name: 'user',
         element: <User />,
-        path: '/user',
+        path: '/user/:id',
       },
       {
         name: 'timeline',
