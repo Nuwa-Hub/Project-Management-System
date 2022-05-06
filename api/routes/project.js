@@ -54,7 +54,10 @@ router.get("/find/:id",verifyTokenAndAuthorization, async (req, res) => {
     }
   });
 
-  router.get("/",verifyTokenAndAuthorization, async (req, res) => {
+
+  //GET ALL PROJECTS
+  router.get("/", async (req, res) => {
+
     try {
       
       const Projects = await Project.find();
@@ -64,17 +67,29 @@ router.get("/find/:id",verifyTokenAndAuthorization, async (req, res) => {
     }
   });
 
-  //GET ALL PROJECTS
-  router.get("/:id",verifyTokenAndAuthorization, async (req, res) => {
-    try {
-      
-      const Projects = await Project.find({managerId:req.params.id});
-      res.status(200).json(Projects);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
 
-  
+  //UPADATE PROJECT
+router.put("/:id",verifyTokenAndAuthorization, async (req, res) => {
+  try {
+    const updateProject = await Project.findByIdAndUpdate(
+      req.params.id,
+      {$set:req.body},
+      {new:true}
+      );
+    res.status(200).json(updateProject);
+  } catch (err) {
+    console.log("err")
+    res.status(500).json(err);
+  }
+})
+//DELETE PROJECT
+router.delete("/:id",verifyTokenAndAuthorization, async (req, res) => {
+  try {
+    const deleteProject = await Project.findByIdAndDelete(req.params.id);
+    res.status(200).json(deleteProject);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
 
   module.exports=router;

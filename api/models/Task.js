@@ -5,7 +5,9 @@ const TaskSchema = new mongoose.Schema(
     Taskname: { type: String, required: true},
     managerId: { type: String, required: true },
     projectId: { type: String },
-    status: { type: String, required: true },
+
+    status: { type: String, required: true ,default:"pending"},
+
     developerId: { type: String, required: true },
     duedate: {
         type: Date, required:true,
