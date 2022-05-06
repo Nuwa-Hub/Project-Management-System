@@ -11,7 +11,7 @@ export const choreSlice = createSlice({
     //GET ALL
     getChoreStart: (state) => {
       state.isFetching = true;
-      state.chores=[]
+      state.chores = [];
       state.error = false;
     },
     getChoreSuccess: (state, action) => {
@@ -48,7 +48,6 @@ export const choreSlice = createSlice({
       state.chores[
         state.chores.findIndex((item) => item._id === action.payload._id)
       ] = action.payload;
-     
     },
     updateChoreFailure: (state) => {
       state.isFetching = false;

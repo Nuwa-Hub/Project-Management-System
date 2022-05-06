@@ -128,6 +128,7 @@ const ChatInterface = (props) => {
                   accept="image/*"
                   style={{ display: "none" }}
                 />
+                
                 <label htmlFor="file-input">
                   <h6 className="sendfilename">{file.name}</h6>
                   <FileUploadIcon className="attachment" />

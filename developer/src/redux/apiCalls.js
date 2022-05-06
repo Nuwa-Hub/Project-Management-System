@@ -1,4 +1,4 @@
-import { loginFailure, loginStart, loginSuccess,logout } from "./userRedux";
+import { loginFailure, loginStart, loginSuccess, logout } from "./userRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 import {
   getProjectFailure,
@@ -14,10 +14,20 @@ import {
   addProjectStart,
   addProjectSuccess,
 } from "./projectRedux";
-import { getDeveloperFailure, getDeveloperStart, getDeveloperSuccess } from "./developerRedux";
+import {
+  getDeveloperFailure,
+  getDeveloperStart,
+  getDeveloperSuccess,
+} from "./developerRedux";
 import { getTaskFailure, getTaskStart, getTaskSuccess } from "./taskRedux";
-import { getChoreFailure, getChoreStart, getChoreSuccess, updateChoreFailure, updateChoreStart, updateChoreSuccess } from "./choreRedux";
-
+import {
+  getChoreFailure,
+  getChoreStart,
+  getChoreSuccess,
+  updateChoreFailure,
+  updateChoreStart,
+  updateChoreSuccess,
+} from "./choreRedux";
 
 //auth
 export const login = async (dispatch, user) => {
@@ -30,9 +40,9 @@ export const login = async (dispatch, user) => {
   }
 };
 
-export const logOut =async(dispatch)=>{
-     dispatch(logout());
-}
+export const logOut = async (dispatch) => {
+  dispatch(logout());
+};
 
 //projects
 export const getProjects = async (dispatch) => {
@@ -90,7 +100,7 @@ export const getdevelopers = async (dispatch) => {
 //TASKS
 
 //GET TASK BY developer ID
-export const getTasks = async (dispatch,id) => {
+export const getTasks = async (dispatch, id) => {
   dispatch(getTaskStart());
   try {
     const res = await userRequest.get(`/tasks/find/${id}`);
@@ -99,7 +109,6 @@ export const getTasks = async (dispatch,id) => {
     dispatch(getTaskFailure());
   }
 };
-
 
 //Chore
 
@@ -118,8 +127,8 @@ export const updateChore = async (id, Chore, dispatch) => {
   dispatch(updateChoreStart());
   try {
     // update
-    const res = await userRequest.put(`/chores/${id}`,Chore);
-    
+    const res = await userRequest.put(`/chores/${id}`, Chore);
+
     dispatch(updateChoreSuccess(res.data));
   } catch (err) {
     dispatch(updateChoreFailure());
