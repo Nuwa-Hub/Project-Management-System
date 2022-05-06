@@ -13,7 +13,22 @@ const Message = ({ msg, user1 }) => {
       <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
 
       <p className="messagetext">
-        <div>{msg.text}</div>
+      <div className="messagetextwrap">
+          {msg.media ? (
+            <a href={msg.media} download>
+              <div>
+                <embed
+                  src={msg.media}
+                  style={{overflow:"hidden"}}
+                  frameBorder="0"
+                  width="200px"
+                  height="200px"
+                />
+              </div>
+            </a>
+          ) : null}
+          {msg.text}
+        </div>
         <small>
           <Moment fromNow>{msg.createdAt.toDate()}</Moment>
         </small>

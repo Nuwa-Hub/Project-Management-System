@@ -93,8 +93,6 @@ const ChatInterface = (props) => {
   };
 
 
- 
-
   return (
     <div className="chatInterface">
       <div id="frame">
@@ -109,7 +107,9 @@ const ChatInterface = (props) => {
             <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
             <p>Harvey Specter</p>
           </div>
+         
           <div className="messages">
+         
             <ul>
               {msgs.length
                 ? msgs.map((msg, i) => (
@@ -118,8 +118,11 @@ const ChatInterface = (props) => {
                 : null}
              
             </ul>
+            
           </div>
+          
           <form className="message_form" onSubmit={handleSubmit}>
+         
           <div className="message-input">
             <div className="wrap">
               <input
@@ -128,14 +131,15 @@ const ChatInterface = (props) => {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
+             
               <input
                 onChange={(e) => setfile(e.target.files[0])}
                 type="file"
                 id="file-input"
-                accept="image/*"
                 style={{ display: "none" }}
               />
               <label htmlFor="file-input">
+              <h6 className="sendfilename">{file.name}</h6>
                 <FileUploadIcon className="attachment" />
               </label>
               <button className="submit">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./chatInterface.css";
 import SendIcon from "@mui/icons-material/Send";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
@@ -21,11 +21,9 @@ import Message from "../message/Message";
 import Instruction from "../instruction/Instruction";
 import TodoApp from "../instruction/Instruction";
 
-
-
 const ChatInterface = (props) => {
   const { taskId, user1, user2 } = props;
-  
+
   const [chat, setChat] = useState("");
   const [text, setText] = useState("");
   const [file, setfile] = useState("");
@@ -33,10 +31,9 @@ const ChatInterface = (props) => {
 
   useEffect(() => {
     const getmsg = async () => {
-
       const msgsRef = collection(db, "messages", taskId, "chat");
       const q = query(msgsRef, orderBy("createdAt", "asc"));
-  
+
       onSnapshot(q, (querySnapshot) => {
         let msgs = [];
         querySnapshot.forEach((doc) => {
@@ -44,7 +41,7 @@ const ChatInterface = (props) => {
         });
         setMsgs(msgs);
       });
-  
+
       // get last message b/w logged in user and selected user
       const docSnap = await getDoc(doc(db, "lastMsg", taskId));
       // if last message exists and message is from selected user
@@ -53,11 +50,10 @@ const ChatInterface = (props) => {
         await updateDoc(doc(db, "lastMsg", taskId), { unread: false });
       }
     };
-     getmsg()
-     // make sure to catch any error
-    .catch(console.error); 
+    getmsg()
+      // make sure to catch any error
+      .catch(console.error);
   }, []);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -94,18 +90,14 @@ const ChatInterface = (props) => {
     setfile("");
   };
 
-
- 
-
   return (
     <div className="chatInterface">
       <div id="frame">
-      <div id="sidepanel">
-      <div className="text">
-      <Instruction taskId={taskId}/>
-      </div>
-        
-      </div>
+        <div id="sidepanel">
+          <div className="text">
+            <Instruction taskId={taskId} />
+          </div>
+        </div>
         <div class="content">
           <div class="contact-profile">
             <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
@@ -113,73 +105,38 @@ const ChatInterface = (props) => {
           </div>
           <div class="messages">
             <ul>
-              <li class="sent">
-                <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                <p>
-                  How the hell am I supposed to get a jury to believe you when I
-                  am not even sure that I do?!
-                </p>
-              </li>
-              <li class="replies">
-                <img
-                  src="http://emilcarlsson.se/assets/harveyspecter.png"
-                  alt=""
-                />
-                <p>
-                  When you're backed against the wall, break the god damn thing
-                  down.
-                </p>
-              </li>
-              <li class="replies">
-                <img
-                  src="http://emilcarlsson.se/assets/harveyspecter.png"
-                  alt=""
-                />
-                <p>Excuses don't win championships.</p>
-              </li>
-              <li class="sent">
-                <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                <p>Oh yeah, did Michael Jordan tell you that?</p>
-              </li>
-              <li class="replies">
-                <img
-                  src="http://emilcarlsson.se/assets/harveyspecter.png"
-                  alt=""
-                />
-                <p>No, I told him that.</p>
-              </li>
               {msgs.length
                 ? msgs.map((msg, i) => (
                     <Message key={i} msg={msg} user1={user1} />
                   ))
                 : null}
-             
             </ul>
           </div>
           <form className="message_form" onSubmit={handleSubmit}>
-          <div class="message-input">
-            <div class="wrap">
-              <input
-                type="text"
-                placeholder="Write your message..."
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-              />
-              <input
-                onChange={(e) => setfile(e.target.files[0])}
-                type="file"
-                id="file-input"
-                accept="image/*"
-                style={{ display: "none" }}
-              />
-              <label for="file-input">
-                <FileUploadIcon className="attachment" />
-              </label>
-              <button class="submit">
-                <SendIcon className="chatsendicon" />
-              </button>
+            <div class="message-input">
+              <div class="wrap">
+                <input
+                  type="text"
+                  placeholder="Write your message..."
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                />
+                <input
+                  onChange={(e) => setfile(e.target.files[0])}
+                  type="file"
+                  id="file-input"
+                  accept="image/*"
+                  style={{ display: "none" }}
+                />
+                <label htmlFor="file-input">
+                  <h6 className="sendfilename">{file.name}</h6>
+                  <FileUploadIcon className="attachment" />
+                </label>
+                <button class="submit">
+                  <SendIcon className="chatsendicon" />
+                </button>
+              </div>
             </div>
-          </div>
           </form>
         </div>
       </div>
