@@ -78,7 +78,7 @@ const ProjectList = () => {
                       <div className="projectShowBottom">
                         <div className="projectShowdetail">
                           <span className="projectShowTitle">
-                            Project Detail
+                            Task Detail
                           </span>
                           <div className="projectShowInfo">
                             <Grid3x3Icon className="projectShowIcon" />
