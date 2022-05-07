@@ -4,15 +4,6 @@ import {
   getProjectFailure,
   getProjectStart,
   getProjectSuccess,
-  deleteProjectFailure,
-  deleteProjectStart,
-  deleteProjectSuccess,
-  updateProjectFailure,
-  updateProjectStart,
-  updateProjectSuccess,
-  addProjectFailure,
-  addProjectStart,
-  addProjectSuccess,
 } from "./projectRedux";
 import {
   getDeveloperFailure,
@@ -44,45 +35,22 @@ export const logOut = async (dispatch) => {
   dispatch(logout());
 };
 
+
+
 //projects
-export const getProjects = async (dispatch) => {
+
+//get projects by developer id
+export const getProjects = async (dispatch,id) => {
   dispatch(getProjectStart());
   try {
-    const res = await userRequest.get("/projects");
+    const res = await userRequest.get(`/projects/find/developer/${id}`);
     dispatch(getProjectSuccess(res.data));
   } catch (err) {
     dispatch(getProjectFailure());
   }
 };
 
-export const deleteProject = async (id, dispatch) => {
-  dispatch(deleteProjectStart());
-  try {
-    // const res = await userRequest.delete(`/Projects/${id}`);
-    dispatch(deleteProjectSuccess(id));
-  } catch (err) {
-    dispatch(deleteProjectFailure());
-  }
-};
 
-export const updateProject = async (id, Project, dispatch) => {
-  dispatch(updateProjectStart());
-  try {
-    // update
-    dispatch(updateProjectSuccess({ id, Project }));
-  } catch (err) {
-    dispatch(updateProjectFailure());
-  }
-};
-export const addProject = async (Project, dispatch) => {
-  dispatch(addProjectStart());
-  try {
-    const res = await userRequest.post(`/Projects`, Project);
-    dispatch(addProjectSuccess(res.data));
-  } catch (err) {
-    dispatch(addProjectFailure());
-  }
-};
 
 // Developers
 

@@ -98,3 +98,10 @@
   padding: 0.7em;
   font-size: 13px;
 }
+.ttextwraper{
+  display: flex;
+  flex-direction: column;
+}
+.ttexttimeago{
+  font-size: 10px;
+}

@@ -5,14 +5,14 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { useDispatch, useSelector } from "react-redux";
 import { addChore, deleteChore, getChores } from "../../redux/apiCalls";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Moment from "react-moment";
 
-function TodoInstruction({ chore,dispatch }) {
-
+function TodoInstruction({ chore, dispatch }) {
   const handleDelete = (e) => {
     e.preventDefault();
     deleteChore(chore._id, dispatch);
   };
-
+  console.log(chore);
   return (
     <div
       className="todo-task"
@@ -32,8 +32,12 @@ function TodoInstruction({ chore,dispatch }) {
             <ListIcon style={{ color: "rgb(255, 0, 0)" }} />
           )}
         </div>
-
-        <h3 className="ttext">{chore.title}</h3>
+        <div className="ttextwraper">
+          <h3 className="ttext">{chore.title}</h3>
+          <small className="ttexttimeago">
+            <Moment fromNow>{chore.createdAt}</Moment>
+          </small>
+        </div>
       </div>
     </div>
   );
@@ -86,7 +90,12 @@ const Instruction = ({ taskId }) => {
       <div className="todo-tasksholder">
         <div className="todo-tasks">
           {chores.map((chore, index) => (
-            <TodoInstruction chore={chore} dispatch={dispatch} index={index} key={index} />
+            <TodoInstruction
+              chore={chore}
+              dispatch={dispatch}
+              index={index}
+              key={index}
+            />
           ))}
         </div>
       </div>

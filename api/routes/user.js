@@ -64,6 +64,18 @@ router.get("/",async (req, res) => {
     res.status(500).json(err);
   }
 });
+//GET ALL DEVELOPERS
+router.get("/managers/",async (req, res) => {
+  const query = req.query.new;
+  try {
+    const users = query
+      ? await User.find({isAdmin:true}).sort({ _id: -1 }).limit(4)
+      : await User.find({isAdmin:true});
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 //UPADATE USER
 router.put("/:id",verifyTokenAndAdmin, async (req, res) => {
   try {

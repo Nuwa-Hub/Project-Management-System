@@ -205,3 +205,7 @@
   font-size: 1.5em;
   top:5px;
 }
+.sendfilename{
+  position:absolute;
+  z-index: 1000;
+}

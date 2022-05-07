@@ -11,12 +11,18 @@ const Task = () => {
   const location = useLocation();
   const taskId = location.pathname.split("/")[2];
 
-  //get developer relevent to tha specific task
+  //get task relevent to tha specific task id
   const task = useSelector((state) =>
-    state.task.tasks.find(
-      (task) => task._id === taskId
-    )
+    state.task.tasks.find((task) => task._id === taskId)
   );
+  //get project relevent to tha specific task.projectId
+  const project = useSelector((state) =>
+    state.project.projects.find((project) => project._id === task.projectId)
+  );
+
+
+  //console.log(task)
+
   //get task developer id
   const user2 = task.developerId;
   //get project manager id
@@ -33,27 +39,31 @@ const Task = () => {
               <div className="taskShow">
                 <div className="taskShowTop">
                   <div className="taskShowTopTitle">
-                    <span className="taskShowtaskname">Create Admin Page</span>
+                    <span className="taskShowtaskname">{task.Taskname}</span>
                     <span className="taskShowtaskTitle">
-                      Project management system
+                      {project.companyname}
                     </span>
                   </div>
                 </div>
                 <div className="taskShowBottom">
                   <span className="taskShowTitle">Task Details</span>
                   <div className="taskShowInfo">
-                    <span className="taskShowInfoTitle">Task ID : 1</span>
+                    <span className="taskShowInfoTitle">{task.Taskname}</span>
                   </div>
                   <div className="taskShowInfo">
-                    <span className="taskShowInfoTitle">description</span>
+                    <span className="taskShowInfoTitle">{task.Taskname}</span>
                   </div>
                   <span className="taskShowTitle">Given date</span>
                   <div className="taskShowInfo">
-                    <span className="taskShowInfoTitle">2000/04/03</span>
+                    <span className="taskShowInfoTitle">
+                      {task.duedate.slice(0, 10)}
+                    </span>
                   </div>
                   <span className="taskShowTitle">Due date</span>
                   <div className="taskShowInfo">
-                    <span className="taskShowInfoTitle">2000/04/06</span>
+                    <span className="taskShowInfoTitle">
+                      {task.duedate.slice(0, 10)}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -91,10 +101,7 @@ const Task = () => {
               </div>
             </div>
             <div className="massages-container">
-              <ChatInterface
-              taskId={taskId}
-              user1={user1}
-              user2={user2} />
+              <ChatInterface taskId={taskId} user1={user1} user2={user2} />
             </div>
           </div>
         </div>

@@ -125,7 +125,7 @@ const ChatInterface = (props) => {
                   onChange={(e) => setfile(e.target.files[0])}
                   type="file"
                   id="file-input"
-                  accept="image/*"
+                  accept=""
                   style={{ display: "none" }}
                 />
                 

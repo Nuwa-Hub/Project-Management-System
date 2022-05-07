@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
-import { getTasks } from "../../redux/apiCalls";
+import { getProjects, getTasks } from "../../redux/apiCalls";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -28,10 +28,12 @@ const Item = styled(Paper)(({ theme }) => ({
 const ProjectList = () => {
   const dispatch = useDispatch();
   const tasks = useSelector((state) => state.task.tasks);
+  const projects = useSelector((state) => state.project.projects);
   const userId = useSelector((state) => state.user.currentUser._id);
-  
+  console.log(projects)
   useEffect(() => {
     getTasks(dispatch,userId);
+    getProjects(dispatch,userId);
   }, [dispatch]);
 
   return (
@@ -76,7 +78,7 @@ const ProjectList = () => {
                       <div className="projectShowBottom">
                         <div className="projectShowdetail">
                           <span className="projectShowTitle">
-                            Project Detail
+                            Task Detail
                           </span>
                           <div className="projectShowInfo">
                             <Grid3x3Icon className="projectShowIcon" />
