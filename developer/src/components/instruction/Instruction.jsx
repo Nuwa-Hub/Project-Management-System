@@ -5,6 +5,7 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { useDispatch, useSelector } from "react-redux";
 import {  getChores, updateChore } from "../../redux/apiCalls";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import Moment from "react-moment";
 
 function TodoInstruction({ chore,dispatch }) {
  
@@ -41,7 +42,12 @@ function TodoInstruction({ chore,dispatch }) {
           )}
         </div>
 
-        <h3 className="ttext">{chore.title}</h3>
+        <div className="ttextwraper">
+          <h3 className="ttext">{chore.title}</h3>
+          <small className="ttexttimeago">
+            <Moment fromNow>{chore.createdAt}</Moment>
+          </small>
+        </div>
       </div>
     </div>
     )}

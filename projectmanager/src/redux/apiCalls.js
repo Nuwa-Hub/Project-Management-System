@@ -189,7 +189,7 @@ export const addChore = async (Chore, dispatch) => {
 export const deleteChore = async (id, dispatch) => {
   dispatch(deleteChoreStart());
   try {
-    const id =await userRequest.delete(`/chores/${id}`);
+    const choreid =await userRequest.delete(`/chores/${id}`);
     
     dispatch(deleteChoreSuccess(id));
   } catch (err) {
