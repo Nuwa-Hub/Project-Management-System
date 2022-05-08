@@ -18,12 +18,7 @@ const developer = useSelector((state) =>
       <div className="widgetTaskwrapper">
         <div className="widgetTasktop">
           <h3 className="widgetTasktitle">{task.Taskname}</h3>
-          <Link className="link" to={"/task"}>
-            <Button className="taskviewbutton" variant="outlined">
-              <RemoveRedEyeIcon className="taskviewbuttonicon" />
-              <h1 className="taskviewbuttontext">display</h1>
-            </Button>
-          </Link>
+       
         </div>
         <div className="widgetTaskbottom">
           <div className="widgetTaskleft">

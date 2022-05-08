@@ -21,6 +21,18 @@ export const developerSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+    registerStart: (state) => {
+      state.isFetching = true;
+    },
+    registerSuccess: (state, action) => {
+      state.isFetching = false;
+      state.developers.push(action.payload);
+      state.error = false;
+    },
+    registerFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
     //DELETE
     deleteDeveloperStart: (state) => {
       state.isFetching = true;
@@ -69,6 +81,9 @@ export const developerSlice = createSlice({
 });
 
 export const {
+  registerStart,
+  registerSuccess,
+  registerFailure,
   getDeveloperStart,
   getDeveloperSuccess,
   getDeveloperFailure,

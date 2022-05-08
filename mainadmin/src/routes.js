@@ -1,4 +1,5 @@
 import Home from "./pages/home/Home"
+import NewUser from "./pages/newUser/NewUser"
 import Profile from "./pages/profile/Profile"
 import Project from "./pages/project/Project"
 import ProjectList from "./pages/projectList/ProjectList"
@@ -43,7 +44,12 @@ export const routes = [
         element: <Timeline />,
         path: '/timeline',
       },
-
+      {
+        name: 'newuser',
+        element: <NewUser />,
+        path: '/newuser',
+      },
+     
       
 ]
 

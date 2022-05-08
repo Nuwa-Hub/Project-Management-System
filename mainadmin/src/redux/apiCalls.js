@@ -1,4 +1,4 @@
-import { loginFailure, loginStart, loginSuccess,logout } from "./userRedux";
+import { loginFailure, loginStart, loginSuccess, logout } from "./userRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 import {
   getProjectFailure,
@@ -14,9 +14,15 @@ import {
   addProjectStart,
   addProjectSuccess,
 } from "./projectRedux";
-import { getDeveloperFailure, getDeveloperStart, getDeveloperSuccess } from "./developerRedux";
+import {
+  getDeveloperFailure,
+  getDeveloperStart,
+  getDeveloperSuccess,
+  registerFailure,
+  registerStart,
+  registerSuccess,
+} from "./developerRedux";
 import { getTaskFailure, getTaskStart, getTaskSuccess } from "./taskRedux";
-
 
 //auth
 export const login = async (dispatch, user) => {
@@ -29,9 +35,11 @@ export const login = async (dispatch, user) => {
   }
 };
 
-export const logOut =async(dispatch)=>{
-     dispatch(logout());
-}
+
+
+export const logOut = async (dispatch) => {
+  dispatch(logout());
+};
 
 //projects
 export const getProjects = async (dispatch) => {
@@ -86,10 +94,21 @@ export const getdevelopers = async (dispatch) => {
   }
 };
 
+//Add developer
+export const addUser = async (dispatch, user) => {
+  dispatch(registerStart());
+  try {
+    const res = await publicRequest.post("/auth/register", user);
+    dispatch(registerSuccess(res.data));
+  } catch (err) {
+    dispatch(registerFailure());
+  }
+};
+
 //TASKS
 
 //GET TASK BY PROJEC ID
-export const getTasks = async (dispatch,id) => {
+export const getTasks = async (dispatch, id) => {
   dispatch(getTaskStart());
   try {
     const res = await userRequest.get(`/tasks/${id}`);
@@ -98,4 +117,3 @@ export const getTasks = async (dispatch,id) => {
     dispatch(getTaskFailure());
   }
 };
-

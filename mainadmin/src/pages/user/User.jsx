@@ -1,6 +1,5 @@
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import { Link } from "react-router-dom";
 import "./user.css";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -8,8 +7,25 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PublishIcon from "@mui/icons-material/Publish";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { userRequest } from "../../requestMethods";
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import userdp from "../../images/user.png";
 
 export default function User() {
+  
+  const location=useLocation();
+  const developerId=location.pathname.split("/")[2];
+  const [inputs, setInputs] = useState({});
+  const [file, setFile] = useState(null);
+  const dispatch = useDispatch();
+
+  const developer=useSelector((state)=>
+    state.developer.developers.find((developer)=>developer._id==developerId)
+  )
+//console.log(developer)
   return (
     <>
       <Topbar />
@@ -33,7 +49,7 @@ export default function User() {
                   className="userShowImg"
                 />
                 <div className="userShowTopTitle">
-                  <span className="userShowUsername">Anna Becker</span>
+                  <span className="userShowUsername">{developer.username}</span>
                   <span className="userShowUserTitle">Software Engineer</span>
                 </div>
               </div>
@@ -41,7 +57,7 @@ export default function User() {
                 <span className="userShowTitle">Account Details</span>
                 <div className="userShowInfo">
                   <PermIdentityIcon className="userShowIcon" />
-                  <span className="userShowInfoTitle">annabeck99</span>
+                  <span className="userShowInfoTitle">{developer.username}</span>
                 </div>
                 <div className="userShowInfo">
                   <CalendarTodayIcon className="userShowIcon" />
@@ -50,17 +66,17 @@ export default function User() {
                 <span className="userShowTitle">Contact Details</span>
                 <div className="userShowInfo">
                   <PhoneAndroidIcon className="userShowIcon" />
-                  <span className="userShowInfoTitle">+1 123 456 67</span>
+                  <span className="userShowInfoTitle">{developer.telNo}</span>
                 </div>
                 <div className="userShowInfo">
                   <MailOutlineIcon className="userShowIcon" />
                   <span className="userShowInfoTitle">
-                    annabeck99@gmail.com
+                  {developer.email}
                   </span>
                 </div>
                 <div className="userShowInfo">
                   <LocationOnIcon className="userShowIcon" />
-                  <span className="userShowInfoTitle">New York | USA</span>
+                  <span className="userShowInfoTitle">{developer.address}</span>
                 </div>
               </div>
             </div>
@@ -72,23 +88,16 @@ export default function User() {
                     <label>Username</label>
                     <input
                       type="text"
-                      placeholder="annabeck99"
+                      placeholder={developer.username}
                       className="userUpdateInput"
                     />
                   </div>
-                  <div className="userUpdateItem">
-                    <label>Full Name</label>
-                    <input
-                      type="text"
-                      placeholder="Anna Becker"
-                      className="userUpdateInput"
-                    />
-                  </div>
+          
                   <div className="userUpdateItem">
                     <label>Email</label>
                     <input
                       type="text"
-                      placeholder="annabeck99@gmail.com"
+                      placeholder={developer.email}
                       className="userUpdateInput"
                     />
                   </div>
@@ -96,7 +105,7 @@ export default function User() {
                     <label>Phone</label>
                     <input
                       type="text"
-                      placeholder="+1 123 456 67"
+                      placeholder={developer.telNo}
                       className="userUpdateInput"
                     />
                   </div>
@@ -104,7 +113,7 @@ export default function User() {
                     <label>Address</label>
                     <input
                       type="text"
-                      placeholder="New York | USA"
+                      placeholder={developer.address}
                       className="userUpdateInput"
                     />
                   </div>

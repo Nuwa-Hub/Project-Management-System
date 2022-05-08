@@ -16,6 +16,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -60,10 +61,12 @@ export default function Sidebar() {
               TimeLine
             </li>
             </Link>
-            <li className="sidebarListItem">
-              <TrendingUpIcon className="sidebarIcon" />
-              Sales
-            </li>
+            <Link className="link" to={"/projects"}>
+              <li className="sidebarListItem">
+                <LaptopChromebookIcon className="sidebarIcon" />
+                Projects
+              </li>
+            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">
@@ -81,13 +84,13 @@ export default function Sidebar() {
                 Project Managers
               </li>
             </Link>
-            <Link className="link" to={"/projects"}>
+        
+            <Link className="link" to={"/newuser"}>
               <li className="sidebarListItem">
-                <LaptopChromebookIcon className="sidebarIcon" />
-                Projects
+                <PersonAddAltIcon className="sidebarIcon" />
+                New User
               </li>
             </Link>
-        
           </ul>
         </div>
         <div className="sidebarMenu">
