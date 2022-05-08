@@ -15,12 +15,18 @@ import {
   addProjectSuccess,
 } from "./projectRedux";
 import {
+  deleteDeveloperFailure,
+  deleteDeveloperStart,
+  deleteDeveloperSuccess,
   getDeveloperFailure,
   getDeveloperStart,
   getDeveloperSuccess,
   registerFailure,
   registerStart,
   registerSuccess,
+  updateDeveloperFailure,
+  updateDeveloperStart,
+  updateDeveloperSuccess,
 } from "./developerRedux";
 import { getTaskFailure, getTaskStart, getTaskSuccess } from "./taskRedux";
 
@@ -88,6 +94,7 @@ export const getdevelopers = async (dispatch) => {
   dispatch(getDeveloperStart());
   try {
     const res = await userRequest.get("/users");
+    
     dispatch(getDeveloperSuccess(res.data));
   } catch (err) {
     dispatch(getDeveloperFailure());
@@ -102,6 +109,28 @@ export const addUser = async (dispatch, user) => {
     dispatch(registerSuccess(res.data));
   } catch (err) {
     dispatch(registerFailure());
+  }
+};
+
+//update developer
+export const updateUser = async (dispatch, user,id) => {
+  dispatch(updateDeveloperStart());
+  try {
+    const res = await userRequest.put(`/users/${id}`, user);
+    console.log(res.data._id)
+    dispatch(updateDeveloperSuccess(res.data));
+  } catch (err) {
+    dispatch(updateDeveloperFailure());
+  }
+};
+
+export const deleteDeveloper = async (id, dispatch) => {
+  dispatch(deleteDeveloperStart());
+  try {
+     const res = await userRequest.delete(`/users/${id}`);
+    dispatch(deleteDeveloperSuccess(id));
+  } catch (err) {
+    dispatch(deleteDeveloperFailure());
   }
 };
 

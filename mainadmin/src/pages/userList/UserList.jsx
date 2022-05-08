@@ -7,16 +7,21 @@ import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getdevelopers } from "../../redux/apiCalls";
+import { deleteDeveloper, getdevelopers } from "../../redux/apiCalls";
 import userdp from "../../images/user.png";
 
 export default function UserList() {
   const dispatch = useDispatch();
-  const developers=useSelector((state) => state.developer.developers);
-  
+  const developers = useSelector((state) => state.developer.developers);
+
   useEffect(() => {
     getdevelopers(dispatch);
   }, [dispatch]);
+
+  const handleDelete = (id) => {
+    console.log(id)
+    deleteDeveloper(id,dispatch);
+  };
 
   const columns = [
     { field: "_id", headerName: "ID", width: 220 },
@@ -27,7 +32,11 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <div className="userListUser">
-            <img className="userListImg" src={userdp || params.row.avatar} alt="user image" />
+            <img
+              className="userListImg"
+              src={userdp || params.row.avatar}
+              alt="user image"
+            />
             {params.row.username}
           </div>
         );
@@ -54,7 +63,12 @@ export default function UserList() {
             <Link to={"/user/" + params.row._id}>
               <button className="userListEdit">Edit</button>
             </Link>
-            <DeleteIcon className="userListDelete" />
+           
+            <DeleteIcon
+              onClick={handleDelete.bind(this,params.row._id)}
+              className="userListDelete"
+            />
+          
           </>
         );
       },

@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
     address: { type: String, required: true },
     telNo: { type: String, required: true },
+    img: { type: String },
     projects: [
       {
         projectId: {
@@ -25,7 +26,7 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    img: { type: String },
+    
   },
   { timestamps: true }
 );

@@ -118,6 +118,17 @@ export const getdevelopers = async (dispatch) => {
   }
 };
 
+//update developer
+export const updatedeveloper = async (dispatch) => {
+  dispatch(getDeveloperStart());
+  try {
+    const res = await userRequest.get("/users");
+    dispatch(getDeveloperSuccess(res.data));
+  } catch (err) {
+    dispatch(getDeveloperFailure());
+  }
+};
+
 //TASKS
 
 //GET TASK BY PROJEC ID

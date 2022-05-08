@@ -57,8 +57,9 @@ export const developerSlice = createSlice({
     updateDeveloperSuccess: (state, action) => {
       state.isFetching = false;
       state.developers[
-        state.developers.findIndex((item) => item._id === action.payload.id)
-      ] = action.payload.developer;
+        state.developers.findIndex((item) => item._id === action.payload._id)
+      ] = action.payload;
+      console.log(state.developers)
     },
     updateDeveloperFailure: (state) => {
       state.isFetching = false;

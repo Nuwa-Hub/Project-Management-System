@@ -15,7 +15,7 @@ const Message = ({ msg, user1 }) => {
       <p className="messagetext">
       <div className="messagetextwrap">
           {msg.media ? (
-            <a href={msg.media} download>
+            <a href={msg.media} >
               <div>
                 <embed
                   src={msg.media}

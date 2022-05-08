@@ -12,7 +12,7 @@ function TodoInstruction({ chore, dispatch }) {
     e.preventDefault();
     deleteChore(chore._id, dispatch);
   };
-  console.log(chore);
+ // console.log(chore);
   return (
     <div
       className="todo-task"

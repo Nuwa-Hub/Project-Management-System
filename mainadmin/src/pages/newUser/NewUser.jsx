@@ -19,7 +19,7 @@ export default function NewUser() {
   const [file, setFile] = useState(null);
 
   const dispatch = useDispatch();
-  console.log(inputs);
+
   const handleChange = (e) => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -91,7 +91,7 @@ export default function NewUser() {
                 <div className="newUserItem">
                   <label>Username</label>
                   <input
-                    value={inputs.name}
+                    
                     type="text"
                     name="username"
                     onChange={handleChange}
@@ -105,7 +105,7 @@ export default function NewUser() {
                 <div className="newUserItem">
                   <label>Email</label>
                   <input
-                    value={inputs && inputs.email}
+                    
                     type="email"
                     name="email"
                     onChange={handleChange}
@@ -115,7 +115,7 @@ export default function NewUser() {
                 <div className="newUserItem">
                   <label>Password</label>
                   <input
-                    value={inputs.password}
+                    
                     type="password"
                     name="password"
                     onChange={handleChange}
@@ -125,7 +125,7 @@ export default function NewUser() {
                 <div className="newUserItem">
                   <label>Phone</label>
                   <input
-                    value={inputs.telNo}
+                   
                     type="text"
                     name="telNo"
                     onChange={handleChange}
@@ -135,7 +135,7 @@ export default function NewUser() {
                 <div className="newUserItem">
                   <label>Address</label>
                   <input
-                    value={inputs.address}
+                   
                     type="text"
                     name="address"
                     onChange={handleChange}

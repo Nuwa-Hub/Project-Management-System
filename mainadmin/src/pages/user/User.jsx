@@ -9,29 +9,47 @@ import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { userRequest } from "../../requestMethods";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import userdp from "../../images/user.png";
+import { updateUser } from "../../redux/apiCalls";
 
 export default function User() {
-  
-  const location=useLocation();
-  const developerId=location.pathname.split("/")[2];
-  const [inputs, setInputs] = useState({});
+  const location = useLocation();
+  const developerId = location.pathname.split("/")[2];
+
+  //new values
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAdrress] = useState("");
+  const [telNo, setTelNo] = useState("");
+
   const [file, setFile] = useState(null);
   const dispatch = useDispatch();
 
-  const developer=useSelector((state)=>
-    state.developer.developers.find((developer)=>developer._id==developerId)
-  )
-//console.log(developer)
+  const developer = useSelector((state) =>
+    state.developer.developers.find((developer) => developer._id == developerId)
+  );
+
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const updatedeveloper = {
+      username: username,
+      email: email,
+      address: address,
+      telNo: telNo,
+    };
+    updateUser(dispatch,updatedeveloper,developerId);
+  };
+
+  //console.log(developer)
   return (
     <>
       <Topbar />
       <div className="container">
         <Sidebar />
-        
+
         <div className="user">
           <div className="userTitleContainer">
             <h1 className="userTitle">Edit User</h1>
@@ -44,8 +62,8 @@ export default function User() {
             <div className="userShow">
               <div className="userShowTop">
                 <img
-                  src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                  alt=""
+                  src={userdp || developer.img}
+                  alt="user img"
                   className="userShowImg"
                 />
                 <div className="userShowTopTitle">
@@ -57,7 +75,9 @@ export default function User() {
                 <span className="userShowTitle">Account Details</span>
                 <div className="userShowInfo">
                   <PermIdentityIcon className="userShowIcon" />
-                  <span className="userShowInfoTitle">{developer.username}</span>
+                  <span className="userShowInfoTitle">
+                    {developer.username}
+                  </span>
                 </div>
                 <div className="userShowInfo">
                   <CalendarTodayIcon className="userShowIcon" />
@@ -70,9 +90,7 @@ export default function User() {
                 </div>
                 <div className="userShowInfo">
                   <MailOutlineIcon className="userShowIcon" />
-                  <span className="userShowInfoTitle">
-                  {developer.email}
-                  </span>
+                  <span className="userShowInfoTitle">{developer.email}</span>
                 </div>
                 <div className="userShowInfo">
                   <LocationOnIcon className="userShowIcon" />
@@ -90,15 +108,21 @@ export default function User() {
                       type="text"
                       placeholder={developer.username}
                       className="userUpdateInput"
+                      onChange={(e) => {
+                        setUsername(e.target.value);
+                      }}
                     />
                   </div>
-          
+
                   <div className="userUpdateItem">
                     <label>Email</label>
                     <input
                       type="text"
                       placeholder={developer.email}
                       className="userUpdateInput"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
                     />
                   </div>
                   <div className="userUpdateItem">
@@ -107,6 +131,9 @@ export default function User() {
                       type="text"
                       placeholder={developer.telNo}
                       className="userUpdateInput"
+                      onChange={(e) => {
+                        setTelNo(e.target.value);
+                      }}
                     />
                   </div>
                   <div className="userUpdateItem">
@@ -115,6 +142,9 @@ export default function User() {
                       type="text"
                       placeholder={developer.address}
                       className="userUpdateInput"
+                      onChange={(e) => {
+                        setAdrress(e.target.value);
+                      }}
                     />
                   </div>
                 </div>
@@ -122,15 +152,17 @@ export default function User() {
                   <div className="userUpdateUpload">
                     <img
                       className="userUpdateImg"
-                      src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                      alt=""
+                      src={userdp || developer.img}
+                      alt="user img"
                     />
                     <label htmlFor="file">
                       <PublishIcon className="userUpdateIcon" />
                     </label>
                     <input type="file" id="file" style={{ display: "none" }} />
                   </div>
-                  <button className="userUpdateButton">Update</button>
+                  <button className="userUpdateButton" onClick={handleSubmit}>
+                    Update
+                  </button>
                 </div>
               </form>
             </div>
