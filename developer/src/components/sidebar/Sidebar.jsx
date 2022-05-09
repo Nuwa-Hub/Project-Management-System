@@ -13,6 +13,7 @@ import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import TaskIcon from '@mui/icons-material/Task';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
+import PasswordIcon from '@mui/icons-material/Password';
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -100,8 +101,8 @@ export default function Sidebar() {
               User Analytics
             </li>
             <li className="sidebarListItem">
-              <TrendingUpIcon className="sidebarIcon" />
-              Settings
+              <PasswordIcon className="sidebarIcon" />
+              Change Pasword
             </li>
           </ul>
         </div>

@@ -22,7 +22,7 @@ const CreateTaskDialog = (props) => {
   const [date, setValue] = React.useState(new Date());
   const [developerId, setdeveloperId] = React.useState(null);
   const [inputs, setInputs] = useState({});
-  console.log(developers)
+ 
   //set input values
   const handleChange = (e) => {
     setInputs((prev) => {

@@ -43,15 +43,7 @@ router.post("/", async (req, res) => {
     }
   });
 
-//GET Project by projectid
-router.get("/find/developer/:id",verifyTokenAndAuthorization, async (req, res) => {
-    try {
-      const projects = await Project.find({ developrId: req.params.id });
-      res.status(200).json(projects);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+
 
   //GET Project by projectid
 router.get("/find/:id",verifyTokenAndAuthorization, async (req, res) => {

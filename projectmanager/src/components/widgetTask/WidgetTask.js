@@ -28,6 +28,7 @@ const WidgetTask = ({ task }) => {
             <DeleteIcon
               className="projectdeleticon"
               onClick={(e) => {
+                console.log("dsdf")
                 deleteTask(task._id, dispatch);
               }}
             />

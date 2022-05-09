@@ -95,6 +95,7 @@ export const updateProject = async (id, Project, dispatch) => {
     dispatch(updateProjectFailure());
   }
 };
+//add project
 export const addProject = async (Project, dispatch) => {
   dispatch(addProjectStart());
   try {

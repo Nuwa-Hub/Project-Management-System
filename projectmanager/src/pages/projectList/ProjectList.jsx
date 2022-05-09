@@ -18,6 +18,7 @@ import { deleteProject, getProjects } from "../../redux/apiCalls";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
+import SearchBar from "material-ui-search-bar";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -29,10 +30,33 @@ const Item = styled(Paper)(({ theme }) => ({
 const ProjectList = () => {
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.project.projects);
+  
 
   useEffect(() => {
     getProjects(dispatch);
   }, [dispatch]);
+
+//search bar
+
+const [searchProjects, setItems] = React.useState(projects);
+const [searched, setSearched] = React.useState("");
+
+const cancelSearch = () => {
+  setSearched("");
+  requestSearch(searched);
+};
+
+const requestSearch = (searchedVal) => {
+  const filteredItems = projects.filter((project) => {
+    return project.projectname.toLowerCase().includes(searchedVal.toLowerCase());
+  });
+  setItems(filteredItems);
+};
+
+useEffect(() => {
+  setItems(projects);
+  requestSearch(searched);
+}, [projects]);
 
   return (
     <>
@@ -42,15 +66,33 @@ const ProjectList = () => {
         <div className="project">
           <div className="projectpagetop">
             <h3 className="projectpagetitle">Projects</h3>
+            <SearchBar
+                   onCancelSearch={() => cancelSearch()}
+                    value={searched}
+                    onChange={(searchVal) => {
+                      requestSearch(searchVal);
+                      setSearched(searchVal);
+                    }}
+                    onRequestSearch={() => console.log("onRequestSearch")}
+                    style={{
+                      margin: "5px",
+                      width:"400px",
+                      height:"40px",
+                      maxWidth: 1200,
+                      maxHight:100,
+                    }}
+                  />
+            <Link className="link" to={"/createproject"}>
             <button className="createprojectbn">create</button>
+            </Link>
           </div>
           <Box className="box" sx={{ width: "100%", height: "100%" }}>
             <Grid
               container
-              rowSpacing={1}
+              rowSpacing={2}
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             >
-              {projects.map((project) => (
+              {searchProjects.map((project) => (
                 <Grid item xs={4} key={project._id}>
                   <Item>
                     <div className="projectShow">
