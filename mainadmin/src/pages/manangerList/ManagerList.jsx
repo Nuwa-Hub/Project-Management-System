@@ -1,4 +1,4 @@
-import "./userList.css";
+import "./managerList.css";
 import { DataGrid } from "@mui/x-data-grid";
 //import { userRows } from "../../dummyData";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -7,16 +7,20 @@ import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getdevelopers } from "../../redux/apiCalls";
+import { deleteDeveloper, getmanagers } from "../../redux/apiCalls";
 import userdp from "../../images/user.png";
 
-export default function UserList() {
+export default function ManagerList() {
   const dispatch = useDispatch();
-  const developers=useSelector((state) => state.developer.developers);
-  
+  const managers = useSelector((state) => state.developer.managers);
+
   useEffect(() => {
-    getdevelopers(dispatch);
+    getmanagers(dispatch);
   }, [dispatch]);
+
+  const handleDelete = (id) => {
+    deleteDeveloper(id,dispatch);
+  };
 
   const columns = [
     { field: "_id", headerName: "ID", width: 220 },
@@ -27,7 +31,11 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <div className="userListUser">
-            <img className="userListImg" src={userdp || params.row.avatar} alt="user image" />
+            <img
+              className="userListImg"
+              src={userdp || params.row.avatar}
+              alt="user image"
+            />
             {params.row.username}
           </div>
         );
@@ -44,7 +52,26 @@ export default function UserList() {
       headerName: "Address",
       width: 180,
     },
-
+    {
+      field: "action",
+      headerName: "Action",
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={"/user/" + params.row._id}>
+              <button className="userListEdit">Edit</button>
+            </Link>
+           
+            <DeleteIcon
+              onClick={handleDelete.bind(this,params.row._id)}
+              className="userListDelete"
+            />
+          
+          </>
+        );
+      },
+    },
   ];
 
   return (
@@ -54,7 +81,7 @@ export default function UserList() {
         <Sidebar />
         <div className="userList">
           <DataGrid
-            rows={developers}
+            rows={managers}
             disableSelectionOnClick
             columns={columns}
             getRowId={(row) => row._id}

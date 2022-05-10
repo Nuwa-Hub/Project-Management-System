@@ -54,7 +54,7 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 //delete chore by task id
-router.delete("find/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.delete("/find/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
     const deleteChores = await Task.remove({taskId:req.params.id});
     res.status(200).json();

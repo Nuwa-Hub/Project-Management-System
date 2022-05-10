@@ -27,7 +27,17 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
-//GET  USER
+//GET ALL managers
+router.get("/manager", async (req, res) => {
+  try {
+    const users =  await User.find({ isAdmin: true });
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//GET  USER by id
 router.get("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
     const User = await User.find({ _ud: req.params.id });
@@ -36,7 +46,7 @@ router.get("/:id", verifyTokenAndAdmin, async (req, res) => {
     res.status(500).json(err);
   }
 });
-//GET ALL USER
+//GET ALL developers
 router.get("/", async (req, res) => {
   const query = req.query.new;
   try {
@@ -48,18 +58,7 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-//GET ALL DEVELOPERS
-router.get("/managers/", async (req, res) => {
-  const query = req.query.new;
-  try {
-    const users = query
-      ? await User.find({ isAdmin: true }).sort({ _id: -1 }).limit(4)
-      : await User.find({ isAdmin: true });
-    res.status(200).json(users);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+
 
 //just a comment
 module.exports = router;

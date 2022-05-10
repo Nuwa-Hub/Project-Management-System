@@ -21,6 +21,9 @@ import {
   getDeveloperFailure,
   getDeveloperStart,
   getDeveloperSuccess,
+  getManagerFailure,
+  getManagerStart,
+  getManagerSuccess,
   registerFailure,
   registerStart,
   registerSuccess,
@@ -131,6 +134,19 @@ export const deleteDeveloper = async (id, dispatch) => {
     dispatch(deleteDeveloperSuccess(id));
   } catch (err) {
     dispatch(deleteDeveloperFailure());
+  }
+};
+//Manangers
+
+//GET ALL Manangers
+export const getmanagers = async (dispatch) => {
+  dispatch(getManagerStart());
+  try {
+    const res = await userRequest.get("/users/manager");
+    console.log(res.data)
+    dispatch(getManagerSuccess(res.data));
+  } catch (err) {
+    dispatch(getManagerFailure());
   }
 };
 

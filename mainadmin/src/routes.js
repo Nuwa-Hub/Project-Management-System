@@ -1,8 +1,10 @@
 import Home from "./pages/home/Home"
+import ManagerList from "./pages/manangerList/ManagerList"
 import NewUser from "./pages/newUser/NewUser"
 import Profile from "./pages/profile/Profile"
 import Project from "./pages/project/Project"
 import ProjectList from "./pages/projectList/ProjectList"
+import SendEmail from "./pages/sendEmail/SendEmail"
 import Timeline from "./pages/timeLine/Timeline"
 import User from "./pages/user/User"
 import UserList from "./pages/userList/UserList"
@@ -48,6 +50,16 @@ export const routes = [
         name: 'newuser',
         element: <NewUser />,
         path: '/newuser',
+      },
+      {
+        name: 'sendemail',
+        element: <SendEmail />,
+        path: '/sendemail',
+      },
+      {
+        name: 'managers',
+        element: <ManagerList />,
+        path: '/managers',
       },
      
       

@@ -17,6 +17,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import EmailIcon from '@mui/icons-material/Email';
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -78,7 +79,7 @@ export default function Sidebar() {
                 Developers
               </li>
             </Link>
-            <Link className="link" to={"/projects"}>
+            <Link className="link" to={"/managers"}>
               <li className="sidebarListItem">
                 <SupervisorAccountIcon className="sidebarIcon" />
                 Project Managers
@@ -89,6 +90,12 @@ export default function Sidebar() {
               <li className="sidebarListItem">
                 <PersonAddAltIcon className="sidebarIcon" />
                 New User
+              </li>
+            </Link>
+            <Link className="link" to={"/sendemail"}>
+              <li className="sidebarListItem">
+                <EmailIcon className="sidebarIcon" />
+                Send Email
               </li>
             </Link>
           </ul>
