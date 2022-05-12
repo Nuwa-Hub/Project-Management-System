@@ -26,7 +26,15 @@ const Task = () => {
       (developer) => developer._id === task.developerId
     )
   );
-  console.log(taskHolder)
+
+    //get chores relevent to tha specific task.projectId
+    const chores = useSelector((state) =>
+    state.developer.developers.find(
+      (developer) => developer._id === task.developerId
+    )
+  );
+
+  //console.log(taskHolder)
   //get task developer id
   const user2 = task.developerId;
   //get project manager id

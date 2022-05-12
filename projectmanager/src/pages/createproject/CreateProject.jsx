@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import "./createproject.css";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
+import Button from '@mui/material/Button';
+import TextField from "../../components/textField/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import { addProject } from "../../redux/apiCalls";
-
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
 const CreateProject = () => {
   const [inputs, setInputs] = useState({});
   //due date picker
@@ -29,55 +27,70 @@ const CreateProject = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.currentUser._id);
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    const project = { ...inputs, duedate: date, managerId:userId };
-          addProject(project, dispatch);
+  const handleClick = (e,{resetForm}) => {
+    
+    const project = { ...e,  managerId: userId };
+    console.log(project)
+    addProject(project, dispatch);
+    resetForm();
   };
+
+  //validate
+  const validate = Yup.object({
+    projectname: Yup.string()
+      .max(25, "Must be 25 characters or less!")
+      .required("Requered!"),
+    companyname: Yup.string()
+      .max(25, "Must be 25 characters or less!")
+      .required("Requered!"),
+      duedate: Yup.string()
+      .required("Requered!"),
+  });
+
   return (
     <>
       <Topbar />
       <div className="container">
         <Sidebar />
         <div className="createproject">
-          <h1 className="newProjectTitle">New Project</h1>
-          <form className="newProjectForm">
-            <div className="newProjectItem">
-              <label>Projet Name</label>
-              <input
-                name="projectname"
-                type="text"
-                placeholder="Software project"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="newProjectItem">
-              <label>Company Name</label>
-              <input
-                name="companyname"
-                type="text"
-                placeholder="ABC company"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="newProjectItem">
-              <label>Due Date</label>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <Stack spacing={3} className="taskCreateInputdate">
-                  <DesktopDatePicker
-                    label="Date desktop"
-                    inputFormat="MM/dd/yyyy"
-                    value={date}
-                    onChange={Changedate}
-                    renderInput={(params) => <TextField {...params} />}
+        <div className="createprojectwrapper">
+          <Formik
+            initialValues={{
+              projectname: "",
+              companyname: "",
+              duedate: "",
+            }}
+            validationSchema={validate}
+            onSubmit={handleClick}
+          >
+            {({values,isValid,dirty}) => (
+              <>
+                
+                <h1 className="newProjectTitle">New Project</h1>
+                <Form className="newProjectForm">
+                  <TextField
+                    label="Project Name"
+                    name="projectname"
+                    type="text"
                   />
-                </Stack>
-              </LocalizationProvider>
-            </div>
-          </form>
-          <button className="newProjectButton" onClick={handleClick}>
-            Create
-          </button>
+                  <TextField
+                    label="Company Name"
+                    name="companyname"
+                    type="text"
+                  />
+                  <TextField label="Due Date" name="duedate" type="date" />
+                  <TextField
+                    label="Company Nam"
+                    name="companynam"
+                    type="text"
+                  />
+                  <button variant="contained"  type="submit" className="newProjectButton">Create</button>
+                </Form>
+              
+              </>
+            )}
+          </Formik>
+          </div>
         </div>
       </div>
     </>

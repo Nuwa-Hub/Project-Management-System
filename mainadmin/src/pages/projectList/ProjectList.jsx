@@ -41,7 +41,7 @@ const [searched, setSearched] = React.useState("");
 
 const cancelSearch = () => {
   setSearched("");
-  requestSearch(searched);
+  requestSearch("");
 };
 
 const requestSearch = (searchedVal) => {

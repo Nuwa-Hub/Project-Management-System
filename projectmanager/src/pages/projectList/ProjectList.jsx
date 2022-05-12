@@ -41,16 +41,16 @@ const ProjectList = () => {
 const [searchProjects, setItems] = React.useState(projects);
 const [searched, setSearched] = React.useState("");
 
-const cancelSearch = () => {
-  setSearched("");
-  requestSearch(searched);
-};
-
 const requestSearch = (searchedVal) => {
   const filteredItems = projects.filter((project) => {
     return project.projectname.toLowerCase().includes(searchedVal.toLowerCase());
   });
   setItems(filteredItems);
+};
+
+const cancelSearch = () => {
+  setSearched("");
+  requestSearch("");
 };
 
 useEffect(() => {

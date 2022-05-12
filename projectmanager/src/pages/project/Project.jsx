@@ -13,7 +13,6 @@ import SearchBar from "material-ui-search-bar";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-
 import CreateTaskDialog from "../../components/createTaskDialog/CreateTaskDialog";
 import WidgetTask from "../../components/widgetTask/WidgetTask";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,6 +39,8 @@ const Project = () => {
     getTasks(dispatch, projectId);
   }, [dispatch, projectId]);
 
+  
+
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
     ...theme.typography.body2,
@@ -65,7 +66,7 @@ const Project = () => {
 
   const cancelSearch = () => {
     setSearched("");
-    requestSearch(searched);
+    requestSearch("");
   };
 
   const requestSearch = (searchedVal) => {

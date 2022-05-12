@@ -1,10 +1,21 @@
 .createproject {
-    flex: 4;
+    flex: 5;
+    
+    
   }
- 
+ .createprojectwrapper{
+  margin: 10px 300px;
+  border: 1px solid gray;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 600px;
+ }
   .newProjectForm {
     display: flex;
     flex-wrap: wrap;
+    
   }
   
   .newProjectItem {
@@ -23,7 +34,7 @@
   }
   
   .newProjectItem > input {
-    height: 25px;
+    height: 35px;
     padding: 10px;
     border: 1px solid gray;
     border-radius: 5px;
@@ -46,6 +57,7 @@
   
   .newProjectButton{
       width: 200px;
+      height: 40px;
       border: none;
       background-color: darkblue;
       color: white;
