@@ -72,7 +72,7 @@ export const developerSlice = createSlice({
       state.developers[
         state.developers.findIndex((item) => item._id === action.payload._id)
       ] = action.payload;
-      console.log(state.developers)
+     // console.log(state.developers)
     },
     updateDeveloperFailure: (state) => {
       state.isFetching = false;

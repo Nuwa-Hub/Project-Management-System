@@ -17,8 +17,9 @@ import CreateTaskDialog from "../../components/createTaskDialog/CreateTaskDialog
 import WidgetTask from "../../components/widgetTask/WidgetTask";
 import { useDispatch, useSelector } from "react-redux";
 import { getTasks } from "../../redux/apiCalls";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import EditIcon from "@mui/icons-material/Edit";
 
 const Project = () => {
   const location = useLocation();
@@ -34,12 +35,10 @@ const Project = () => {
   //get tasks
   const dispatch = useDispatch();
   const tasks = useSelector((state) => state.task.tasks);
- //get task by projectID
+  //get task by projectID
   useEffect(() => {
     getTasks(dispatch, projectId);
   }, [dispatch, projectId]);
-
-  
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#fff",
@@ -101,7 +100,13 @@ const Project = () => {
             </div>
             <div className="uprojectmid">
               <div className="uprojectdetail">
-                <h3 className="uprojectdetailtitle">Project Detail</h3>
+                <div className="projectaction">
+                  <h3 className="uprojectdetailtitle">Project Detail</h3>
+                  <Link className="link" to={`/editproject/${project._id}`}>
+                  <EditIcon  className="projectediticon"/>
+                  </Link>
+                </div>
+
                 <div className="userShowBottom">
                   <span className="userShowTitle">Account Details</span>
                   <div className="userShowInfo">

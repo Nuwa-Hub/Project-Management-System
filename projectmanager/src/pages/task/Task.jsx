@@ -5,8 +5,10 @@ import "./task.css";
 import Divider from "@mui/material/Divider";
 import ChatInterface from "../../components/chatInterface/ChatInterface";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import userdp from "../../images/user.png";
+import EditIcon from "@mui/icons-material/Edit";
+
 
 const Task = () => {
   const location = useLocation();
@@ -51,7 +53,11 @@ const Task = () => {
               <div className="taskShow">
                 <div className="taskShowTop">
                   <div className="taskShowTopTitle">
-                    <span className="taskShowtaskname">{task.Taskname}</span>
+                  <div className="taskaction"><span className="taskShowtaskname">{task.Taskname}</span>
+                  <Link className="link" to={`/edittask/${taskId}`}>
+                  <EditIcon className="taskediticon"/>
+                  </Link></div>
+                    
                     <span className="taskShowtaskTitle">
                       {project.companyname}
                     </span>

@@ -6,7 +6,11 @@
   font-size: 24px;
   font-weight: 600;
 }
-
+.taskCreateFormtop{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .taskCreateForm {
   width: 500px;
   display: flex;
@@ -80,4 +84,10 @@
   justify-items: center;
   align-items: center;
   margin-left: 10px;
+}
+.cancelIcon{
+  color: rgb(255, 83, 83);
+}
+.cancelIcon:hover{
+  color: red;
 }

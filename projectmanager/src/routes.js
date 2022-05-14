@@ -1,4 +1,6 @@
 import CreateProject from "./pages/createproject/CreateProject"
+import EditProject from "./pages/editProject/EditProject"
+import EditTask from "./pages/editTask/EditTask"
 import Home from "./pages/home/Home"
 import Project from "./pages/project/Project"
 import ProjectList from "./pages/projectList/ProjectList"
@@ -54,6 +56,16 @@ export const routes = [
         name: 'createproject',
         element: <CreateProject />,
         path: '/createproject',
+      },
+      {
+        name: 'editproject',
+        element: <EditProject />,
+        path: '/editproject/:id',
+      },
+      {
+        name: 'edittask',
+        element: <EditTask />,
+        path: '/edittask/:id',
       },
       
 ]

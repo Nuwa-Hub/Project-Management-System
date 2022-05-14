@@ -29,6 +29,9 @@ import {
   deleteTaskFailure,
   deleteTaskSuccess,
   deleteTaskStart,
+  updateTaskStart,
+  updateTaskSuccess,
+  updateTaskFailure,
 } from "./taskRedux";
 import {
   addChoreFailure,
@@ -70,31 +73,31 @@ export const getProjects = async (dispatch) => {
   }
 };
 
+//delete project
 export const deleteProject = async (id, dispatch) => {
   dispatch(deleteProjectStart());
   try {
-    const deletProject= await userRequest.delete(`/projects/${id}`);
-    
-   // const releventTasks= getTasks(dispatch,deletProject.data._id);
-   
+    const deletProject = await userRequest.delete(`/projects/${id}`);
+    // const releventTasks= getTasks(dispatch,deletProject.data._id);
     //console.log(releventTasks);
     dispatch(deleteProjectSuccess(id));
-    
-    
   } catch (err) {
     dispatch(deleteProjectFailure());
   }
 };
 
-export const updateProject = async (id, Project, dispatch) => {
+//update Project
+export const updateProject = async (dispatch, project, id) => {
   dispatch(updateProjectStart());
   try {
-    // update
-    dispatch(updateProjectSuccess({ id, Project }));
+    const res = await userRequest.put(`/projects/${id}`, project);
+    //console.log(res.data);
+    dispatch(updateProjectSuccess(res.data));
   } catch (err) {
     dispatch(updateProjectFailure());
   }
 };
+
 //add project
 export const addProject = async (Project, dispatch) => {
   dispatch(addProjectStart());
@@ -142,6 +145,20 @@ export const getTasks = async (dispatch, id) => {
     dispatch(getTaskFailure());
   }
 };
+
+//update Task
+export const updateTask = async (dispatch, task, id) => {
+  dispatch(updateTaskStart());
+  try {
+    const res = await userRequest.put(`/tasks/${id}`, task);
+    //console.log(res.data);
+    dispatch(updateTaskSuccess(res.data));
+  } catch (err) {
+    dispatch(updateTaskFailure());
+  }
+};
+
+
 //ADD TASK
 export const addTask = async (Task, dispatch) => {
   dispatch(addTaskStart());
@@ -156,7 +173,7 @@ export const addTask = async (Task, dispatch) => {
 export const deleteTask = async (id, dispatch) => {
   dispatch(deleteTaskStart);
   try {
-     await userRequest.delete(`/tasks/${id}`);
+    await userRequest.delete(`/tasks/${id}`);
     dispatch(deleteTaskSuccess(id));
   } catch (err) {
     dispatch(deleteTaskFailure());
@@ -167,7 +184,7 @@ export const deleteTask = async (id, dispatch) => {
 export const deleteTaskByProjectId = async (id, dispatch) => {
   dispatch(deleteTaskStart);
   try {
-     await userRequest.delete(`/tasks/find/${id}`);
+    await userRequest.delete(`/tasks/find/${id}`);
     dispatch(deleteTaskSuccess(id));
   } catch (err) {
     dispatch(deleteTaskFailure());
@@ -201,8 +218,8 @@ export const addChore = async (Chore, dispatch) => {
 export const deleteChore = async (id, dispatch) => {
   dispatch(deleteChoreStart());
   try {
-    const choreid =await userRequest.delete(`/chores/${id}`);
-    
+    const choreid = await userRequest.delete(`/chores/${id}`);
+
     dispatch(deleteChoreSuccess(id));
   } catch (err) {
     dispatch(deleteChoreFailure());

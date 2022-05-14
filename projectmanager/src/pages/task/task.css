@@ -77,3 +77,17 @@
   .taskShowInfoTitle{
       margin-left: 10px;
   }
+  .taskaction{
+    display: flex;
+    align-items: center;
+    justify-content: space-between !important;
+}
+.taskediticon{
+    color: rgb(254, 153, 153);
+    border: 1px solid rgb(255, 0, 0);
+    cursor: pointer;
+    margin-right: 20px;
+}
+.taskediticon:hover{
+    color: rgb(255, 0, 0);
+}

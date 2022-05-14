@@ -46,8 +46,9 @@ export const taskSlice = createSlice({
     updateTaskSuccess: (state, action) => {
       state.isFetching = false;
       state.tasks[
-        state.Tasks.findIndex((item) => item._id === action.payload.id)
-      ] = action.payload.Task;
+        state.tasks.findIndex((item) => item._id === action.payload._id)
+      ] = action.payload;
+     
     },
     updateTaskFailure: (state) => {
       state.isFetching = false;
