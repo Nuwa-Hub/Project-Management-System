@@ -4,6 +4,7 @@ export const developerSlice = createSlice({
   name: "developer",
   initialState: {
     developers: [],
+    managers:[],
     isFetching: false,
     error: false,
   },
@@ -18,6 +19,30 @@ export const developerSlice = createSlice({
       state.developers = action.payload;
     },
     getDeveloperFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
+    getManagerStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+    getManagerSuccess: (state, action) => {
+      state.isFetching = false;
+      state.managers = action.payload;
+    },
+    getManagerFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
+    registerStart: (state) => {
+      state.isFetching = true;
+    },
+    registerSuccess: (state, action) => {
+      state.isFetching = false;
+      state.developers.push(action.payload);
+      state.error = false;
+    },
+    registerFailure: (state) => {
       state.isFetching = false;
       state.error = true;
     },
@@ -45,8 +70,9 @@ export const developerSlice = createSlice({
     updateDeveloperSuccess: (state, action) => {
       state.isFetching = false;
       state.developers[
-        state.developers.findIndex((item) => item._id === action.payload.id)
-      ] = action.payload.developer;
+        state.developers.findIndex((item) => item._id === action.payload._id)
+      ] = action.payload;
+     // console.log(state.developers)
     },
     updateDeveloperFailure: (state) => {
       state.isFetching = false;
@@ -69,9 +95,15 @@ export const developerSlice = createSlice({
 });
 
 export const {
+  registerStart,
+  registerSuccess,
+  registerFailure,
   getDeveloperStart,
   getDeveloperSuccess,
   getDeveloperFailure,
+  getManagerStart,
+  getManagerSuccess,
+  getManagerFailure,
   deleteDeveloperStart,
   deleteDeveloperSuccess,
   deleteDeveloperFailure,

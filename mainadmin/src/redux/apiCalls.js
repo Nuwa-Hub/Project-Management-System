@@ -1,4 +1,4 @@
-import { loginFailure, loginStart, loginSuccess,logout } from "./userRedux";
+import { loginFailure, loginStart, loginSuccess, logout } from "./userRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 import {
   getProjectFailure,
@@ -14,9 +14,24 @@ import {
   addProjectStart,
   addProjectSuccess,
 } from "./projectRedux";
-import { getDeveloperFailure, getDeveloperStart, getDeveloperSuccess } from "./developerRedux";
+import {
+  deleteDeveloperFailure,
+  deleteDeveloperStart,
+  deleteDeveloperSuccess,
+  getDeveloperFailure,
+  getDeveloperStart,
+  getDeveloperSuccess,
+  getManagerFailure,
+  getManagerStart,
+  getManagerSuccess,
+  registerFailure,
+  registerStart,
+  registerSuccess,
+  updateDeveloperFailure,
+  updateDeveloperStart,
+  updateDeveloperSuccess,
+} from "./developerRedux";
 import { getTaskFailure, getTaskStart, getTaskSuccess } from "./taskRedux";
-
 
 //auth
 export const login = async (dispatch, user) => {
@@ -29,9 +44,11 @@ export const login = async (dispatch, user) => {
   }
 };
 
-export const logOut =async(dispatch)=>{
-     dispatch(logout());
-}
+
+
+export const logOut = async (dispatch) => {
+  dispatch(logout());
+};
 
 //projects
 export const getProjects = async (dispatch) => {
@@ -80,16 +97,63 @@ export const getdevelopers = async (dispatch) => {
   dispatch(getDeveloperStart());
   try {
     const res = await userRequest.get("/users");
+    
     dispatch(getDeveloperSuccess(res.data));
   } catch (err) {
     dispatch(getDeveloperFailure());
   }
 };
 
+//Add developer
+export const addUser = async (dispatch, user) => {
+  dispatch(registerStart());
+  try {
+    const res = await publicRequest.post("/auth/register", user);
+    dispatch(registerSuccess(res.data));
+  } catch (err) {
+    dispatch(registerFailure());
+  }
+};
+
+//update developer
+export const updateUser = async (dispatch, user,id) => {
+  dispatch(updateDeveloperStart());
+  try {
+    const res = await userRequest.put(`/users/${id}`, user);
+    console.log(res.data._id)
+    dispatch(updateDeveloperSuccess(res.data));
+  } catch (err) {
+    dispatch(updateDeveloperFailure());
+  }
+};
+
+export const deleteDeveloper = async (id, dispatch) => {
+  dispatch(deleteDeveloperStart());
+  try {
+     const res = await userRequest.delete(`/users/${id}`);
+    dispatch(deleteDeveloperSuccess(id));
+  } catch (err) {
+    dispatch(deleteDeveloperFailure());
+  }
+};
+//Manangers
+
+//GET ALL Manangers
+export const getmanagers = async (dispatch) => {
+  dispatch(getManagerStart());
+  try {
+    const res = await userRequest.get("/users/manager");
+    console.log(res.data)
+    dispatch(getManagerSuccess(res.data));
+  } catch (err) {
+    dispatch(getManagerFailure());
+  }
+};
+
 //TASKS
 
 //GET TASK BY PROJEC ID
-export const getTasks = async (dispatch,id) => {
+export const getTasks = async (dispatch, id) => {
   dispatch(getTaskStart());
   try {
     const res = await userRequest.get(`/tasks/${id}`);
@@ -98,4 +162,3 @@ export const getTasks = async (dispatch,id) => {
     dispatch(getTaskFailure());
   }
 };
-

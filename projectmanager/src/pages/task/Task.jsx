@@ -5,8 +5,10 @@ import "./task.css";
 import Divider from "@mui/material/Divider";
 import ChatInterface from "../../components/chatInterface/ChatInterface";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import userdp from "../../images/user.png";
+import EditIcon from "@mui/icons-material/Edit";
+
 
 const Task = () => {
   const location = useLocation();
@@ -26,7 +28,15 @@ const Task = () => {
       (developer) => developer._id === task.developerId
     )
   );
-  console.log(taskHolder)
+
+    //get chores relevent to tha specific task.projectId
+    const chores = useSelector((state) =>
+    state.developer.developers.find(
+      (developer) => developer._id === task.developerId
+    )
+  );
+
+  //console.log(taskHolder)
   //get task developer id
   const user2 = task.developerId;
   //get project manager id
@@ -43,7 +53,11 @@ const Task = () => {
               <div className="taskShow">
                 <div className="taskShowTop">
                   <div className="taskShowTopTitle">
-                    <span className="taskShowtaskname">{task.Taskname}</span>
+                  <div className="taskaction"><span className="taskShowtaskname">{task.Taskname}</span>
+                  <Link className="link" to={`/edittask/${taskId}`}>
+                  <EditIcon className="taskediticon"/>
+                  </Link></div>
+                    
                     <span className="taskShowtaskTitle">
                       {project.companyname}
                     </span>

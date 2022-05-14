@@ -1,4 +1,4 @@
-import "./userList.css";
+import "./managerList.css";
 import { DataGrid } from "@mui/x-data-grid";
 //import { userRows } from "../../dummyData";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -7,19 +7,18 @@ import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { deleteDeveloper, getdevelopers } from "../../redux/apiCalls";
+import { deleteDeveloper, getmanagers } from "../../redux/apiCalls";
 import userdp from "../../images/user.png";
 
-export default function UserList() {
+export default function ManagerList() {
   const dispatch = useDispatch();
-  const developers = useSelector((state) => state.developer.developers);
+  const managers = useSelector((state) => state.developer.managers);
 
   useEffect(() => {
-    getdevelopers(dispatch);
+    getmanagers(dispatch);
   }, [dispatch]);
 
   const handleDelete = (id) => {
-    console.log(id)
     deleteDeveloper(id,dispatch);
   };
 
@@ -82,7 +81,7 @@ export default function UserList() {
         <Sidebar />
         <div className="userList">
           <DataGrid
-            rows={developers}
+            rows={managers}
             disableSelectionOnClick
             columns={columns}
             getRowId={(row) => row._id}

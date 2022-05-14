@@ -9,15 +9,20 @@ import "./timeline.css";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
-import { getProjects } from "../../redux/apiCalls";
+import { getTasks } from "../../redux/apiCalls";
+
 
 const Timeline = () => {
   const dispatch = useDispatch();
-  var count = 0;
-  const projects = useSelector((state) => state.project.projects);
+  var count =0;
+  const tasks = useSelector((state) => state.task.tasks);
+
+  const userId = useSelector((state) => state.user.currentUser._id);
+  
 
   useEffect(() => {
-    getProjects(dispatch);
+    getTasks(dispatch,userId);
+   
   }, [dispatch]);
 
   return (
@@ -27,7 +32,7 @@ const Timeline = () => {
         <Sidebar />
         <div className="timeline">
           <VerticalTimeline>
-            {projects.map((project) => (
+            {tasks.map((task) => (
               <VerticalTimelineElement
                 className="vertical-timeline-element--work"
                 date="2011 - present"
@@ -39,10 +44,10 @@ const Timeline = () => {
                 icon={<WorkIcon />}
               >
                 <h3 className="vertical-timeline-element-title">
-                  {project.projectname}
+                  {task.Taskname}
                 </h3>
                 <h4 className="vertical-timeline-element-subtitle">
-                  {project.companyname}
+                  test
                 </h4>
                 <p>
                   Creative Direction, User Experience, Visual Design, Project

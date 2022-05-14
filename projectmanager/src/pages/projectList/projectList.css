@@ -9,8 +9,8 @@
 }
 .projectaction{
   display: flex;
-  justify-content: center;
-  align-items: center;
+ align-items: center;
+justify-content: center;
 }
 .projectdeleticon{
   margin-right: 5px;
@@ -68,14 +68,22 @@
 }
 .viewbutton{
   width: 100px;
+  height: 40px;
+  color: rgb(113, 113, 243) !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-style: none;
-  background-color: rgb(214, 255, 236);
+  border-style: solid !important;
+  border-width: 1px !important;
+  border-color: rgb(113, 113, 243) !important;
+  background-color: rgb(214, 226, 255);
   padding: 5px;
-  border-radius: 10px;
+  border-radius: 5px !important;
   margin-bottom: 10px;
+}
+.viewbutton:hover{
+  color: rgb(31, 31, 243) !important;
+  border-color: rgb(31, 31, 243) !important;
 }
 .viewbuttontext{
   font-size: 14px;

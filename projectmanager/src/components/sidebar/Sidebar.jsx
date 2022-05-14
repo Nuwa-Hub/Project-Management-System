@@ -8,11 +8,11 @@ import { Link } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/apiCalls";
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
-import TaskIcon from '@mui/icons-material/Task';
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css'; 
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import TaskIcon from "@mui/icons-material/Task";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -21,26 +21,32 @@ export default function Sidebar() {
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
-          <div className='custom-ui'>
-            <h1>Confirm to Logout?</h1>
-            <p>Are you sure to do this.</p>
-            <button onClick={onClose}>No</button>
-            <button
-              onClick={() => {
-                logOut(dispatch);
-                onClose();
-              }}
-            >
-              Yes
-            </button>
+          <div className="custom-ui">
+            <div>
+              <h1 className="logoutmsg">Confirm to Logout?</h1>
+              <p className="logout-text">Are you sure to do this.</p>
+            </div>
+            <div className="logoutaction">
+              <button className="logoutbtn no" onClick={onClose}>
+                No
+              </button>
+              <button
+                className="logoutbtn yes"
+                onClick={() => {
+                  logOut(dispatch);
+                  onClose();
+                }}
+              >
+                Yes
+              </button>
+            </div>
           </div>
         );
-      }
+      },
     });
-  }
-
+  };
   return (
-    <div className="sidebar">
+    <div className="sidebar scrollable">
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
@@ -52,10 +58,10 @@ export default function Sidebar() {
               </li>
             </Link>
             <Link className="link" to={"/timeline"}>
-            <li className="sidebarListItem">
-              <TimelineIcon className="sidebarIcon" />
-              TimeLine
-            </li>
+              <li className="sidebarListItem">
+                <TimelineIcon className="sidebarIcon" />
+                TimeLine
+              </li>
             </Link>
             <li className="sidebarListItem">
               <TrendingUpIcon className="sidebarIcon" />
@@ -79,10 +85,10 @@ export default function Sidebar() {
               </li>
             </Link>
             <Link className="link" to={"/createproject"}>
-            <li className="sidebarListItem">
-              <TaskIcon className="sidebarIcon" />
-              Create Project
-            </li>
+              <li className="sidebarListItem">
+                <TaskIcon className="sidebarIcon" />
+                Create Project
+              </li>
             </Link>
           </ul>
         </div>
@@ -101,15 +107,13 @@ export default function Sidebar() {
               <TrendingUpIcon className="sidebarIcon" />
               Settings
             </li>
+            <li className="sidebarListItem" onClick={submit}>
+              <LogoutIcon className="sidebarIcon" />
+              Logout
+            </li>
           </ul>
         </div>
       </div>
-     
-      <div className="logoutdiv" onClick={submit}>
-        <LogoutIcon className="logoutIcon"/>
-        <span className="logouttext">logout</span>
-      </div>
-     
     </div>
   );
 }

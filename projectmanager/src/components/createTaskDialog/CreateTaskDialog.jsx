@@ -4,36 +4,22 @@ import PersonIcon from "@mui/icons-material/Person";
 import "./createTaskDialog.css";
 import Select from "react-select";
 import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import TextField from "../textField/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import { addTask } from "../../redux/apiCalls";
-
-
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 
 const CreateTaskDialog = (props) => {
   const { onClose, selectedValue, open, projectId } = props;
 
   //get all users
   const developers = useSelector((state) => state.developer.developers);
-  //due date picker
-  const [date, setValue] = React.useState(new Date());
   const [developerId, setdeveloperId] = React.useState(null);
   const [inputs, setInputs] = useState({});
-  console.log(developers)
-  //set input values
-  const handleChange = (e) => {
-    setInputs((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
-    });
-  };
 
-  //set duedate
-  const Changedate = (newValue) => {
-    setValue(newValue);
-  };
+
   //select options
   const options = developers.map((developer) => ({
     value: developer._id,
@@ -45,81 +31,88 @@ const CreateTaskDialog = (props) => {
     onClose(selectedValue);
   };
 
-  const handleListItemClick = (value) => {
-    onClose(value);
-  };
-
   //get current user id
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.currentUser._id);
 
   //create task and add to database
-  const handleClick = (e) => {
-    e.preventDefault();
+  const handleClick = (e, { resetForm }) => {
     const task = {
-      ...inputs,
-      duedate: date,
+      ...e,
       managerId: userId,
       developerId: developerId.value,
       projectId: projectId,
     };
     addTask(task, dispatch);
-    handleClose();
+    resetForm();
   };
+
+  //validate
+  const validate = Yup.object({
+    Taskname: Yup.string()
+      .max(25, "Must be 25 characters or less!")
+      .required("Requered!"),
+    duedate: Yup.string().required("Requered!"),
+  });
 
   return (
     <Dialog onClose={handleClose} open={open} className="taskcreateDialog">
       <div className="taskCreatewrapper">
         <div className="taskCreate">
-          <span className="taskCreateTitle">Create Task</span>
-          <form className="taskCreateForm">
-            <div className="taskCreateLeft">
-              <div className="taskCreateItem">
-                <label>Task Name</label>
-                <input
-                  name="Taskname"
-                  type="text"
-                  placeholder="annabeck99"
-                  className="taskCreateInput"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="taskCreateItem">
-                <label>Task Description</label>
-                <input
-                  name=""
-                  type="text"
-                  placeholder="Anna Becker"
-                  className="taskCreateInput"
-                />
-              </div>
-              <div className="taskCreateItem">
-                <label>Due Date</label>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <Stack spacing={3} className="taskCreateInputdate">
-                    <DesktopDatePicker
-                      label="Date desktop"
-                      inputFormat="MM/dd/yyyy"
-                      value={date}
-                      onChange={Changedate}
-                      renderInput={(params) => <TextField {...params} />}
+          <Formik
+            initialValues={{
+              Taskname: "",
+              duedate: "",
+            }}
+            validationSchema={validate}
+            onSubmit={handleClick}
+          >
+            {({ values, isValid, dirty }) => (
+              <>
+                <div className="taskCreateFormtop">
+                  <span className="taskCreateTitle">Create Task</span>
+                  <CancelPresentationIcon className="cancelIcon" onClick={handleClose}/>
+                </div>
+
+                <Form className="taskCreateForm">
+                  <div className="taskCreateLeft">
+                    <TextField
+                      label="Task Name"
+                      name="Taskname"
+                      type="text"
+                      className1="taskCreateItem"
+                      className2="taskCreateInput"
                     />
-                  </Stack>
-                </LocalizationProvider>
-              </div>
-              <button className="taskCreateButton" onClick={handleClick}>
-                Create
-              </button>
-            </div>
-            <div className="taskCreateRight">
-              <Select
-                options={options}
-                placeholder="Select Collaborator..."
-                className="createtaskuserselector"
-                onChange={setdeveloperId}
-              />
-            </div>
-          </form>
+                    <TextField
+                      label="Task Description"
+                      name="description"
+                      type="text"
+                      className1="taskCreateItem"
+                      className2="taskCreateInput"
+                    />
+                    <TextField
+                      label="Due Date"
+                      name="duedate"
+                      type="date"
+                      className1="taskCreateItem"
+                      className2="taskCreateInput"
+                    />
+                    <button className="taskCreateButton" onClick={handleClick}>
+                      Create
+                    </button>
+                  </div>
+                  <div className="taskCreateRight">
+                    <Select
+                      options={options}
+                      placeholder="Select Collaborator..."
+                      className="createtaskuserselector"
+                      onChange={setdeveloperId}
+                    />
+                  </div>
+                </Form>
+              </>
+            )}
+          </Formik>
         </div>
       </div>
     </Dialog>

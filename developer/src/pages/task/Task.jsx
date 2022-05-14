@@ -56,7 +56,7 @@ const Task = () => {
                   <span className="taskShowTitle">Given date</span>
                   <div className="taskShowInfo">
                     <span className="taskShowInfoTitle">
-                      {task.duedate.slice(0, 10)}
+                      {task.updatedAt.slice(0, 10)}
                     </span>
                   </div>
                   <span className="taskShowTitle">Due date</span>

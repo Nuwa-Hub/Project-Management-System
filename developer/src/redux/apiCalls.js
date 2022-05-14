@@ -39,16 +39,6 @@ export const logOut = async (dispatch) => {
 
 //projects
 
-//get projects by developer id
-export const getProjects = async (dispatch,id) => {
-  dispatch(getProjectStart());
-  try {
-    const res = await userRequest.get(`/projects/find/developer/${id}`);
-    dispatch(getProjectSuccess(res.data));
-  } catch (err) {
-    dispatch(getProjectFailure());
-  }
-};
 
 
 

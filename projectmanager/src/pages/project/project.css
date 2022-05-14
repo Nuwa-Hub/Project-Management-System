@@ -58,3 +58,16 @@
 .uprojectbottombody{
     margin-top: 30px;
 }
+.projectaction{
+    display: flex;
+    align-items: center;
+    justify-content: space-between !important;
+}
+.projectediticon{
+    color: rgb(254, 153, 153);
+    border: 1px solid rgb(255, 0, 0);
+    cursor: pointer;
+}
+.projectediticon:hover{
+    color: rgb(255, 0, 0);
+}

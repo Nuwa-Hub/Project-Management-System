@@ -44,21 +44,7 @@ export default function UserList() {
       headerName: "Address",
       width: 180,
     },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={"/user"}>
-              <button className="userListEdit">Edit</button>
-            </Link>
-            <DeleteIcon className="userListDelete" />
-          </>
-        );
-      },
-    },
+
   ];
 
   return (

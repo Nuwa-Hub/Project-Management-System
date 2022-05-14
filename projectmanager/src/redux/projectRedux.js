@@ -45,9 +45,11 @@ export const projectSlice = createSlice({
     updateProjectSuccess: (state, action) => {
       state.isFetching = false;
       state.projects[
-        state.projects.findIndex((item) => item._id === action.payload.id)
-      ] = action.payload.project;
+        state.projects.findIndex((item) => item._id === action.payload._id)
+      ] = action.payload;
+      
     },
+    
     updateProjectFailure: (state) => {
       state.isFetching = false;
       state.error = true;
