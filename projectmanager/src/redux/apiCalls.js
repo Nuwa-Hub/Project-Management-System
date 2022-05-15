@@ -151,7 +151,7 @@ export const updateTask = async (dispatch, task, id) => {
   dispatch(updateTaskStart());
   try {
     const res = await userRequest.put(`/tasks/${id}`, task);
-    //console.log(res.data);
+    console.log(res.data);
     dispatch(updateTaskSuccess(res.data));
   } catch (err) {
     dispatch(updateTaskFailure());

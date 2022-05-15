@@ -10,11 +10,13 @@ const Task = require("../models/Task");
 //UPADATE Task
 router.put("/:id", async (req, res) => {
   try {
+    
     const updateTask = await Task.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
       { new: true }
     );
+    
     res.status(200).json(updateTask);
   } catch (err) {
     console.log("err");
