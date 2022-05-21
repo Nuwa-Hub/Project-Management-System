@@ -53,16 +53,17 @@ const data = [
     amt: 2100,
   },
 ];
-const Chart = () => {
+const Chart = ({ title, data, dataKey, grid }) => {
+  
   return (
     <div className="chart">
       <h3 className="chartTitle">Project Analytics</h3>
-      <ResponsiveContainer width="100%" aspect={4 / 1}>
+      <ResponsiveContainer width="100%" aspect={5 / 1}>
         <LineChart data={data}>
           <XAxis dataKey="name" stroke="#5550bd" />
           <Tooltip />
           <CartesianGrid stroke="#e0dfdf" strokeDasharray="5 5" />
-          <Line type="monotone" dataKey="activeUser" stroke="#8884d8" />
+          <Line type="monotone" dataKey={dataKey} stroke="#8884d8" />
         </LineChart>
       </ResponsiveContainer>
     </div>

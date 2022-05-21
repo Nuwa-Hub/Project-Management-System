@@ -8,16 +8,16 @@ import { Link } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/apiCalls";
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
-import TaskIcon from '@mui/icons-material/Task';
-import { confirmAlert } from 'react-confirm-alert';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import 'react-confirm-alert/src/react-confirm-alert.css'; 
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import EmailIcon from '@mui/icons-material/Email';
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import TaskIcon from "@mui/icons-material/Task";
+import { confirmAlert } from "react-confirm-alert";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+import EmailIcon from "@mui/icons-material/Email";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ export default function Sidebar() {
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
-          <div className='custom-ui'>
+          <div className="custom-ui">
             <h1>Confirm to Logout?</h1>
             <p>Are you sure to do this.</p>
             <button onClick={onClose}>No</button>
@@ -40,9 +40,9 @@ export default function Sidebar() {
             </button>
           </div>
         );
-      }
+      },
     });
-  }
+  };
 
   return (
     <div className="sidebar">
@@ -57,10 +57,10 @@ export default function Sidebar() {
               </li>
             </Link>
             <Link className="link" to={"/timeline"}>
-            <li className="sidebarListItem">
-              <TimelineIcon className="sidebarIcon" />
-              TimeLine
-            </li>
+              <li className="sidebarListItem">
+                <TimelineIcon className="sidebarIcon" />
+                TimeLine
+              </li>
             </Link>
             <Link className="link" to={"/projects"}>
               <li className="sidebarListItem">
@@ -85,7 +85,7 @@ export default function Sidebar() {
                 Project Managers
               </li>
             </Link>
-        
+
             <Link className="link" to={"/newuser"}>
               <li className="sidebarListItem">
                 <PersonAddAltIcon className="sidebarIcon" />
@@ -108,26 +108,24 @@ export default function Sidebar() {
               Time handle
             </li>
             <Link className="link" to={`/profile/ ${234}`}>
-            <li className="sidebarListItem">
-              <AccountCircleIcon className="sidebarIcon" />
-              Profile
-            </li>
+              <li className="sidebarListItem">
+                <AccountCircleIcon className="sidebarIcon" />
+                Profile
+              </li>
             </Link>
             <Link className="link" to={`/user/ ${234}`}>
-            <li className="sidebarListItem">
-              <ManageAccountsIcon className="sidebarIcon" />
-              Manage Profile
-            </li>
+              <li className="sidebarListItem">
+                <ManageAccountsIcon className="sidebarIcon" />
+                Manage Profile
+              </li>
             </Link>
+            <li className="sidebarListItem" onClick={submit}>
+              <LogoutIcon className="logoutIcon" />
+              <span className="logouttext">logout</span>
+            </li>
           </ul>
         </div>
       </div>
-     
-      <div className="logoutdiv" onClick={submit}>
-        <LogoutIcon className="logoutIcon"/>
-        <span className="logouttext">logout</span>
-      </div>
-     
     </div>
   );
 }
