@@ -30,12 +30,11 @@ const WidgetLg = () => {
   useEffect(() => {
     const getTaskStats = async () => {
       try {
-        const res = await userRequest.get("/projects/stats");
-
+        const res = await userRequest.get("/tasks/stats");
         res.data.map((item) => {
           setTaskStats((prev) => [
             ...prev,
-            { name: MONTHS[item._id], "Active Tasks": item.total },
+            { name: MONTHS[item._id-1], "Active Tasks": item.total },
           ]);
         });
       } catch {}

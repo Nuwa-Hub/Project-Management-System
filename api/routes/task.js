@@ -23,6 +23,35 @@ router.put("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+//get task stats
+router.get("/stats", async (req, res) => {
+  const date = new Date();
+  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+  
+  try {
+    const data = await Task.aggregate([
+      { $match: { createdAt: { $gte: lastYear } } },
+      {
+        $project: {
+          month: { $month: "$createdAt" },
+        },
+      },
+      {
+        $group: {
+          _id: "$month",
+          total: { $sum: 1 },
+        },
+      },
+     {$sort: {_id: 1}}
+    ]);
+    
+    res.status(200).json(data)
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //DELETE Task
 router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
@@ -74,6 +103,9 @@ router.get("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
+
 //GET ALL TaskS
 router.get("/",  async (req, res) => {
   try {
@@ -84,29 +116,5 @@ router.get("/",  async (req, res) => {
   }
 });
 
-router.get("/stats", async (req, res) => {
-  const date = new Date();
-  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
 
-  try {
-    const data = await Task.aggregate([
-      { $match: { createdAt: { $gte: lastYear } } },
-      {
-        $project: {
-          month: { $month: "$createdAt" },
-        },
-      },
-      {
-        $group: {
-          _id: "$month",
-          total: { $sum: 1 },
-        },
-      },
-     {$sort: {_id: 1}}
-    ]);
-    res.status(200).json(data)
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 module.exports = router;
