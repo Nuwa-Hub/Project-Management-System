@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./chatInterface.css";
 import SendIcon from "@mui/icons-material/Send";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
@@ -19,11 +19,13 @@ import {
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import Message from "../message/Message";
 import Instruction from "../instruction/Instruction";
-
+import { addNotification } from "../../redux/apiCalls";
+import { useDispatch } from "react-redux";
 
 const ChatInterface = (props) => {
-  const { taskId, user1, user2 } = props;
-  
+  const {taskName,taskManager,projectName, taskId, user1, user2 } = props;
+  const distpatch=useDispatch()
+
   const [chat, setChat] = useState("");
   const [text, setText] = useState("");
   const [file, setfile] = useState("");
@@ -31,10 +33,9 @@ const ChatInterface = (props) => {
 
   useEffect(() => {
     const getmsg = async () => {
-
       const msgsRef = collection(db, "messages", taskId, "chat");
       const q = query(msgsRef, orderBy("createdAt", "asc"));
-  
+
       onSnapshot(q, (querySnapshot) => {
         let msgs = [];
         querySnapshot.forEach((doc) => {
@@ -42,7 +43,7 @@ const ChatInterface = (props) => {
         });
         setMsgs(msgs);
       });
-  
+
       // get last message b/w logged in user and selected user
       const docSnap = await getDoc(doc(db, "lastMsg", taskId));
       // if last message exists and message is from selected user
@@ -51,11 +52,10 @@ const ChatInterface = (props) => {
         await updateDoc(doc(db, "lastMsg", taskId), { unread: false });
       }
     };
-     getmsg()
-     // make sure to catch any error
-    .catch(console.error); 
+    getmsg()
+      // make sure to catch any error
+      .catch(console.error);
   }, []);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,66 +87,67 @@ const ChatInterface = (props) => {
       media: url || "",
       unread: true,
     });
+    //add notification whe  add a instruction
 
+    const notification = {
+      title: `${projectName} > ${taskName} > added new message `,
+      receiverId: taskManager,
+      taskId: taskId,
+    };
+    addNotification(notification, distpatch);
     setText("");
     setfile("");
   };
 
-
   return (
     <div className="chatInterface">
       <div id="frame">
-      <div id="sidepanel">
-      <div className="text">
-      <Instruction taskId={taskId}/>
-      </div>
-        
-      </div>
+        <div id="sidepanel">
+          <div className="text">
+            <Instruction taskId={taskId} />
+          </div>
+        </div>
         <div className="content">
           <div className="contact-profile">
             <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
             <p>Harvey Specter</p>
           </div>
-         
+
           <div className="messages">
-         
             <ul>
               {msgs.length
                 ? msgs.map((msg, i) => (
                     <Message key={i} msg={msg} user1={user1} />
                   ))
                 : null}
-             
             </ul>
-            
           </div>
-          
+
           <form className="message_form" onSubmit={handleSubmit}>
-         
-          <div className="message-input">
-            <div className="wrap">
-              <input
-                type="text"
-                placeholder="Write your message..."
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-              />
-             
-              <input
-                onChange={(e) => setfile(e.target.files[0])}
-                type="file"
-                id="file-input"
-                style={{ display: "none" }}
-              />
-              <label htmlFor="file-input">
-              <h6 className="sendfilename">{file.name}</h6>
-                <FileUploadIcon className="attachment" />
-              </label>
-              <button className="submit">
-                <SendIcon className="chatsendicon" />
-              </button>
+            <div className="message-input">
+              <div className="wrap">
+                <input
+                  type="text"
+                  placeholder="Write your message..."
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                />
+
+                <input
+                  onChange={(e) => setfile(e.target.files[0])}
+                  type="file"
+                  id="file-input"
+                  style={{ display: "none" }}
+                />
+                <label htmlFor="file-input">
+                  <h6 className="sendfilename">{file.name}</h6>
+                  <FileUploadIcon className="attachment" />
+                </label>
+                <button className="submit">
+                  <SendIcon className="chatsendicon" />
+                </button>
+              </div>
             </div>
-          </div>
           </form>
         </div>
       </div>

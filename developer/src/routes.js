@@ -1,9 +1,11 @@
+import ManagerList from "./pages/manangerList/ManagerList";
 import Home from "./pages/home/Home";
-import ProjectList from "./pages/projectList/ProjectList";
+import ProjectList from "./pages/taskList/ProjectList";
 import Task from "./pages/task/Task";
 import Timeline from "./pages/timeLine/Timeline";
 import User from "./pages/user/User";
 import UserList from "./pages/userList/UserList";
+import ProjectsList from "./pages/projectList/ProjectsList";
 
 export const routes = [
   {
@@ -14,7 +16,7 @@ export const routes = [
   {
     name: "projects",
     element: <ProjectList />,
-    path: "/projects",
+    path: "/tasks",
   },
   {
     name: "users",
@@ -36,5 +38,15 @@ export const routes = [
     name: "timeline",
     element: <Timeline />,
     path: "/timeline",
+  },
+  {
+    name: 'managers',
+    element: <ManagerList />,
+    path: '/managers',
+  },
+  {
+    name: 'projects',
+    element: <ProjectsList />,
+    path: '/projects',
   },
 ];

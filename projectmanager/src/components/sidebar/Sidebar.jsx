@@ -13,6 +13,7 @@ import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import TaskIcon from "@mui/icons-material/Task";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -76,6 +77,12 @@ export default function Sidebar() {
               <li className="sidebarListItem ">
                 <PersonOutlineIcon className="sidebarIcon" />
                 Developers
+              </li>
+            </Link>
+            <Link className="link" to={"/managers"}>
+              <li className="sidebarListItem">
+                <SupervisorAccountIcon className="sidebarIcon" />
+                Project Managers
               </li>
             </Link>
             <Link className="link" to={"/projects"}>

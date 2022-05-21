@@ -4,6 +4,7 @@ import projectReducer from "./projectRedux";
 import developerReducer from "./developerRedux";
 import taskReducer from "./taskRedux";
 import choreReducer from "./choreRedux";
+import notificationReducer from "./notificationRedux";
 
 import {
   persistStore,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   developer:developerReducer,
   task:taskReducer,
   chore:choreReducer,
+  notification:notificationReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

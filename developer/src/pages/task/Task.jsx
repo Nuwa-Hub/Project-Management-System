@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import "./task.css";
@@ -6,10 +6,25 @@ import Divider from "@mui/material/Divider";
 import ChatInterface from "../../components/chatInterface/ChatInterface";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { deleteNotification } from "../../redux/apiCalls";
 
 const Task = () => {
   const location = useLocation();
   const taskId = location.pathname.split("/")[2];
+  const dispatch = useDispatch();
+
+  //get current user
+  const user = useSelector((state) => state.user.currentUser);
+
+  useEffect(() => {
+    const data={
+         taskId:taskId,
+         userId:user._id
+    }
+    
+    deleteNotification(data,dispatch);
+  }, []);
+  
 
   //get task relevent to tha specific task id
   const task = useSelector((state) =>
@@ -20,8 +35,10 @@ const Task = () => {
     state.project.projects.find((project) => project._id === task.projectId)
   );
 
-
-  //console.log(task)
+   //get manager relevent to tha specific project.managerId
+   const manager = useSelector((state) =>
+   state.developer.managers.find((manager) => manager._id === task.managerId)
+ );
 
   //get task developer id
   const user2 = task.developerId;
@@ -41,7 +58,7 @@ const Task = () => {
                   <div className="taskShowTopTitle">
                     <span className="taskShowtaskname">{task.Taskname}</span>
                     <span className="taskShowtaskTitle">
-                      {project.companyname}
+                     
                     </span>
                   </div>
                 </div>
@@ -101,7 +118,7 @@ const Task = () => {
               </div>
             </div>
             <div className="massages-container">
-              <ChatInterface taskId={taskId} user1={user1} user2={user2} />
+              <ChatInterface taskName={task.Taskname} taskManager={manager._id} projectName={project.projectname} taskId={taskId} user1={user1} user2={user2} />
             </div>
           </div>
         </div>

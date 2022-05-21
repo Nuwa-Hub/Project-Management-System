@@ -15,6 +15,7 @@ const Login = () => {
     e.preventDefault();
     login(dispatch, { username, password });
   };
+  
   if (user != null) navigate("/");
   return (
     <div

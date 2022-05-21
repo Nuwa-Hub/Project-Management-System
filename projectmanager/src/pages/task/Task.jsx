@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import "./task.css";
@@ -8,12 +8,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import userdp from "../../images/user.png";
 import EditIcon from "@mui/icons-material/Edit";
+import { deleteNotification } from "../../redux/apiCalls";
 
 
 const Task = () => {
   const location = useLocation();
   const taskId = location.pathname.split("/")[2];
+  const dispatch=useDispatch();
 
+  const user = useSelector((state) => state.user.currentUser);
   //get task relevent to tha specific taskid
   const task = useSelector((state) =>
     state.task.tasks.find((task) => task._id === taskId)
@@ -28,14 +31,22 @@ const Task = () => {
       (developer) => developer._id === task.developerId
     )
   );
-
+  console.log(taskHolder)
     //get chores relevent to tha specific task.projectId
     const chores = useSelector((state) =>
     state.developer.developers.find(
       (developer) => developer._id === task.developerId
     )
   );
-
+//delete notifications
+  useEffect(() => {
+    const data={
+         taskId:taskId,
+         receiverId:user._id
+    }
+    console.log(taskId)
+    deleteNotification(data,dispatch);
+  }, []);
   //console.log(taskHolder)
   //get task developer id
   const user2 = task.developerId;
@@ -122,7 +133,7 @@ const Task = () => {
               </div>
             </div>
             <div className="massages-container">
-              <ChatInterface taskId={taskId} user1={user1} user2={user2} />
+              <ChatInterface taskHolder={taskHolder._id} taskName={task.Taskname} taskId={taskId} user1={user1} user2={user2} />
             </div>
           </div>
         </div>

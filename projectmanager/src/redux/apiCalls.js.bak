@@ -298,11 +298,11 @@ export const addNotification = async (Notification, dispatch) => {
 };
 
 //delete notification by  id
-export const deleteNotification = async (id, dispatch) => {
+export const deleteNotification = async (data, dispatch) => {
   dispatch(deleteNotificationStart());
   try {
-    await userRequest.delete(`/notification/${id}`);
-    dispatch(deleteNotificationSuccess(id));
+    await userRequest.delete(`/notifications/${data.taskId}/${data.receiverId}`);
+    dispatch(deleteNotificationSuccess(data.taskId));
   } catch (err) {
     dispatch(deleteNotificationFailure());
   }

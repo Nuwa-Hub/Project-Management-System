@@ -57,7 +57,7 @@ const Chart = () => {
   return (
     <div className="chart">
       <h3 className="chartTitle">Project Analytics</h3>
-      <ResponsiveContainer width="100%" aspect={4 / 1}>
+      <ResponsiveContainer width="90%" aspect={4 / 1}>
         <LineChart data={data}>
           <XAxis dataKey="name" stroke="#5550bd" />
           <Tooltip />
