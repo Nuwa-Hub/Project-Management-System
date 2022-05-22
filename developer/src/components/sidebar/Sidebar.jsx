@@ -110,10 +110,12 @@ export default function Sidebar() {
               <PeopleOutlineIcon className="sidebarIcon" />
               User Analytics
             </li>
+            <Link className="link" to={"/changepassword"}>
             <li className="sidebarListItem">
               <PasswordIcon className="sidebarIcon" />
               Change Pasword
             </li>
+            </Link>
             <li className="sidebarListItem" onClick={submit}>
               <LogoutIcon className="logoutIcon"  />
               <span className="logouttext">logout</span>

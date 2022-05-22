@@ -18,8 +18,7 @@ export default function Topbar() {
   }, [dispatch]);
 
   let notificationset = useSelector((state) => state.notification.notifications);
-  console.log(notificationset.legnth)
-
+  
   const displayNotification = ({ title,_id }) => {
     return (
       <div className="notifywrap" key={_id}>
@@ -33,8 +32,10 @@ export default function Topbar() {
 
   //tooglt notification component
   function toggleMenu() {
+    if (notificationset.length){
     const notifymenu = document.getElementById("notifications");
     notifymenu.classList.toggle("isOpen");
+    }
   }
 
 //delete notification
@@ -48,7 +49,7 @@ export default function Topbar() {
         <div className="topRight">
           <div className="topbarIconContainer">
            <NotificationsNoneIcon onClick={() => toggleMenu()} />
-            <span className="topIconBadge">{notificationset.legnth}</span>
+            <span className="topIconBadge">{notificationset.length}</span>
           </div>
           <div className="topbarIconContainer">
            <LanguageIcon/>

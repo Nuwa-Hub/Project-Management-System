@@ -1,3 +1,4 @@
+import ChangePassword from "./pages/changePassword/ChangePassword"
 import CreateProject from "./pages/createproject/CreateProject"
 import EditProject from "./pages/editProject/EditProject"
 import EditTask from "./pages/editTask/EditTask"
@@ -73,6 +74,10 @@ export const routes = [
         element: <ManagerList />,
         path: '/managers',
       },
-   
+      {
+        name: 'changepassword',
+        element: <ChangePassword />,
+        path: '/changepassword',
+      },
 ]
 

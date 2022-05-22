@@ -12,7 +12,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/login" element={user ? <ProtectedRoute element={<Home/>}/>:<Login />} />
+        <Route exact path="/login" element={user?.isAdmin ? <ProtectedRoute element={<Home/>}/>:<Login />} />
         {routes.map(({ element, path, name }) => (
           <Route
             key={name}

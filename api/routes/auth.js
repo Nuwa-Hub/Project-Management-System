@@ -5,15 +5,18 @@ const jwt = require("jsonwebtoken");
 
 //REGISTER
 router.post("/register", async (req, res) => {
+
   const newUser = new User({
     username: req.body.username,
     email: req.body.email,
+    isAdmin:req.body.isAdmin,
     password: CryptoJS.AES.encrypt(
       req.body.password,
       process.env.PASS_SEC
     ).toString(),
     address: req.body.address,
     telNo: req.body.telNo,
+    
   });
 
   try {
@@ -23,7 +26,6 @@ router.post("/register", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 //LOGIN
 router.post("/login", async (req, res) => {
@@ -36,7 +38,7 @@ router.post("/login", async (req, res) => {
       process.env.PASS_SEC
     );
     const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
-    
+
     OriginalPassword !== req.body.password &&
       res.status(401).json("Wrong credentials!");
 
@@ -46,15 +48,44 @@ router.post("/login", async (req, res) => {
         isAdmin: user.isAdmin,
       },
       process.env.JWT_SEC,
-      {expiresIn:"2d"}
+      { expiresIn: "2d" }
     );
-   
+
     const { password, ...others } = user._doc;
-    
-    res.status(200).json({...others, accessToken});
-  } catch (err) {
-    
-  }
+
+    res.status(200).json({ ...others, accessToken });
+  } catch (err) {}
 });
 
-module.exports=router;
+//CHNAGE PASSWORD
+router.post("/changepassword", async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.body.userId });
+    !user && res.status(401).json("Wrong credentials!");
+
+    const hashedPassword = CryptoJS.AES.decrypt(
+      user.password,
+      process.env.PASS_SEC
+    );
+    const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+    
+    OriginalPassword !== req.body.currentPassword &&
+      res.status(401).json("Your Password is Wrong!");
+    if (OriginalPassword === req.body.currentPassword) {
+      const updatePassword = await User.findByIdAndUpdate(
+        req.body.userId,
+        {
+          $set: {
+            password: CryptoJS.AES.encrypt(
+              req.body.newPassword,
+              process.env.PASS_SEC
+            ).toString(),
+          },
+        },
+        { new: true }
+      );
+    }
+    res.status(200).json("Password Update Success!");
+  } catch (err) {}
+});
+module.exports = router;

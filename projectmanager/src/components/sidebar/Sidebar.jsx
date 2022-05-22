@@ -14,6 +14,7 @@ import TaskIcon from "@mui/icons-material/Task";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import PasswordIcon from "@mui/icons-material/Password";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -107,10 +108,12 @@ export default function Sidebar() {
               <PeopleOutlineIcon className="sidebarIcon" />
               User Analytics
             </li>
+            <Link className="link" to={"/changepassword"}>
             <li className="sidebarListItem">
-              <TrendingUpIcon className="sidebarIcon" />
-              Settings
+              <PasswordIcon className="sidebarIcon" />
+              Change Pasword
             </li>
+            </Link>
             <li className="sidebarListItem" onClick={submit}>
               <LogoutIcon className="sidebarIcon" />
               Logout

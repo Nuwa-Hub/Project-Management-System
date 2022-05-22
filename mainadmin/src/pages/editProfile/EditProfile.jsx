@@ -1,6 +1,6 @@
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import "./user.css";
+import "./editProfile.css";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -17,16 +17,15 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import TextField from "../../components/textField/TextField";
 
-export default function User() {
-  const location = useLocation();
-  const developerId = location.pathname.split("/")[2];
+export default function EditProfile() {
+ 
+
 
   const [file, setFile] = useState(null);
   const dispatch = useDispatch();
 
-  const developer = useSelector((state) =>
-    state.developer.developers.find((developer) => developer._id == developerId)
-  );
+  //get current user
+  const developer = useSelector((state) => state?.user?.currentUser);
 
   const handleClick = (e, { resetForm }) => {
     const updatedeveloper = { ...e };
@@ -35,8 +34,7 @@ export default function User() {
         delete updatedeveloper[key];
       }
     });
-  
-    updateUser(dispatch,updatedeveloper,developerId);
+    updateCurrentUser(dispatch,updatedeveloper,developer._id);
     resetForm();
   };
 
@@ -56,10 +54,8 @@ export default function User() {
 
         <div className="user">
           <div className="userTitleContainer">
-            <h1 className="userTitle">Edit User</h1>
-            <Link to="/newUser">
-              <button className="userAddButton">Create</button>
-            </Link>
+            <h1 className="userTitle">Edit Profile</h1>
+            
           </div>
 
           <div className="userContainer">

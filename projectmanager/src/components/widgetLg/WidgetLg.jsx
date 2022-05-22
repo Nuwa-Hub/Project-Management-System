@@ -26,12 +26,12 @@ const WidgetLg = () => {
     ],
     []
   );
-
+ 
   useEffect(() => {
     const getTaskStats = async () => {
       try {
         const res = await userRequest.get("/tasks/stats");
-
+        
         res.data.map((item) => {
           setTaskStats((prev) => [
             ...prev,
@@ -42,7 +42,7 @@ const WidgetLg = () => {
     };
     getTaskStats();
   }, [MONTHS]);
-
+  
   return (
     <div className="widgetLg">
       <div className="widgetLgchart">

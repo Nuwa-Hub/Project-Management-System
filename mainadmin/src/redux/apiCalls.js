@@ -1,4 +1,15 @@
-import { loginFailure, loginStart, loginSuccess, logout } from "./userRedux";
+import {
+  changePasswordFailure,
+  changePasswordStart,
+  changePasswordSuccess,
+  loginFailure,
+  loginStart,
+  loginSuccess,
+  logout,
+  updateUserFailure,
+  updateUserStart,
+  updateUserSuccess,
+} from "./userRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 import {
   getProjectFailure,
@@ -38,13 +49,35 @@ export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
     const res = await publicRequest.post("/auth/login", user);
+    sessionStorage.setItem("accessToken", res.data.accessToken);
     dispatch(loginSuccess(res.data));
   } catch (err) {
     dispatch(loginFailure());
   }
 };
 
+//change password
+export const changePassword = async (dispatch, data) => {
+  dispatch(changePasswordStart());
+  try {
+    const res = await userRequest.post("/auth/changepassword", data);
+    dispatch(changePasswordSuccess(res.data));
+  } catch (err) {
+    dispatch(changePasswordFailure());
+  }
+};
 
+//update developer
+export const updateCurrentUser = async (dispatch, user, id) => {
+  dispatch(updateUserStart());
+  try {
+    const res = await userRequest.put(`/users/${id}`, user);
+    console.log(res.data);
+    dispatch(updateUserSuccess(res.data));
+  } catch (err) {
+    dispatch(updateUserFailure());
+  }
+};
 
 export const logOut = async (dispatch) => {
   dispatch(logout());
@@ -97,7 +130,7 @@ export const getdevelopers = async (dispatch) => {
   dispatch(getDeveloperStart());
   try {
     const res = await userRequest.get("/users");
-    
+
     dispatch(getDeveloperSuccess(res.data));
   } catch (err) {
     dispatch(getDeveloperFailure());
@@ -116,11 +149,11 @@ export const addUser = async (dispatch, user) => {
 };
 
 //update developer
-export const updateUser = async (dispatch, user,id) => {
+export const updateUser = async (dispatch, user, id) => {
   dispatch(updateDeveloperStart());
   try {
     const res = await userRequest.put(`/users/${id}`, user);
-    console.log(res.data._id)
+    console.log(res.data._id);
     dispatch(updateDeveloperSuccess(res.data));
   } catch (err) {
     dispatch(updateDeveloperFailure());
@@ -130,7 +163,7 @@ export const updateUser = async (dispatch, user,id) => {
 export const deleteDeveloper = async (id, dispatch) => {
   dispatch(deleteDeveloperStart());
   try {
-     const res = await userRequest.delete(`/users/${id}`);
+    const res = await userRequest.delete(`/users/${id}`);
     dispatch(deleteDeveloperSuccess(id));
   } catch (err) {
     dispatch(deleteDeveloperFailure());
@@ -143,7 +176,7 @@ export const getmanagers = async (dispatch) => {
   dispatch(getManagerStart());
   try {
     const res = await userRequest.get("/users/manager");
-    console.log(res.data)
+  
     dispatch(getManagerSuccess(res.data));
   } catch (err) {
     dispatch(getManagerFailure());

@@ -6,6 +6,7 @@ import Timeline from "./pages/timeLine/Timeline";
 import User from "./pages/user/User";
 import UserList from "./pages/userList/UserList";
 import ProjectsList from "./pages/projectList/ProjectsList";
+import ChangePassword from "./pages/changePassword/ChangePassword";
 
 export const routes = [
   {
@@ -48,5 +49,10 @@ export const routes = [
     name: 'projects',
     element: <ProjectsList />,
     path: '/projects',
+  },
+  {
+    name: 'changepassword',
+    element: <ChangePassword />,
+    path: '/changepassword',
   },
 ];

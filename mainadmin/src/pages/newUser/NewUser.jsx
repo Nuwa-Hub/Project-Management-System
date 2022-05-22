@@ -17,7 +17,7 @@ import { useState } from "react";
 export default function NewUser() {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
-
+  console.log(inputs)
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -164,8 +164,8 @@ export default function NewUser() {
                     name="isAdmin"
                     id="active"
                   >
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
+                    <option  name="isAdmin" value={true}>Yes</option>
+                    <option  name="isAdmin" value={false}>No</option>
                   </select>
                 </div>
               </div>

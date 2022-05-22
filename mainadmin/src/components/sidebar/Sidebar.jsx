@@ -18,6 +18,7 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import EmailIcon from "@mui/icons-material/Email";
+import PasswordIcon from "@mui/icons-material/Password";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -27,17 +28,24 @@ export default function Sidebar() {
       customUI: ({ onClose }) => {
         return (
           <div className="custom-ui">
-            <h1>Confirm to Logout?</h1>
-            <p>Are you sure to do this.</p>
-            <button onClick={onClose}>No</button>
-            <button
-              onClick={() => {
-                logOut(dispatch);
-                onClose();
-              }}
-            >
-              Yes
-            </button>
+            <div>
+              <h1 className="logoutmsg">Confirm to Logout?</h1>
+              <p className="logout-text">Are you sure to do this.</p>
+            </div>
+            <div className="logoutaction">
+              <button className="logoutbtn no" onClick={onClose}>
+                No
+              </button>
+              <button
+                className="logoutbtn yes"
+                onClick={() => {
+                  logOut(dispatch);
+                  onClose();
+                }}
+              >
+                Yes
+              </button>
+            </div>
           </div>
         );
       },
@@ -92,32 +100,34 @@ export default function Sidebar() {
                 New User
               </li>
             </Link>
-            <Link className="link" to={"/sendemail"}>
+            {/* <Link className="link" to={"/sendemail"}>
               <li className="sidebarListItem">
                 <EmailIcon className="sidebarIcon" />
                 Send Email
               </li>
-            </Link>
+            </Link> */}
           </ul>
         </div>
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <AccessAlarmIcon className="sidebarIcon" />
-              Time handle
-            </li>
-            <Link className="link" to={`/profile/ ${234}`}>
+            {/* <Link className="link" to={`/profile/ ${234}`}>
               <li className="sidebarListItem">
                 <AccountCircleIcon className="sidebarIcon" />
                 Profile
               </li>
-            </Link>
-            <Link className="link" to={`/user/ ${234}`}>
+            </Link> */}
+            <Link className="link" to={`/editprofile`}>
               <li className="sidebarListItem">
                 <ManageAccountsIcon className="sidebarIcon" />
                 Manage Profile
               </li>
+            </Link>
+            <Link className="link" to={"/changepassword"}>
+            <li className="sidebarListItem">
+              <PasswordIcon className="sidebarIcon" />
+              Change Pasword
+            </li>
             </Link>
             <li className="sidebarListItem" onClick={submit}>
               <LogoutIcon className="logoutIcon" />

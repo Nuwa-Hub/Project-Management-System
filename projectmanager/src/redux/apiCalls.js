@@ -1,4 +1,6 @@
-import { loginFailure, loginStart, loginSuccess, logout } from "./userRedux";
+import { loginFailure, loginStart, loginSuccess, logout, changePasswordFailure,
+  changePasswordStart,
+  changePasswordSuccess } from "./userRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 import {
   getProjectFailure,
@@ -65,11 +67,21 @@ export const login = async (dispatch, user) => {
   try {
     const res = await publicRequest.post("/auth/login", user);
     dispatch(loginSuccess(res.data));
+    sessionStorage.setItem("accessToken",res.data.accessToken)
   } catch (err) {
     dispatch(loginFailure());
   }
 };
-
+//change password
+export const changePassword = async (dispatch, data) => {
+  dispatch(changePasswordStart());
+  try {
+    const res = await userRequest.post("/auth/changepassword", data);
+    dispatch(changePasswordSuccess(res.data));
+  } catch (err) {
+    dispatch(changePasswordFailure());
+  }
+};
 export const logOut = async (dispatch) => {
   dispatch(logout());
 };
@@ -298,11 +310,11 @@ export const addNotification = async (Notification, dispatch) => {
 };
 
 //delete notification by  id
-export const deleteNotification = async (id, dispatch) => {
+export const deleteNotification = async (data, dispatch) => {
   dispatch(deleteNotificationStart());
   try {
-    await userRequest.delete(`/notification/${id}`);
-    dispatch(deleteNotificationSuccess(id));
+    await userRequest.delete(`/notifications/${data.taskId}/${data.userId}`);
+    dispatch(deleteNotificationSuccess(data));
   } catch (err) {
     dispatch(deleteNotificationFailure());
   }

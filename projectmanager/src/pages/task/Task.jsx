@@ -42,7 +42,7 @@ const Task = () => {
   useEffect(() => {
     const data={
          taskId:taskId,
-         receiverId:user._id
+         userId:user._id
     }
     console.log(taskId)
     deleteNotification(data,dispatch);

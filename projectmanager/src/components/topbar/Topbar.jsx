@@ -17,11 +17,11 @@ export default function Topbar() {
   }, [dispatch]);
 
   let notificationset = useSelector((state) => state.notification.notifications);
-  console.log(notificationset.legnth)
+  
 
-  const displayNotification = ({ title }) => {
+  const displayNotification = ({ title,_id }) => {
     return (
-      <div className="notifywrap">
+      <div className="notifywrap" key={_id}>
         <NotificationsActiveIcon className="notifyicon" />
         <span className="notifySpan">
           {title}
@@ -44,7 +44,7 @@ export default function Topbar() {
         <div className="topRight">
           <div className="topbarIconContainer" onClick={() => toggleMenu()}>
             <NotificationsNoneIcon />
-            <span className="topIconBadge">2</span>
+            <span className="topIconBadge">{notificationset.length}</span>
           </div>
           <div className="topbarIconContainer">
             <LanguageIcon />

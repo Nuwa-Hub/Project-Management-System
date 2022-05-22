@@ -28,22 +28,21 @@ const Home = () => {
     ],
     []
   );
+  const getStats = async () => {
+    try {
+      const res = await userRequest.get("/projects/stats");
 
+      res.data.map((item) => {
+        setProjectStats((prev) => [
+          ...prev,
+          { name: MONTHS[item._id], "Active Projects": item.total },
+        ]);
+      });
+    } catch {}
+  };
   useEffect(() => {
-    const getStats = async () => {
-      try {
-        const res = await userRequest.get("/projects/stats");
-
-        res.data.map((item) => {
-          setProjectStats((prev) => [
-            ...prev,
-            { name: MONTHS[item._id], "Active Projects": item.total },
-          ]);
-        });
-      } catch {}
-    };
     getStats();
-  }, [MONTHS]);
+  }, []);
 
   return (
     <>

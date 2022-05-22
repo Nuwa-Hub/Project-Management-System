@@ -50,6 +50,7 @@ const Home = () => {
     };
     getStats();
   }, [MONTHS]);
+ 
   return (
     <>
       <Topbar />

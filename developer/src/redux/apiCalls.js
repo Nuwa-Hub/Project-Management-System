@@ -1,4 +1,12 @@
-import { loginFailure, loginStart, loginSuccess, logout } from "./userRedux";
+import {
+  changePasswordFailure,
+  changePasswordStart,
+  changePasswordSuccess,
+  loginFailure,
+  loginStart,
+  loginSuccess,
+  logout,
+} from "./userRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 import {
   getProjectFailure,
@@ -39,17 +47,27 @@ export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
     const res = await publicRequest.post("/auth/login", user);
+    sessionStorage.setItem("accessToken",res.data.accessToken)
     dispatch(loginSuccess(res.data));
   } catch (err) {
     dispatch(loginFailure());
   }
 };
 
+//change password
+export const changePassword = async (dispatch, data) => {
+  dispatch(changePasswordStart());
+  try {
+    const res = await userRequest.post("/auth/changepassword", data);
+    dispatch(changePasswordSuccess(res.data));
+  } catch (err) {
+    dispatch(changePasswordFailure());
+  }
+};
+
 export const logOut = async (dispatch) => {
   dispatch(logout());
 };
-
-
 
 //projects
 //get project
@@ -153,7 +171,7 @@ export const addNotification = async (Notification, dispatch) => {
 
 //delete notification by  id
 export const deleteNotification = async (data, dispatch) => {
-  console.log(data.taskId)
+  console.log(data.taskId);
   dispatch(deleteNotificationStart());
   try {
     await userRequest.delete(`/notifications/${data.taskId}/${data.userId}`);
