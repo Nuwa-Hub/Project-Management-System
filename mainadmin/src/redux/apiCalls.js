@@ -44,11 +44,13 @@ import {
 } from "./developerRedux";
 import { getTaskFailure, getTaskStart, getTaskSuccess } from "./taskRedux";
 
+
 //auth
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
     const res = await publicRequest.post("/auth/login", user);
+    
     sessionStorage.setItem("accessToken", res.data.accessToken);
     dispatch(loginSuccess(res.data));
   } catch (err) {

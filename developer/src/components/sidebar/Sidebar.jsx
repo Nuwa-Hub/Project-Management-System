@@ -16,6 +16,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import PasswordIcon from "@mui/icons-material/Password";
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -102,14 +103,12 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <AccessAlarmIcon className="sidebarIcon" />
-              Time handle
-            </li>
-            <li className="sidebarListItem">
-              <PeopleOutlineIcon className="sidebarIcon" />
-              User Analytics
-            </li>
+          <Link className="link" to={`/editprofile`}>
+              <li className="sidebarListItem">
+                <ManageAccountsIcon className="sidebarIcon" />
+                Manage Profile
+              </li>
+            </Link>
             <Link className="link" to={"/changepassword"}>
             <li className="sidebarListItem">
               <PasswordIcon className="sidebarIcon" />

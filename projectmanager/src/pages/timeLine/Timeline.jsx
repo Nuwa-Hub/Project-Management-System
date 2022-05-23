@@ -15,11 +15,12 @@ const Timeline = () => {
   const dispatch = useDispatch();
   var count = 0;
   const projects = useSelector((state) => state.project.projects);
+  const user=useSelector((state) => state.user.currentUser);
 
   useEffect(() => {
-    getProjects(dispatch);
+    getProjects(dispatch,user._id);
   }, [dispatch]);
-
+ 
   return (
     <>
       <Topbar />
@@ -31,7 +32,7 @@ const Timeline = () => {
               {projects.map((project) => (
                 <VerticalTimelineElement
                   className="vertical-timeline-element--work"
-                  date="2011 - present"
+                  date={`${project.createdAt.slice(0,7)} - present`}
                   iconStyle={
                     count++ % 2
                       ? { background: "rgb(33, 150, 243)", color: "#fff" }
@@ -46,8 +47,7 @@ const Timeline = () => {
                     {project.companyname}
                   </h4>
                   <p>
-                    Creative Direction, User Experience, Visual Design, Project
-                    Management, Team Leading
+                    {project.description}
                   </p>
                 </VerticalTimelineElement>
               ))}

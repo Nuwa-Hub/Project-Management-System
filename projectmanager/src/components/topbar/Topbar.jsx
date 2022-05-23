@@ -6,6 +6,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import { useDispatch, useSelector } from "react-redux";
 import { getNotifications } from "../../redux/apiCalls";
+import userdp from "../../images/user.png"
 
 export default function Topbar() {
   const dispatch = useDispatch();
@@ -39,22 +40,15 @@ export default function Topbar() {
     <div className="topbar">
       <div className="topbarWrapper">
         <div className="topLeft">
-          <span className="logo">Project Manager</span>
+          <span className="logo">RedMine(Project Manager)</span>
         </div>
         <div className="topRight">
           <div className="topbarIconContainer" onClick={() => toggleMenu()}>
             <NotificationsNoneIcon />
             <span className="topIconBadge">{notificationset.length}</span>
           </div>
-          <div className="topbarIconContainer">
-            <LanguageIcon />
-            <span className="topIconBadge">2</span>
-          </div>
-          <div className="topbarIconContainer">
-            <SettingsIcon />
-          </div>
           <img
-            src="https://images.pexels.com/photos/1526814/pexels-photo-1526814.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+            src={user.img || userdp}
             alt=""
             className="topAvatar"
           />

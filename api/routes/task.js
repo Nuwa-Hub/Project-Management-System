@@ -53,7 +53,7 @@ router.get("/stats", async (req, res) => {
 });
 
 //DELETE Task
-router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.delete("/:id",  async (req, res) => {
   try {
     const deleteTask = await Task.findByIdAndDelete(req.params.id);
     res.status(200).json(deleteTask);
@@ -63,7 +63,7 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 //delete Task by project id
-router.delete("find/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.delete("find/:id",  async (req, res) => {
   try {
     const deleteTasks = await Task.remove({projectId:req.params.id});
     res.status(200).json();

@@ -23,7 +23,7 @@ import { addNotification } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 
 const ChatInterface = (props) => {
-  const {taskName,taskManager,projectName, taskId, user1, user2 } = props;
+  const {taskName,taskManager,projectName, taskId, user1, user2,manager } = props;
   const distpatch=useDispatch()
 
   const [chat, setChat] = useState("");
@@ -109,15 +109,15 @@ const ChatInterface = (props) => {
         </div>
         <div className="content">
           <div className="contact-profile">
-            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-            <p>Harvey Specter</p>
+            <img className="managerdp" src={manager.img || "http://emilcarlsson.se/assets/harveyspecter.png"} alt="" />
+            <p>{manager.fullname}</p>
           </div>
 
           <div className="messages">
             <ul>
               {msgs.length
                 ? msgs.map((msg, i) => (
-                    <Message key={i} msg={msg} user1={user1} />
+                    <Message key={i} msg={msg} user1={user1} manager={manager}/>
                   ))
                 : null}
             </ul>

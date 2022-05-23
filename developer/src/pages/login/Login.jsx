@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/apiCalls";
+import "./login.css"
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -43,9 +44,8 @@ const Login = () => {
       <button onClick={handleClick} style={{ padding: 10, width: 100 }}>
         Login
       </button>
-      {error && <span>Something went wrong...</span>}
-      <a>DO NOT YOU REMEMBER THE PASSWORD?</a>
-      <a>CREATE A NEW ACCOUNT</a>
+      {error && <span className="loginerr">Something went wrong...</span>}
+   
     </div>
   );
 };

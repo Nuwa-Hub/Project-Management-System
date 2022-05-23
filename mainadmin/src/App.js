@@ -8,10 +8,11 @@ import ProtectedRoute from "./common/protectedRoute";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
+
   return (
     <BrowserRouter>
       <Routes>
-       <Route exact path="/login" element={user?.isAdmin ? <ProtectedRoute element={<Home/>}/>:<Login />} />
+       <Route exact path="/login" element={user ? <ProtectedRoute element={<Home/>}/>:<Login />} />
          {routes.map(({ element, path, name }) => (
           <Route
             key={name}

@@ -111,27 +111,23 @@ const Project = () => {
                   <span className="userShowTitle">Account Details</span>
                   <div className="userShowInfo">
                     <PermIdentityIcon className="userShowIcon" />
-                    <span className="userShowInfoTitle">annabeck99</span>
+                    <span className="userShowInfoTitle">{project.projectname}</span>
                   </div>
                   <div className="userShowInfo">
                     <CalendarTodayIcon className="userShowIcon" />
-                    <span className="userShowInfoTitle">10.12.1999</span>
+                    <span className="userShowInfoTitle">{project.duedate}</span>
                   </div>
-                  <span className="userShowTitle">Contact Details</span>
                   <div className="userShowInfo">
                     <PhoneAndroidIcon className="userShowIcon" />
-                    <span className="userShowInfoTitle">+1 123 456 67</span>
+                    <span className="userShowInfoTitle">{project.description}</span>
                   </div>
                   <div className="userShowInfo">
                     <MailOutlineIcon className="userShowIcon" />
                     <span className="userShowInfoTitle">
-                      annabeck99@gmail.com
+                    {project.companyname}
                     </span>
                   </div>
-                  <div className="userShowInfo">
-                    <LocationOnIcon className="userShowIcon" />
-                    <span className="userShowInfoTitle">New York | USA</span>
-                  </div>
+             
                   <span className="projectShowTitle">Contributors</span>
                   <div className="userShowInfo">
                     <img

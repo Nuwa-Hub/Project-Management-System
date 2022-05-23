@@ -1,6 +1,15 @@
-import { loginFailure, loginStart, loginSuccess, logout, changePasswordFailure,
+import {
+  loginFailure,
+  loginStart,
+  loginSuccess,
+  logout,
+  changePasswordFailure,
   changePasswordStart,
-  changePasswordSuccess } from "./userRedux";
+  changePasswordSuccess,
+  updateUserFailure,
+  updateUserStart,
+  updateUserSuccess,
+} from "./userRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 import {
   getProjectFailure,
@@ -67,9 +76,20 @@ export const login = async (dispatch, user) => {
   try {
     const res = await publicRequest.post("/auth/login", user);
     dispatch(loginSuccess(res.data));
-    sessionStorage.setItem("accessToken",res.data.accessToken)
+    sessionStorage.setItem("accessToken", res.data.accessToken);
   } catch (err) {
     dispatch(loginFailure());
+  }
+};
+//update developer
+export const updateCurrentUser = async (dispatch, user, id) => {
+  dispatch(updateUserStart());
+  try {
+    const res = await userRequest.put(`/users/${id}`, user);
+    console.log(res.data);
+    dispatch(updateUserSuccess(res.data));
+  } catch (err) {
+    dispatch(updateUserFailure());
   }
 };
 //change password
@@ -88,11 +108,11 @@ export const logOut = async (dispatch) => {
 
 //PROJECTS
 
-//get project
-export const getProjects = async (dispatch) => {
+//get projects
+export const getProjects = async (dispatch, id) => {
   dispatch(getProjectStart());
   try {
-    const res = await userRequest.get("/projects");
+    const res = await userRequest.get(`/projects/check/${id}`);
     dispatch(getProjectSuccess(res.data));
   } catch (err) {
     dispatch(getProjectFailure());
@@ -206,12 +226,11 @@ export const addTask = async (Task, dispatch) => {
 
     const notification = {
       title: `added new task > ${res.data.Taskname}`,
-      senderId:res.data.managerId,
-      receiverId:res.data.developerId,
-      taskId:res.data._id
+      senderId: res.data.managerId,
+      receiverId: res.data.developerId,
+      taskId: res.data._id,
     };
-    addNotification(notification,dispatch);
-    
+    addNotification(notification, dispatch);
   } catch (err) {
     dispatch(addTaskFailure());
   }
@@ -251,12 +270,12 @@ export const getChores = async (dispatch, id) => {
 };
 
 //ADD chore
-export const addChore = async (notification,Chore, dispatch) => {
+export const addChore = async (notification, Chore, dispatch) => {
   dispatch(addChoreStart());
   try {
     const res = await userRequest.post(`/chores`, Chore);
     dispatch(addChoreSuccess(res.data));
-    addNotification(notification,dispatch);
+    addNotification(notification, dispatch);
   } catch (err) {
     dispatch(addChoreFailure());
   }

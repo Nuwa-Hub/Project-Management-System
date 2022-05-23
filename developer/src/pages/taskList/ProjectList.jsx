@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {  getTasks } from "../../redux/apiCalls";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import userdp from "../../images/user.png";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -63,7 +64,7 @@ const ProjectList = () => {
                             {task.Taskname}
                           </span>
                           <span className="projectShowprojectTitle">
-                            {task._id}
+                            
                           </span>
                         </div>
                         <Link  className="link" to={"/task/"+task._id}>
@@ -84,15 +85,15 @@ const ProjectList = () => {
                           <div className="projectShowInfo">
                             <Grid3x3Icon className="projectShowIcon" />
                             <span className="userShowInfoTitle">
-                              {task._id}
+                              {task.Taskname}
                             </span>
                           </div>
                           <div className="projectShowInfo">
                             <BookIcon className="projectShowIcon" />
-                            <span className="userShowInfoTitle">tast</span>
+                            <span className="userShowInfoTitle">{task.description}</span>
                           </div>
                           <div className="projectShowInfo">
-                            {task.status === "pending" ? (
+                            {task.status === "processing" ? (
                               <PendingIcon className="projectShowIcon pending" 
                                />
                             ) : (
@@ -106,7 +107,7 @@ const ProjectList = () => {
                           <div className="userShowInfo">
                             <img
                               className="contributorImg"
-                              src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                              src={userdp}
                             />
                           </div>
                         </div>
@@ -115,7 +116,7 @@ const ProjectList = () => {
                             Project Analytics
                           </span>
                           <div className="projectShowInfo">
-                            <Progressbar progress={2} />
+                            <Progressbar progress={task.progress} />
                           </div>
                         </div>
                       </div>

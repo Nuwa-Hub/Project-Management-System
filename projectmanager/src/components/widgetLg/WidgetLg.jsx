@@ -1,13 +1,15 @@
 import "./widgetLg.css";
-import Piechart from "../pieChart/Piechart";
+import Piechart from "../pieChart/Userchart";
 import React from "react";
 import FiberManualRecordOutlinedIcon from "@mui/icons-material/FiberManualRecordOutlined";
 import FillAreaChart from "../areaChart/AreaChart";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
+import { useSelector } from "react-redux";
 
 const WidgetLg = () => {
   const [taskStats, setTaskStats] = useState([]);
+  
 
   const MONTHS = useMemo(
     () => [
@@ -51,16 +53,16 @@ const WidgetLg = () => {
           <Piechart className="widgetLgchart" />
           <div className="chartItems">
             <div className="chartItem">
-              <FiberManualRecordOutlinedIcon className="dotIndicator" />
-              <h3 className="chartItemText">completed projects</h3>
+              <FiberManualRecordOutlinedIcon className="dotIndicator manager" />
+              <h3 className="chartItemText">Managers</h3>
             </div>
             <div className="chartItem">
-              <FiberManualRecordOutlinedIcon className="dotIndicator" />
-              <h3 className="chartItemText">completed projects</h3>
+              <FiberManualRecordOutlinedIcon className="dotIndicator developer" />
+              <h3 className="chartItemText">Developers</h3>
             </div>
             <div className="chartItem">
-              <FiberManualRecordOutlinedIcon className="dotIndicator" />
-              <h3 className="chartItemText">pending projects</h3>
+              <FiberManualRecordOutlinedIcon className="dotIndicator admin" />
+              <h3 className="chartItemText">Admins</h3>
             </div>
           </div>
         </div>

@@ -16,6 +16,13 @@ import { updateCurrentUser, updateUser } from "../../redux/apiCalls";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import TextField from "../../components/textField/TextField";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import { db, auth, storage } from "../../firebase";
 
 export default function User() {
   const location = useLocation();
@@ -30,14 +37,58 @@ export default function User() {
 
   const handleClick = (e, { resetForm }) => {
     const updatedeveloper = { ...e };
-    Object.keys(updatedeveloper).forEach(key => {
-      if (updatedeveloper[key] === '') {
+    Object.keys(updatedeveloper).forEach((key) => {
+      if (updatedeveloper[key] === "") {
         delete updatedeveloper[key];
       }
     });
-  
-    updateUser(dispatch,updatedeveloper,developerId);
-    resetForm();
+
+    if (file) {
+      const fileName = `dp/${new Date().getTime()} - ${file.name}`;
+      //const storage = getStorage(app);
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      // Register three observers:
+      // 1. 'state_changed' observer, called any time the state changes
+      // 2. Error observer, called on failure
+      // 3. Completion observer, called on successful completion
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Observe state change events such as progress, pause, and resume
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+            default:
+          }
+        },
+        (error) => {
+          // Handle unsuccessful uploads
+        },
+        () => {
+          // Handle successful uploads on complete
+          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            const setupdatedeveloper = { img: downloadURL, ...updatedeveloper };
+            //console.log(user)
+            updateUser(dispatch, setupdatedeveloper, developerId);
+            resetForm();
+          });
+        }
+      );
+    } else {
+      updateUser(dispatch, updatedeveloper, developerId);
+      resetForm();
+    }
   };
 
   //validate
@@ -66,7 +117,7 @@ export default function User() {
             <div className="userShow">
               <div className="userShowTop">
                 <img
-                  src={userdp || developer.img}
+                  src={ developer.img || userdp }
                   alt="user img"
                   className="userShowImg"
                 />
@@ -151,7 +202,7 @@ export default function User() {
                         <div className="userUpdateUpload">
                           <img
                             className="userUpdateImg"
-                            src={userdp || developer.img}
+                            src={developer.img || userdp}
                             alt="user img"
                           />
                           <label htmlFor="file">
@@ -161,6 +212,7 @@ export default function User() {
                             type="file"
                             id="file"
                             style={{ display: "none" }}
+                            onChange={(e) => setFile(e.target.files[0])}
                           />
                         </div>
                         <button className="userUpdateButton" type="submit">

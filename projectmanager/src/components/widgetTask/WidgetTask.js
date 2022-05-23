@@ -18,7 +18,7 @@ const WidgetTask = ({ task }) => {
       (developer) => developer._id === task.developerId
     )
   );
-
+ 
   return (
     <div className="widgetTask">
       <div className="widgetTaskwrapper">
@@ -45,11 +45,11 @@ const WidgetTask = ({ task }) => {
             <span className="projectShowTitle">Project Detail</span>
             <div className="projectShowInfo">
               <BookIcon className="projectShowIcon" />
-              <span className="userShowInfoTitle">test</span>
+              <span className="userShowInfoTitle">{task.Taskname}</span>
             </div>
             <div className="projectShowInfo">
               <BookIcon className="projectShowIcon" />
-              <span className="userShowInfoTitle">test</span>
+              <span className="userShowInfoTitle">{task.description}</span>
             </div>
             <div className="projectShowInfo">
               <BookIcon className="projectShowIcon" />
@@ -61,7 +61,7 @@ const WidgetTask = ({ task }) => {
             <div className="userShowInfo">
               <img
                 className="taskcontributorImg"
-                src={userdp || developer.img}
+                src={ developer.img || userdp }
               />
             </div>
           </div>

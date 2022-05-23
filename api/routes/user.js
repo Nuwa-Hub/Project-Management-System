@@ -3,7 +3,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 
 //UPADATE USER
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.put("/:id",  async (req, res) => {
   try {
     const updateUser = await User.findByIdAndUpdate(
       req.params.id,
@@ -17,7 +17,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 //DELETE user
-router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.delete("/:id",  async (req, res) => {
   try {
     const deleteUser = await User.findByIdAndDelete(req.params.id);
     res.status(200).json();
@@ -38,7 +38,7 @@ router.get("/manager", async (req, res) => {
 });
 
 //GET  USER by id
-router.get("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.get("/:id",  async (req, res) => {
   try {
     const User = await User.find({ _ud: req.params.id });
     res.status(200).json(User);

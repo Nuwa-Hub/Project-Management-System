@@ -2,6 +2,11 @@ const router = require("express").Router();
 const User = require("../models/User");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
+const {
+  verifyToken,
+  verifyTokenAndAuthorization,
+  verifyTokenAndAdmin,
+} = require("./verifyToken");
 
 //REGISTER
 router.post("/register", async (req, res) => {
@@ -10,13 +15,16 @@ router.post("/register", async (req, res) => {
     username: req.body.username,
     email: req.body.email,
     isAdmin:req.body.isAdmin,
+    ismainAdmin:req.body.ismainAdmin,
     password: CryptoJS.AES.encrypt(
       req.body.password,
       process.env.PASS_SEC
     ).toString(),
     address: req.body.address,
     telNo: req.body.telNo,
-    
+    birthday:req.body.birthday,
+    img:req.body.img,
+    fullname:req.body.fullname,
   });
 
   try {
@@ -54,12 +62,14 @@ router.post("/login", async (req, res) => {
     const { password, ...others } = user._doc;
 
     res.status(200).json({ ...others, accessToken });
+
   } catch (err) {}
 });
 
 //CHNAGE PASSWORD
-router.post("/changepassword", async (req, res) => {
+router.post("/changepassword",verifyTokenAndAdmin, async (req, res) => {
   try {
+    
     const user = await User.findOne({ _id: req.body.userId });
     !user && res.status(401).json("Wrong credentials!");
 

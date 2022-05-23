@@ -35,7 +35,7 @@ const Timeline = () => {
             {tasks.map((task) => (
               <VerticalTimelineElement
                 className="vertical-timeline-element--work"
-                date="2011 - present"
+                date={`${task.createdAt.slice(0,7)} - present`}
                 iconStyle={
                   count++ % 2
                     ? { background: "rgb(33, 150, 243)", color: "#fff" }
@@ -46,12 +46,9 @@ const Timeline = () => {
                 <h3 className="vertical-timeline-element-title">
                   {task.Taskname}
                 </h3>
-                <h4 className="vertical-timeline-element-subtitle">
-                  test
-                </h4>
+                
                 <p>
-                  Creative Direction, User Experience, Visual Design, Project
-                  Management, Team Leading
+                {task.description}
                 </p>
               </VerticalTimelineElement>
             ))}

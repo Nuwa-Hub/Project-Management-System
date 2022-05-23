@@ -1,5 +1,6 @@
 import ChangePassword from "./pages/changePassword/ChangePassword"
 import CreateProject from "./pages/createproject/CreateProject"
+import EditProfile from "./pages/editProfile/EditProfile"
 import EditProject from "./pages/editProject/EditProject"
 import EditTask from "./pages/editTask/EditTask"
 import Home from "./pages/home/Home"
@@ -78,6 +79,11 @@ export const routes = [
         name: 'changepassword',
         element: <ChangePassword />,
         path: '/changepassword',
+      },
+      {
+        name: 'editprofile',
+        element: <EditProfile />,
+        path: '/editprofile',
       },
 ]
 

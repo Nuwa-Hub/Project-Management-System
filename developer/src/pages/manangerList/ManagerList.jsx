@@ -21,7 +21,7 @@ export default function ManagerList() {
  
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 220 },
+    { field: "fullname", headerName: "Full Name", width: 220 },
     {
       field: "user",
       headerName: "User",
@@ -31,7 +31,7 @@ export default function ManagerList() {
           <div className="userListUser">
             <img
               className="userListImg"
-              src={userdp || params.row.avatar}
+              src={ params.row.img || userdp}
               alt="user image"
             />
             {params.row.username}
@@ -41,9 +41,9 @@ export default function ManagerList() {
     },
     { field: "email", headerName: "Email", width: 180 },
     {
-      field: "status",
-      headerName: "Status",
-      width: 100,
+      field: "birthday",
+      headerName: "Birthday",
+      width: 200,
     },
     {
       field: "address",

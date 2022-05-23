@@ -2,6 +2,9 @@ import {
   changePasswordFailure,
   changePasswordStart,
   changePasswordSuccess,
+  updateUserStart,
+  updateUserSuccess,
+  updateUserFailure,
   loginFailure,
   loginStart,
   loginSuccess,
@@ -51,6 +54,18 @@ export const login = async (dispatch, user) => {
     dispatch(loginSuccess(res.data));
   } catch (err) {
     dispatch(loginFailure());
+  }
+};
+
+//update developer
+export const updateCurrentUser = async (dispatch, user, id) => {
+  dispatch(updateUserStart());
+  try {
+    const res = await userRequest.put(`/users/${id}`, user);
+    console.log(res.data);
+    dispatch(updateUserSuccess(res.data));
+  } catch (err) {
+    dispatch(updateUserFailure());
   }
 };
 

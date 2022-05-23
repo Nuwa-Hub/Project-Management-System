@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/login/Login";
 import { routes } from "./routes";
-import ProtectedRoute from "./components/common/protectedRoute";
+import ProtectedRoute from "./common/protectedRoute";
 import { useSelector } from "react-redux";
 import Home from "./pages/home/Home";
 

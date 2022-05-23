@@ -7,6 +7,7 @@ import ChatInterface from "../../components/chatInterface/ChatInterface";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { deleteNotification } from "../../redux/apiCalls";
+import userdp from "../../images/user.png";
 
 const Task = () => {
   const location = useLocation();
@@ -17,14 +18,13 @@ const Task = () => {
   const user = useSelector((state) => state.user.currentUser);
 
   useEffect(() => {
-    const data={
-         taskId:taskId,
-         userId:user._id
-    }
-    
-    deleteNotification(data,dispatch);
+    const data = {
+      taskId: taskId,
+      userId: user._id,
+    };
+
+    deleteNotification(data, dispatch);
   }, []);
-  
 
   //get task relevent to tha specific task id
   const task = useSelector((state) =>
@@ -35,10 +35,10 @@ const Task = () => {
     state.project.projects.find((project) => project._id === task.projectId)
   );
 
-   //get manager relevent to tha specific project.managerId
-   const manager = useSelector((state) =>
-   state.developer.managers.find((manager) => manager._id === task.managerId)
- );
+  //get manager relevent to tha specific project.managerId
+  const manager = useSelector((state) =>
+    state.developer.managers.find((manager) => manager._id === task.managerId)
+  );
 
   //get task developer id
   const user2 = task.developerId;
@@ -57,9 +57,7 @@ const Task = () => {
                 <div className="taskShowTop">
                   <div className="taskShowTopTitle">
                     <span className="taskShowtaskname">{task.Taskname}</span>
-                    <span className="taskShowtaskTitle">
-                     
-                    </span>
+                    <span className="taskShowtaskTitle"></span>
                   </div>
                 </div>
                 <div className="taskShowBottom">
@@ -68,7 +66,9 @@ const Task = () => {
                     <span className="taskShowInfoTitle">{task.Taskname}</span>
                   </div>
                   <div className="taskShowInfo">
-                    <span className="taskShowInfoTitle">{task.Taskname}</span>
+                    <span className="taskShowInfoTitle">
+                      {task.description}
+                    </span>
                   </div>
                   <span className="taskShowTitle">Given date</span>
                   <div className="taskShowInfo">
@@ -88,37 +88,47 @@ const Task = () => {
               <div className="taskShow">
                 <div className="userShowTop">
                   <img
-                    src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                    src={manager.img || userdp}
                     alt=""
                     className="userShowImg"
                   />
                   <div className="userShowTopTitle">
-                    <span className="userShowUsername">Anna Becker</span>
-                    <span className="userShowUserTitle">Task Holder</span>
+                    <span className="userShowUsername">{manager.fullname}</span>
+                    <span className="userShowUserTitle">task creator</span>
                   </div>
                 </div>
                 <div className="userShowBottom">
                   <span className="userShowTitle">Account Details</span>
                   <div className="userShowInfo">
-                    <span className="userShowInfoTitle">annabeck99</span>
-                  </div>
-                  <div className="userShowInfo">
-                    <span className="userShowInfoTitle">10.12.1999</span>
-                  </div>
-                  <span className="userShowTitle">Contact Details</span>
-                  <div className="userShowInfo">
-                    <span className="userShowInfoTitle">+1 123 456 67</span>
+                    <span className="userShowInfoTitle">
+                      {manager.fullname}
+                    </span>
                   </div>
                   <div className="userShowInfo">
                     <span className="userShowInfoTitle">
-                      annabeck99@gmail.com
+                      {manager.birthday.slice(0, 10)}
                     </span>
+                  </div>
+                  <span className="userShowTitle">Contact Details</span>
+                  <div className="userShowInfo">
+                    <span className="userShowInfoTitle">{manager.telNo}</span>
+                  </div>
+                  <div className="userShowInfo">
+                    <span className="userShowInfoTitle">{manager.email}</span>
                   </div>
                 </div>
               </div>
             </div>
             <div className="massages-container">
-              <ChatInterface taskName={task.Taskname} taskManager={manager._id} projectName={project.projectname} taskId={taskId} user1={user1} user2={user2} />
+              <ChatInterface
+                taskName={task.Taskname}
+                taskManager={manager._id}
+                projectName={project.projectname}
+                taskId={taskId}
+                user1={user1}
+                user2={user2}
+                manager={manager}
+              />
             </div>
           </div>
         </div>

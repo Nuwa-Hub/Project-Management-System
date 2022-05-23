@@ -119,15 +119,15 @@ useEffect(() => {
                           <div className="projectShowInfo">
                             <Grid3x3Icon className="projectShowIcon" />
                             <span className="userShowInfoTitle">
-                              {project._id}
+                              {project.projectname}
                             </span>
                           </div>
                           <div className="projectShowInfo">
                             <BookIcon className="projectShowIcon" />
-                            <span className="userShowInfoTitle">tast</span>
+                            <span className="userShowInfoTitle">{project.description}</span>
                           </div>
                           <div className="projectShowInfo">
-                            {project.status === "pending" ? (
+                            {project.status === "processing" ? (
                               <PendingIcon className="projectShowIcon pending" 
                                />
                             ) : (

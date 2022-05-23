@@ -54,6 +54,9 @@ const CreateTaskDialog = (props) => {
       .max(25, "Must be 25 characters or less!")
       .required("Requered!"),
     duedate: Yup.string().required("Requered!"),
+    description: Yup.string()
+      .max(25, "Must be 25 characters or less!")
+      .required("Requered!"),
   });
 
   return (
@@ -64,6 +67,7 @@ const CreateTaskDialog = (props) => {
             initialValues={{
               Taskname: "",
               duedate: "",
+              descripion:"",
             }}
             validationSchema={validate}
             onSubmit={handleClick}

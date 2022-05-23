@@ -209,3 +209,7 @@
   position:absolute;
   z-index: 1000;
 }
+.holderdp{
+  width: 40px;
+  height: 40px;
+}

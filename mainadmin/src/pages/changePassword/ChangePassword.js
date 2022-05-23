@@ -30,7 +30,10 @@ const ChangePassword = () => {
       .max(25, "Must be 25 characters or less!")
       .required("Requered!"),
     newPassword: Yup.string()
-      .max(25, "Must be 25 characters or less!")
+       .matches(
+        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
+        "Must Contain One Uppercase"
+      )
       .required("Requered!"),
     confirmPassword: Yup.string()
       .required("Requered!")
@@ -61,13 +64,13 @@ const ChangePassword = () => {
                     <TextField
                       label="Current Password"
                       name="currentPassword"
-                      type="text"
+                      type="password"
                       className1="newProjectItem"
                     />
                     <TextField
                       label="New Password"
                       name="newPassword"
-                      type="text"
+                      type="password"
                       className1="newProjectItem"
                     />
                     <TextField
