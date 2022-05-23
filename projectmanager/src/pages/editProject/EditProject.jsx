@@ -38,7 +38,7 @@ const EditProject = () => {
 
   //validate
   const validate = Yup.object({
-    projectname: Yup.string().max(15, "Must be 25 characters or less!"),
+    projectname: Yup.string().max(20, "Must be 20 characters or less!"),
     companyname: Yup.string().max(15, "Must be 25 characters or less!"),
     duedate: Yup.string(),
   });

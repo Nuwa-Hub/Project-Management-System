@@ -1,4 +1,15 @@
-import { loginFailure, loginStart, loginSuccess, logout } from "./userRedux";
+import {
+  loginFailure,
+  loginStart,
+  loginSuccess,
+  logout,
+  changePasswordFailure,
+  changePasswordStart,
+  changePasswordSuccess,
+  updateUserFailure,
+  updateUserStart,
+  updateUserSuccess,
+} from "./userRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 import {
   getProjectFailure,
@@ -18,6 +29,9 @@ import {
   getDeveloperFailure,
   getDeveloperStart,
   getDeveloperSuccess,
+  getManagerFailure,
+  getManagerStart,
+  getManagerSuccess,
 } from "./developerRedux";
 import {
   getTaskFailure,
@@ -44,6 +58,17 @@ import {
   getChoreStart,
   getChoreSuccess,
 } from "./choreRedux";
+import {
+  addNotificationFailure,
+  addNotificationStart,
+  addNotificationSuccess,
+  deleteNotificationFailure,
+  deleteNotificationStart,
+  deleteNotificationSuccess,
+  getNotificationFailure,
+  getNotificationStart,
+  getNotificationSuccess,
+} from "./notificationRedux";
 
 //auth
 export const login = async (dispatch, user) => {
@@ -51,22 +76,43 @@ export const login = async (dispatch, user) => {
   try {
     const res = await publicRequest.post("/auth/login", user);
     dispatch(loginSuccess(res.data));
+    sessionStorage.setItem("accessToken", res.data.accessToken);
   } catch (err) {
     dispatch(loginFailure());
   }
 };
-
+//update developer
+export const updateCurrentUser = async (dispatch, user, id) => {
+  dispatch(updateUserStart());
+  try {
+    const res = await userRequest.put(`/users/${id}`, user);
+    console.log(res.data);
+    dispatch(updateUserSuccess(res.data));
+  } catch (err) {
+    dispatch(updateUserFailure());
+  }
+};
+//change password
+export const changePassword = async (dispatch, data) => {
+  dispatch(changePasswordStart());
+  try {
+    const res = await userRequest.post("/auth/changepassword", data);
+    dispatch(changePasswordSuccess(res.data));
+  } catch (err) {
+    dispatch(changePasswordFailure());
+  }
+};
 export const logOut = async (dispatch) => {
   dispatch(logout());
 };
 
 //PROJECTS
 
-//get project
-export const getProjects = async (dispatch) => {
+//get projects
+export const getProjects = async (dispatch, id) => {
   dispatch(getProjectStart());
   try {
-    const res = await userRequest.get("/projects");
+    const res = await userRequest.get(`/projects/check/${id}`);
     dispatch(getProjectSuccess(res.data));
   } catch (err) {
     dispatch(getProjectFailure());
@@ -133,6 +179,19 @@ export const updatedeveloper = async (dispatch) => {
   }
 };
 
+//Manangers
+
+//GET ALL Manangers
+export const getmanagers = async (dispatch) => {
+  dispatch(getManagerStart());
+  try {
+    const res = await userRequest.get("/users/manager");
+    console.log(res.data);
+    dispatch(getManagerSuccess(res.data));
+  } catch (err) {
+    dispatch(getManagerFailure());
+  }
+};
 //TASKS
 
 //GET TASK BY PROJEC ID
@@ -151,13 +210,12 @@ export const updateTask = async (dispatch, task, id) => {
   dispatch(updateTaskStart());
   try {
     const res = await userRequest.put(`/tasks/${id}`, task);
-    //console.log(res.data);
+    console.log(res.data);
     dispatch(updateTaskSuccess(res.data));
   } catch (err) {
     dispatch(updateTaskFailure());
   }
 };
-
 
 //ADD TASK
 export const addTask = async (Task, dispatch) => {
@@ -165,6 +223,14 @@ export const addTask = async (Task, dispatch) => {
   try {
     const res = await userRequest.post(`/tasks`, Task);
     dispatch(addTaskSuccess(res.data));
+
+    const notification = {
+      title: `added new task > ${res.data.Taskname}`,
+      senderId: res.data.managerId,
+      receiverId: res.data.developerId,
+      taskId: res.data._id,
+    };
+    addNotification(notification, dispatch);
   } catch (err) {
     dispatch(addTaskFailure());
   }
@@ -204,11 +270,12 @@ export const getChores = async (dispatch, id) => {
 };
 
 //ADD chore
-export const addChore = async (Chore, dispatch) => {
+export const addChore = async (notification, Chore, dispatch) => {
   dispatch(addChoreStart());
   try {
     const res = await userRequest.post(`/chores`, Chore);
     dispatch(addChoreSuccess(res.data));
+    addNotification(notification, dispatch);
   } catch (err) {
     dispatch(addChoreFailure());
   }
@@ -234,5 +301,40 @@ export const deleteChoreByTaskId = async (id, dispatch) => {
     dispatch(deleteChoreSuccess(id));
   } catch (err) {
     dispatch(deleteChoreFailure());
+  }
+};
+
+//NOTIFICATION
+
+//get notification by user id
+export const getNotifications = async (dispatch, id) => {
+  dispatch(getNotificationStart());
+  try {
+    const res = await userRequest.get(`/notifications/${id}`);
+    dispatch(getNotificationSuccess(res.data));
+  } catch (err) {
+    dispatch(getNotificationFailure());
+  }
+};
+
+//add notification
+export const addNotification = async (Notification, dispatch) => {
+  dispatch(addNotificationStart());
+  try {
+    const res = await userRequest.post(`/notifications`, Notification);
+    dispatch(addNotificationSuccess(res.data));
+  } catch (err) {
+    dispatch(addNotificationFailure());
+  }
+};
+
+//delete notification by  id
+export const deleteNotification = async (data, dispatch) => {
+  dispatch(deleteNotificationStart());
+  try {
+    await userRequest.delete(`/notifications/${data.taskId}/${data.userId}`);
+    dispatch(deleteNotificationSuccess(data));
+  } catch (err) {
+    dispatch(deleteNotificationFailure());
   }
 };

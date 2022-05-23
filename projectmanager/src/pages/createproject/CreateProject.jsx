@@ -15,7 +15,7 @@ const CreateProject = () => {
 
   const handleClick = (e, { resetForm }) => {
     const project = { ...e, managerId: userId };
-    console.log(project);
+    //console.log(project);
     addProject(project, dispatch);
     resetForm();
   };
@@ -29,6 +29,9 @@ const CreateProject = () => {
       .max(25, "Must be 25 characters or less!")
       .required("Requered!"),
     duedate: Yup.string().required("Requered!"),
+    description: Yup.string()
+      .max(50, "Must be 50 characters or less!")
+      .required("Requered!"),
   });
 
   return (
@@ -43,6 +46,7 @@ const CreateProject = () => {
                 projectname: "",
                 companyname: "",
                 duedate: "",
+                description:"",
               }}
               validationSchema={validate}
               onSubmit={handleClick}
@@ -70,8 +74,8 @@ const CreateProject = () => {
                       className1="newProjectItem"
                     />
                     <TextField
-                      label="Company Nam"
-                      name="companynam"
+                      label="Description"
+                      name="description"
                       type="text"
                       className1="newProjectItem"
                     />

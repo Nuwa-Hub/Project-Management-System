@@ -1,3 +1,5 @@
+import ChangePassword from "./pages/changePassword/ChangePassword"
+import EditProfile from "./pages/editProfile/EditProfile"
 import Home from "./pages/home/Home"
 import ManagerList from "./pages/manangerList/ManagerList"
 import NewUser from "./pages/newUser/NewUser"
@@ -61,7 +63,15 @@ export const routes = [
         element: <ManagerList />,
         path: '/managers',
       },
-     
-      
+      {
+        name: 'changepassword',
+        element: <ChangePassword />,
+        path: '/changepassword',
+      },
+      {
+        name: 'editprofile',
+        element: <EditProfile />,
+        path: '/editprofile',
+      },
 ]
 

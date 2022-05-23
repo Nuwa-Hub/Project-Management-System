@@ -30,10 +30,10 @@ const Item = styled(Paper)(({ theme }) => ({
 const ProjectList = () => {
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.project.projects);
-  
+  const user=useSelector((state) => state.user.currentUser);
 
   useEffect(() => {
-    getProjects(dispatch);
+    getProjects(dispatch,user._id);
   }, [dispatch]);
 
 //search bar
@@ -128,15 +128,15 @@ useEffect(() => {
                           <div className="projectShowInfo">
                             <Grid3x3Icon className="projectShowIcon" />
                             <span className="userShowInfoTitle">
-                              {project._id}
+                              {project.projectname}
                             </span>
                           </div>
                           <div className="projectShowInfo">
                             <BookIcon className="projectShowIcon" />
-                            <span className="userShowInfoTitle">tast</span>
+                            <span className="userShowInfoTitle">{project.description}</span>
                           </div>
                           <div className="projectShowInfo">
-                            {project.status === "pending" ? (
+                            {project.status === "processing" ? (
                               <PendingIcon className="projectShowIcon pending" />
                             ) : (
                               <DoneOutlineIcon className="projectShowIcon done" />

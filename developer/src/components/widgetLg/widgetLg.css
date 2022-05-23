@@ -13,16 +13,28 @@
 .widgetLgchart{
   display: flex;
 }
+.widgetLgleft{
+  flex: 1;
+}
+.widgetLgright{
+  flex: 2;
+}
 .chartItems{
-  margin: 50px 20px;
-
+  margin: 10px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  
 }
 .dotIndicator{
-  margin-right: 10px;
-  width: 8px;
-  height: 8px;
-  color: rgb(235, 8, 8);
+  margin-right: 5px;
+  width: 6px;
+  height: 6px;
+  
+  font-size: 14px !important;
 }
+.dotIndicator.manager{color: #0088FE;}
+.dotIndicator.developer{color: #00C49F;}
+.dotIndicator.admin{color: #FFBB28;}
 .chartItem{
   display: flex;
   justify-items: center;
@@ -30,6 +42,7 @@
    margin-bottom: 10px;
 }
 .chartItemText{
-  font-size: 14px;
-  font-weight: 300;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 2px;
 }

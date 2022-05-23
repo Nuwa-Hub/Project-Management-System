@@ -3,7 +3,7 @@ import "./instruction.css";
 import ListIcon from "@mui/icons-material/List";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { useDispatch, useSelector } from "react-redux";
-import { addChore, deleteChore, getChores } from "../../redux/apiCalls";
+import { addChore, addNotification, deleteChore, getChores } from "../../redux/apiCalls";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Moment from "react-moment";
 
@@ -12,7 +12,8 @@ function TodoInstruction({ chore, dispatch }) {
     e.preventDefault();
     deleteChore(chore._id, dispatch);
   };
- // console.log(chore);
+  // console.log(chore);
+
   return (
     <div
       className="todo-task"
@@ -43,7 +44,7 @@ function TodoInstruction({ chore, dispatch }) {
   );
 }
 
-const Instruction = ({ taskId }) => {
+const Instruction = ({ taskId ,taskHolder,taskName}) => {
   const [title, setTitle] = useState("");
 
   //set input values
@@ -60,6 +61,7 @@ const Instruction = ({ taskId }) => {
     getChores(dispatch, taskId);
   }, [dispatch, taskId]);
 
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title) return;
@@ -68,7 +70,17 @@ const Instruction = ({ taskId }) => {
       title: title,
       taskId: taskId,
     };
-    addChore(chore, dispatch);
+
+    //add notification whe  add a instruction
+   
+    const notification = {
+      title: `${taskName}>added new instruction ${title} `,
+      receiverId: taskHolder,
+      taskId: taskId,
+    };
+    
+    addChore(notification,chore, dispatch);
+    addNotification()
     setTitle("");
   };
 

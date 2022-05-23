@@ -5,7 +5,8 @@
   }
  .createprojectwrapper{
   margin: 10px 300px;
-  border: 1px solid gray;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -14,7 +15,7 @@
  }
   .newProjectForm {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     
   }
   

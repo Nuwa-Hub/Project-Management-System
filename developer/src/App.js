@@ -8,6 +8,7 @@ import ProtectedRoute from "./common/protectedRoute";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
+  
   console.log(user);
   return (
     <BrowserRouter>

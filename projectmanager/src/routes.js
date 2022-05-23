@@ -1,7 +1,10 @@
+import ChangePassword from "./pages/changePassword/ChangePassword"
 import CreateProject from "./pages/createproject/CreateProject"
+import EditProfile from "./pages/editProfile/EditProfile"
 import EditProject from "./pages/editProject/EditProject"
 import EditTask from "./pages/editTask/EditTask"
 import Home from "./pages/home/Home"
+import ManagerList from "./pages/manangerList/ManagerList"
 import Project from "./pages/project/Project"
 import ProjectList from "./pages/projectList/ProjectList"
 import ProjectTaskList from "./pages/projectTask/ProjectTaskList"
@@ -67,6 +70,20 @@ export const routes = [
         element: <EditTask />,
         path: '/edittask/:id',
       },
-      
+      {
+        name: 'managers',
+        element: <ManagerList />,
+        path: '/managers',
+      },
+      {
+        name: 'changepassword',
+        element: <ChangePassword />,
+        path: '/changepassword',
+      },
+      {
+        name: 'editprofile',
+        element: <EditProfile />,
+        path: '/editprofile',
+      },
 ]
 

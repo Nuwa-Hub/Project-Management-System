@@ -19,7 +19,6 @@ const CreateTaskDialog = (props) => {
   const [developerId, setdeveloperId] = React.useState(null);
   const [inputs, setInputs] = useState({});
 
-
   //select options
   const options = developers.map((developer) => ({
     value: developer._id,
@@ -37,12 +36,14 @@ const CreateTaskDialog = (props) => {
 
   //create task and add to database
   const handleClick = (e, { resetForm }) => {
+
     const task = {
       ...e,
       managerId: userId,
       developerId: developerId.value,
       projectId: projectId,
     };
+  
     addTask(task, dispatch);
     resetForm();
   };
@@ -53,6 +54,9 @@ const CreateTaskDialog = (props) => {
       .max(25, "Must be 25 characters or less!")
       .required("Requered!"),
     duedate: Yup.string().required("Requered!"),
+    description: Yup.string()
+      .max(25, "Must be 25 characters or less!")
+      .required("Requered!"),
   });
 
   return (
@@ -63,6 +67,7 @@ const CreateTaskDialog = (props) => {
             initialValues={{
               Taskname: "",
               duedate: "",
+              descripion:"",
             }}
             validationSchema={validate}
             onSubmit={handleClick}
@@ -71,7 +76,10 @@ const CreateTaskDialog = (props) => {
               <>
                 <div className="taskCreateFormtop">
                   <span className="taskCreateTitle">Create Task</span>
-                  <CancelPresentationIcon className="cancelIcon" onClick={handleClose}/>
+                  <CancelPresentationIcon
+                    className="cancelIcon"
+                    onClick={handleClose}
+                  />
                 </div>
 
                 <Form className="taskCreateForm">

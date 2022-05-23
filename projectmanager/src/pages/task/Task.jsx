@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import "./task.css";
@@ -8,12 +8,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import userdp from "../../images/user.png";
 import EditIcon from "@mui/icons-material/Edit";
-
+import { deleteNotification } from "../../redux/apiCalls";
 
 const Task = () => {
   const location = useLocation();
   const taskId = location.pathname.split("/")[2];
+  const dispatch = useDispatch();
 
+  const user = useSelector((state) => state.user.currentUser);
   //get task relevent to tha specific taskid
   const task = useSelector((state) =>
     state.task.tasks.find((task) => task._id === taskId)
@@ -28,14 +30,22 @@ const Task = () => {
       (developer) => developer._id === task.developerId
     )
   );
-
-    //get chores relevent to tha specific task.projectId
-    const chores = useSelector((state) =>
+  console.log(taskHolder);
+  //get chores relevent to tha specific task.projectId
+  const chores = useSelector((state) =>
     state.developer.developers.find(
       (developer) => developer._id === task.developerId
     )
   );
-
+  //delete notifications
+  useEffect(() => {
+    const data = {
+      taskId: taskId,
+      userId: user._id,
+    };
+    console.log(taskId);
+    deleteNotification(data, dispatch);
+  }, []);
   //console.log(taskHolder)
   //get task developer id
   const user2 = task.developerId;
@@ -53,11 +63,13 @@ const Task = () => {
               <div className="taskShow">
                 <div className="taskShowTop">
                   <div className="taskShowTopTitle">
-                  <div className="taskaction"><span className="taskShowtaskname">{task.Taskname}</span>
-                  <Link className="link" to={`/edittask/${taskId}`}>
-                  <EditIcon className="taskediticon"/>
-                  </Link></div>
-                    
+                    <div className="taskaction">
+                      <span className="taskShowtaskname">{task.Taskname}</span>
+                      <Link className="link" to={`/edittask/${taskId}`}>
+                        <EditIcon className="taskediticon" />
+                      </Link>
+                    </div>
+
                     <span className="taskShowtaskTitle">
                       {project.companyname}
                     </span>
@@ -74,14 +86,12 @@ const Task = () => {
                   <span className="taskShowTitle">Given date</span>
                   <div className="taskShowInfo">
                     <span className="taskShowInfoTitle">
-                      {" "}
-                      {task.duedate.slice(0, 10)}
+                      {task.createdAt.slice(0, 10)}
                     </span>
                   </div>
                   <span className="taskShowTitle">Due date</span>
                   <div className="taskShowInfo">
                     <span className="taskShowInfoTitle">
-                      {" "}
                       {task.duedate.slice(0, 10)}
                     </span>
                   </div>
@@ -91,7 +101,8 @@ const Task = () => {
               <div className="taskShow">
                 <div className="userShowTop">
                   <img
-                    src={userdp || taskHolder.img} alt="user image"
+                    src={ taskHolder.img || userdp }
+                    alt="user image"
                     className="userShowImg"
                   />
                   <div className="userShowTopTitle">
@@ -104,25 +115,38 @@ const Task = () => {
                 <div className="userShowBottom">
                   <span className="userShowTitle">Account Details</span>
                   <div className="userShowInfo">
-                    <span className="userShowInfoTitle">{taskHolder.username}</span>
-                  </div>
-                  <div className="userShowInfo">
-                    <span className="userShowInfoTitle">{taskHolder.email}</span>
-                  </div>
-                  <span className="userShowTitle">Contact Details</span>
-                  <div className="userShowInfo">
-                    <span className="userShowInfoTitle">{taskHolder.telNo}</span>
+                    <span className="userShowInfoTitle">
+                      {taskHolder.username}
+                    </span>
                   </div>
                   <div className="userShowInfo">
                     <span className="userShowInfoTitle">
-                    {taskHolder.address}
+                      {taskHolder.email}
+                    </span>
+                  </div>
+                  <span className="userShowTitle">Contact Details</span>
+                  <div className="userShowInfo">
+                    <span className="userShowInfoTitle">
+                      {taskHolder.telNo}
+                    </span>
+                  </div>
+                  <div className="userShowInfo">
+                    <span className="userShowInfoTitle">
+                      {taskHolder.address}
                     </span>
                   </div>
                 </div>
               </div>
             </div>
             <div className="massages-container">
-              <ChatInterface taskId={taskId} user1={user1} user2={user2} />
+              <ChatInterface
+                taskHolder={taskHolder._id}
+                taskName={task.Taskname}
+                taskId={taskId}
+                user1={user1}
+                user2={user2}
+                holder={taskHolder}
+              />
             </div>
           </div>
         </div>

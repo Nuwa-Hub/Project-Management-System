@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import "./projectList.css";
+import "./projectsList.css";
 import Progressbar from "../../components/circular-progressbar/Progressbar";
 import Grid3x3Icon from "@mui/icons-material/Grid3x3";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
@@ -14,9 +14,10 @@ import Button from "@mui/material/Button";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
-import {  getTasks } from "../../redux/apiCalls";
+import { getProjects } from "../../redux/apiCalls";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import SearchBar from "material-ui-search-bar";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -25,17 +26,35 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
 }));
 
-const ProjectList = () => {
+const ProjectsList = () => {
   const dispatch = useDispatch();
-  const tasks = useSelector((state) => state.task.tasks);
-
-  const userId = useSelector((state) => state.user.currentUser._id);
+  const projects = useSelector((state) => state.project.projects);
   
-
   useEffect(() => {
-    getTasks(dispatch,userId);
-   
+    getProjects(dispatch);
   }, [dispatch]);
+
+  //search bar
+
+const [searchProjects, setItems] = React.useState(projects);
+const [searched, setSearched] = React.useState("");
+
+const cancelSearch = () => {
+  setSearched("");
+  requestSearch("");
+};
+
+const requestSearch = (searchedVal) => {
+  const filteredItems = projects.filter((project) => {
+    return project.projectname.toLowerCase().includes(searchedVal.toLowerCase());
+  });
+  setItems(filteredItems);
+};
+
+useEffect(() => {
+  setItems(projects);
+  requestSearch(searched);
+}, [projects]);
 
   return (
     <>
@@ -44,8 +63,24 @@ const ProjectList = () => {
         <Sidebar />
         <div className="project">
           <div className="projectpagetop">
-            <h3 className="projectpagetitle">Tasks</h3>
-            <button className="createprojectbn">create</button>
+            <h3 className="projectpagetitle">Projects</h3>
+            <SearchBar
+                   onCancelSearch={() => cancelSearch()}
+                    value={searched}
+                    onChange={(searchVal) => {
+                      requestSearch(searchVal);
+                      setSearched(searchVal);
+                    }}
+                    onRequestSearch={() => console.log("onRequestSearch")}
+                    style={{
+                      margin: "5px",
+                      width:"400px",
+                      height:"40px",
+                      maxWidth: 1200,
+                      maxHight:100,
+                    }}
+                  />
+          <div></div>
           </div>
           <Box className="box" sx={{ width: "100%", height: "100%" }}>
             <Grid
@@ -53,20 +88,20 @@ const ProjectList = () => {
               rowSpacing={1}
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             >
-              {tasks.map((task) => (
-                <Grid item xs={4} key={task._id}>
+              {searchProjects.map((project) => (
+                <Grid item xs={4} key={project._id}>
                   <Item>
                     <div className="projectShow">
                       <div className="projectShowTop">
                         <div className="projectShowTopTitle">
                           <span className="projectShowprojectname">
-                            {task.Taskname}
+                            {project.projectname}
                           </span>
                           <span className="projectShowprojectTitle">
-                            {task._id}
+                            {project.companyname}
                           </span>
                         </div>
-                        <Link  className="link" to={"/task/"+task._id}>
+                        <Link  className="link" to={"/project/"+project._id}>
                         <Button
                           className="viewbutton"
                           variant="outlined"
@@ -79,27 +114,27 @@ const ProjectList = () => {
                       <div className="projectShowBottom">
                         <div className="projectShowdetail">
                           <span className="projectShowTitle">
-                            Task Detail
+                            Project Detail
                           </span>
                           <div className="projectShowInfo">
                             <Grid3x3Icon className="projectShowIcon" />
                             <span className="userShowInfoTitle">
-                              {task._id}
+                              {project.projectname}
                             </span>
                           </div>
                           <div className="projectShowInfo">
                             <BookIcon className="projectShowIcon" />
-                            <span className="userShowInfoTitle">tast</span>
+                            <span className="userShowInfoTitle">{project.description}</span>
                           </div>
                           <div className="projectShowInfo">
-                            {task.status === "pending" ? (
+                            {project.status === "processing" ? (
                               <PendingIcon className="projectShowIcon pending" 
                                />
                             ) : (
                               <DoneOutlineIcon className="projectShowIcon done" />
                             )}
                             <span className="userShowInfoTitle">
-                              {task.status}
+                              {project.status}
                             </span>
                           </div>
                           <span className="projectShowTitle">Contributors</span>
@@ -115,7 +150,7 @@ const ProjectList = () => {
                             Project Analytics
                           </span>
                           <div className="projectShowInfo">
-                            <Progressbar progress={2} />
+                            <Progressbar progress={project.progress} />
                           </div>
                         </div>
                       </div>
@@ -131,4 +166,4 @@ const ProjectList = () => {
   );
 };
 
-export default ProjectList;
+export default ProjectsList;

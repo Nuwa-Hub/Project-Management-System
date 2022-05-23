@@ -8,12 +8,15 @@ import { Link } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/apiCalls";
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
-import TaskIcon from '@mui/icons-material/Task';
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css'; 
-import PasswordIcon from '@mui/icons-material/Password';
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import TaskIcon from "@mui/icons-material/Task";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import PasswordIcon from "@mui/icons-material/Password";
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -22,27 +25,30 @@ export default function Sidebar() {
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
-          <div className='custom-ui'>
-          <div>
-            <h1 className="logoutmsg">Confirm to Logout?</h1>
-            <p className="logout-text">Are you sure to do this.</p>
+          <div className="custom-ui">
+            <div>
+              <h1 className="logoutmsg">Confirm to Logout?</h1>
+              <p className="logout-text">Are you sure to do this.</p>
             </div>
             <div className="logoutaction">
-            <button className="logoutbtn no" onClick={onClose}>No</button>
-            <button className="logoutbtn yes"
-              onClick={() => {
-                logOut(dispatch);
-                onClose();
-              }}
-            >
-              Yes
-            </button>
+              <button className="logoutbtn no" onClick={onClose}>
+                No
+              </button>
+              <button
+                className="logoutbtn yes"
+                onClick={() => {
+                  logOut(dispatch);
+                  onClose();
+                }}
+              >
+                Yes
+              </button>
             </div>
           </div>
         );
-      }
+      },
     });
-  }
+  };
 
   return (
     <div className="sidebar">
@@ -57,15 +63,17 @@ export default function Sidebar() {
               </li>
             </Link>
             <Link className="link" to={"/timeline"}>
-            <li className="sidebarListItem">
-              <TimelineIcon className="sidebarIcon" />
-              TimeLine
-            </li>
+              <li className="sidebarListItem">
+                <TimelineIcon className="sidebarIcon" />
+                TimeLine
+              </li>
             </Link>
-            <li className="sidebarListItem">
-              <TrendingUpIcon className="sidebarIcon" />
-              Sales
-            </li>
+            <Link className="link" to={"/projects"}>
+              <li className="sidebarListItem">
+                <MenuBookIcon className="sidebarIcon" />
+                Projects
+              </li>
+            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">
@@ -77,42 +85,43 @@ export default function Sidebar() {
                 Developers
               </li>
             </Link>
-            <Link className="link" to={"/projects"}>
+            <Link className="link" to={"/managers"}>
+              <li className="sidebarListItem">
+                <SupervisorAccountIcon className="sidebarIcon" />
+                Project Managers
+              </li>
+            </Link>
+            <Link className="link" to={"/tasks"}>
               <li className="sidebarListItem">
                 <LaptopChromebookIcon className="sidebarIcon" />
                 Tasks
               </li>
             </Link>
-            <li className="sidebarListItem">
-              <TaskIcon className="sidebarIcon" />
-              Task 
-            </li>
+         
           </ul>
         </div>
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <AccessAlarmIcon className="sidebarIcon" />
-              Time handle
-            </li>
-            <li className="sidebarListItem">
-              <PeopleOutlineIcon className="sidebarIcon" />
-              User Analytics
-            </li>
+          <Link className="link" to={`/editprofile`}>
+              <li className="sidebarListItem">
+                <ManageAccountsIcon className="sidebarIcon" />
+                Manage Profile
+              </li>
+            </Link>
+            <Link className="link" to={"/changepassword"}>
             <li className="sidebarListItem">
               <PasswordIcon className="sidebarIcon" />
               Change Pasword
             </li>
+            </Link>
+            <li className="sidebarListItem" onClick={submit}>
+              <LogoutIcon className="logoutIcon"  />
+              <span className="logouttext">logout</span>
+            </li>
           </ul>
         </div>
       </div>
-     
-      <div className="logoutdiv" onClick={submit}>
-        <LogoutIcon className="logoutIcon"/>
-        <span className="logouttext">logout</span>
-      </div>
-     
     </div>
   );
 }

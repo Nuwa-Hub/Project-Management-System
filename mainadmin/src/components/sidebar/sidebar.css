@@ -1,6 +1,6 @@
 .sidebar {
   flex: 1;
-  height: calc(100vh - 50px);
+  height: calc(90vh - 80px);
   background-color: rgb(251, 251, 255);
   position: sticky;
   top: 50px;
@@ -59,4 +59,38 @@
 .sidebarIcon{
     margin-right: 5px;
     font-size: 20px !important;
+}
+.custom-ui{
+  border: 1px black solid;
+  width: 400px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.custom-ui div{
+  align-items: center;
+  justify-content: center;
+}
+.logout-text{
+  padding: 10px;
+}
+.logoutaction{
+  display: inline;
+  align-items: center;
+  justify-content: center;
+}
+.logoutaction button{
+   width: 100px;
+   height: 30px;
+   border-radius: 20px;
+   margin: 0px 40px;
+   border: none;
+}
+.logoutaction .yes{
+  background-color: orange;
+}
+.logoutaction .no{
+  background-color: rgb(255, 0, 0);
 }

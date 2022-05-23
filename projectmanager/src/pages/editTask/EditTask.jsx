@@ -24,23 +24,24 @@ const EditTask = () => {
 
   //for select
   const developers = useSelector((state) => state.developer.developers);
-  const [developerId, setdeveloperId] = React.useState(null);
+  const [developerId, setdeveloperId] = React.useState("");
   //select options
   const options = developers.map((developer) => ({
     value: developer._id,
     label: developer.username,
   }));
 
-
+  
   //validate and upadate
   const handleClick = (e, { resetForm }) => {
     const task = { ...e,developerId:developerId.value };
+    console.log(task);
     Object.keys(task).forEach((key) => {
       if (task[key] === "" || task[key] === null) {
         delete task[key];
       }
     });
-    console.log(task);
+    
     updateTask(dispatch,task,taskId)
     
     resetForm();

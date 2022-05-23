@@ -19,7 +19,7 @@ export default function UserList() {
   }, [dispatch]);
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 220 },
+    { field: "fullname", headerName: "Full Name", width: 220 },
     {
       field: "user",
       headerName: "User",
@@ -27,7 +27,7 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <div className="userListUser">
-            <img className="userListImg" src={userdp || params.row.avatar} alt="user image" />
+            <img className="userListImg" src={params.row.img || userdp} alt="user image" />
             {params.row.username}
           </div>
         );
@@ -35,9 +35,9 @@ export default function UserList() {
     },
     { field: "email", headerName: "Email", width: 180 },
     {
-      field: "status",
-      headerName: "Status",
-      width: 100,
+      field: "birthday",
+      headerName: "Birthday",
+      width: 200,
     },
     {
       field: "address",
@@ -56,7 +56,7 @@ export default function UserList() {
           <DataGrid
             rows={developers}
             disableSelectionOnClick
-            columns={columns}
+             columns={columns}
             getRowId={(row) => row._id}
             pageSize={8}
             checkboxSelection

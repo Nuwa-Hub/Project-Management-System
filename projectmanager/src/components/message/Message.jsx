@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Moment from "react-moment";
+import userdp from "../../images/user.png"
 
 const Message = ({ msg, user1 }) => {
   const scrollRef = useRef();
@@ -10,7 +11,7 @@ const Message = ({ msg, user1 }) => {
 
   return (
     <li class={`${msg.from === user1 ? "sent" : "replies"}`} ref={scrollRef}>
-      <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+      <img src={userdp} alt="" />
 
       <p className="messagetext">
       <div className="messagetextwrap">

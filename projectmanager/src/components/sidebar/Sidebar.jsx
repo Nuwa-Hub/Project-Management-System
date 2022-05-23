@@ -13,6 +13,9 @@ import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import TaskIcon from "@mui/icons-material/Task";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import PasswordIcon from "@mui/icons-material/Password";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -63,10 +66,12 @@ export default function Sidebar() {
                 TimeLine
               </li>
             </Link>
-            <li className="sidebarListItem">
-              <TrendingUpIcon className="sidebarIcon" />
-              Sales
-            </li>
+            <Link className="link" to={"/projects"}>
+              <li className="sidebarListItem">
+                <LaptopChromebookIcon className="sidebarIcon" />
+                Projects
+              </li>
+            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">
@@ -78,12 +83,13 @@ export default function Sidebar() {
                 Developers
               </li>
             </Link>
-            <Link className="link" to={"/projects"}>
+            <Link className="link" to={"/managers"}>
               <li className="sidebarListItem">
-                <LaptopChromebookIcon className="sidebarIcon" />
-                Projects
+                <SupervisorAccountIcon className="sidebarIcon" />
+                Project Managers
               </li>
             </Link>
+       
             <Link className="link" to={"/createproject"}>
               <li className="sidebarListItem">
                 <TaskIcon className="sidebarIcon" />
@@ -95,18 +101,18 @@ export default function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
+          <Link className="link" to={`/editprofile`}>
+              <li className="sidebarListItem">
+                <ManageAccountsIcon className="sidebarIcon" />
+                Manage Profile
+              </li>
+            </Link>
+            <Link className="link" to={"/changepassword"}>
             <li className="sidebarListItem">
-              <AccessAlarmIcon className="sidebarIcon" />
-              Time handle
+              <PasswordIcon className="sidebarIcon" />
+              Change Pasword
             </li>
-            <li className="sidebarListItem">
-              <PeopleOutlineIcon className="sidebarIcon" />
-              User Analytics
-            </li>
-            <li className="sidebarListItem">
-              <TrendingUpIcon className="sidebarIcon" />
-              Settings
-            </li>
+            </Link>
             <li className="sidebarListItem" onClick={submit}>
               <LogoutIcon className="sidebarIcon" />
               Logout

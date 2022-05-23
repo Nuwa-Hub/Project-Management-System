@@ -4,6 +4,7 @@ export const developerSlice = createSlice({
   name: "developer",
   initialState: {
     developers: [],
+    managers:[],
     isFetching: false,
     error: false,
   },
@@ -18,6 +19,19 @@ export const developerSlice = createSlice({
       state.developers = action.payload;
     },
     getDeveloperFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
+    //get managers
+    getManagerStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+    getManagerSuccess: (state, action) => {
+      state.isFetching = false;
+      state.managers = action.payload;
+    },
+    getManagerFailure: (state) => {
       state.isFetching = false;
       state.error = true;
     },
@@ -81,6 +95,9 @@ export const {
   addDeveloperStart,
   addDeveloperSuccess,
   addDeveloperFailure,
+  getManagerStart,
+  getManagerSuccess,
+  getManagerFailure,
 } = developerSlice.actions;
 
 export default developerSlice.reducer;

@@ -43,7 +43,7 @@ router.put("/:id",  async (req, res) => {
   }
 });
 //DELETE CHORE
-router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
     const deleteChore = await Chore.findByIdAndDelete(req.params.id);
     res.status(200).json();
