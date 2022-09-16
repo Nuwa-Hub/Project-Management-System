@@ -31,8 +31,24 @@ const ChangePassword = () => {
       .required("Requered!"),
     newPassword: Yup.string()
        .matches(
-        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
-        "Must Contain One Uppercase"
+        "(?=.*?[A-Z])",
+        "at least one uppercase letter"
+      )
+      .matches(
+        "(?=.*?[a-z])",
+        "at least one lower letter"
+      )
+      .matches(
+        "(?=.*?[0-9])",
+        "at least one digit"
+      )
+      .matches(
+        "(?=.*?[#?!@$%^&*-])",
+        "at least one special character"
+      )
+      .matches(
+        ".{8,}",
+        "at least 8 characters"
       )
       .required("Requered!"),
     confirmPassword: Yup.string()
